@@ -53,6 +53,16 @@
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
   
+  <!--손용훈 로그아웃 -->
+  <servlet>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>kr.co.library.controller.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  
   <!-- 김진광 -대여신청완료 -->
   <servlet>
   	<servlet-name>rentBook</servlet-name>
