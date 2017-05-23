@@ -12,10 +12,6 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import exception.BookNotFoundException;
-import exception.FailRentException;
-import exception.FailWaitException;
-import exception.UserNotFoundException;
 import kr.co.library.dao.BookDao;
 import kr.co.library.dao.RentalListDao;
 import kr.co.library.dao.UserManagementDao;
@@ -24,6 +20,10 @@ import kr.co.library.dao.impl.BookDaoImpl;
 import kr.co.library.dao.impl.RentalListDaoImpl;
 import kr.co.library.dao.impl.UserManagementDaoImpl;
 import kr.co.library.dao.impl.WaitListDaoImpl;
+import kr.co.library.exception.BookNotFoundException;
+import kr.co.library.exception.FailRentException;
+import kr.co.library.exception.FailWaitException;
+import kr.co.library.exception.UserNotFoundException;
 import kr.co.library.service.RentalService;
 import kr.co.library.util.PagingBean;
 import kr.co.library.util.SqlSessionFactoryManager;
@@ -207,8 +207,6 @@ public class RentalServiceImpl implements RentalService {
 			List<RentalList> list = rentalDao.selectRentalListPagingByUserIdToBook(session, userId,
 					pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
 
-			// DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-
 			Calendar limit = Calendar.getInstance();
 
 			for (int i = 0; i < list.size(); i++) {
@@ -217,7 +215,7 @@ public class RentalServiceImpl implements RentalService {
 				} else {
 					limit.setTime(list.get(i).getRentalStart());
 					limit.add(Calendar.DATE, 14);
-					if (list.get(i).getRentalStart().getTime() > limit.getTimeInMillis()) {
+					if (new Date().getTime() > limit.getTimeInMillis()) {
 						overdue.add("Y");
 					} else {
 						overdue.add("N");

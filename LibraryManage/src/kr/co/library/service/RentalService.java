@@ -3,8 +3,8 @@ package kr.co.library.service;
 import java.util.List;
 import java.util.Map;
 
-import exception.FailRentException;
-import exception.FailWaitException;
+import kr.co.library.exception.FailRentException;
+import kr.co.library.exception.FailWaitException;
 import kr.co.library.vo.RentalList;
 import kr.co.library.vo.WaitList;
 

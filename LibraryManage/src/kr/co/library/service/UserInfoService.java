@@ -2,8 +2,8 @@ package kr.co.library.service;
 
 import java.io.IOException;
 
-import exception.UserIDOverlapException;
-import exception.UserNotFoundException;
+import kr.co.library.exception.UserIDOverlapException;
+import kr.co.library.exception.UserNotFoundException;
 import kr.co.library.vo.UserManagement;
 
 public interface UserInfoService {

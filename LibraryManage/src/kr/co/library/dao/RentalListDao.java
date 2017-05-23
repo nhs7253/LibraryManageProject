@@ -83,4 +83,14 @@ public interface RentalListDao {
 	 * @return
 	 */
 	List<RentalList> selectRentalListPagingByUserIdToBook(SqlSession session, String userId, int startIndex, int endIndex);
+	
+	
+	/**
+	 * rental_end가 널인 지를 기준으로 book 테이블의 정보와 user_name을 조회 후 일정 부분만 리턴한다. (rental_start를 기준으로 내림 차순)
+	 * @param session
+	 * @param startIndex
+	 * @param endIndex
+	 * @return
+	 */
+	List<Object> selectRentalListPagingByEndIsNull(SqlSession session, int startIndex, int endIndex);
 }

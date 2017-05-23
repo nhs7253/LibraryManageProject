@@ -1,4 +1,4 @@
-package exception;
+package kr.co.library.exception;
 
 public class BookNotFoundException extends Exception {
 	private String bookId;

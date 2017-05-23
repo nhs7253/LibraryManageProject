@@ -2,8 +2,8 @@ package kr.co.library.service;
 
 import java.util.Map;
 
-import exception.BookIdException;
-import exception.BookNotFoundException;
+import kr.co.library.exception.BookIdException;
+import kr.co.library.exception.BookNotFoundException;
 import kr.co.library.vo.Book;
 
 public interface BookService {

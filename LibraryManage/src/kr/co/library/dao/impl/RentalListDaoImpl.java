@@ -83,4 +83,13 @@ public class RentalListDaoImpl implements RentalListDao {
 		return session.selectList(namespace + "selectRentalListPagingByUserIdToBook", input);
 	}
 
+	@Override
+	public List<Object> selectRentalListPagingByEndIsNull(SqlSession session, int startIndex, int endIndex) {
+		// TODO Auto-generated method stub
+		Map<String, String> input = new HashMap<String, String>();
+		input.put("startIndex",String.valueOf(startIndex));
+		input.put("endIndex",String.valueOf(endIndex));
+		return session.selectList(namespace + "selectRentalListPagingByEndIsNull", input);
+	}
+
 }

@@ -1,4 +1,4 @@
-package exception;
+package kr.co.library.exception;
 
 public class BookIdException extends Exception{
 
