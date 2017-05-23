@@ -78,7 +78,7 @@ public class UserInfoServiceImpl implements UserInfoService{
 	}
 	
 	@Override
-	public UserManagement searchUser(String userId) throws UserIDOverlapException, IOException {
+	public UserManagement searchUser(String userId) {
 		//회원의 ID조회
 		SqlSession session = factory.openSession();
 		try {

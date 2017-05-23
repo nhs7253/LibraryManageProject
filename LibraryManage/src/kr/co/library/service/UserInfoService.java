@@ -38,7 +38,7 @@ public interface UserInfoService {
 	 * @throws IOException 
 	 * @throws Exception 
 	 */
-	public UserManagement searchUser(String userId) throws UserIDOverlapException, IOException;
+	public UserManagement searchUser(String userId);
 	
 	/**
 	 * 회원id의 연체상태를 변경함

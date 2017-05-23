@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.javassist.compiler.ast.NewExpr;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
@@ -59,7 +60,7 @@ public class RentalServiceImpl implements RentalService {
 	
 	@Override
 	public String rentBook(String userId, String bookId) throws FailRentException, FailWaitException {
-		// TODO Auto-generated method stub
+
 		SqlSession session = factory.openSession();
 
 		Book book = bookDao.selectBookListById(session, bookId);
@@ -198,7 +199,7 @@ public class RentalServiceImpl implements RentalService {
 	@Override
 	public Map<String, Object> PrintRentalList(int page, String userId) {
 		HashMap<String, Object> map = new HashMap<>();
-		List<String> overdue = new ArrayList<>();
+		List<String> overdue = null;
 
 		SqlSession session = factory.openSession();
 		try {
@@ -207,21 +208,7 @@ public class RentalServiceImpl implements RentalService {
 			List<RentalList> list = rentalDao.selectRentalListPagingByUserIdToBook(session, userId,
 					pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
 
-			Calendar limit = Calendar.getInstance();
-
-			for (int i = 0; i < list.size(); i++) {
-				if (list.get(i).getRentalEnd() != null) {
-					overdue.add("N");
-				} else {
-					limit.setTime(list.get(i).getRentalStart());
-					limit.add(Calendar.DATE, 14);
-					if (new Date().getTime() > limit.getTimeInMillis()) {
-						overdue.add("Y");
-					} else {
-						overdue.add("N");
-					}
-				}
-			}
+			overdue = getOverdueInfo(list);
 
 			map.put("pageBean", pageBean);
 			map.put("list", list);
@@ -268,4 +255,55 @@ public class RentalServiceImpl implements RentalService {
 
 		return waitDao.selectWaitListByWaitRanking(session, minRanking);
 	}
+
+	@Override
+	public Map<String, Object> PrintCurrentRentalList(int page) {
+		HashMap<String, Object> map = new HashMap<>();
+		List<String> name = new ArrayList<>();
+		List<String> overdue = null;
+
+		SqlSession session = factory.openSession();
+		try {
+			int tatalCount = rentalDao.selectRentalListByEndIsNullCount(session);
+			PagingBean pageBean = new PagingBean(tatalCount, page);
+			List<Object> list = rentalDao.selectRentalListPagingByEndIsNull(session, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+			List<RentalList> temp = new ArrayList<>();
+
+			for(int i=0;i<list.size();i++){
+				temp.add((RentalList) ((Map<String, Object>)list.get(i)).get("list"));
+				name.add((String) ((Map<String, Object>)list.get(i)).get("user_name"));
+			}
+			
+			overdue = getOverdueInfo(temp);
+			
+
+			map.put("pageBean", pageBean);
+			map.put("list", list);
+			map.put("name", name);
+			map.put("overdue", overdue);
+		} finally {
+			session.close();
+		}
+		return map;
+	}
+	
+	public List<String> getOverdueInfo(List<RentalList> list){
+		List<String> overdue = new ArrayList<>();
+		Calendar limit = Calendar.getInstance();
+		for (int i = 0; i < list.size(); i++) {
+			if (list.get(i).getRentalEnd() != null) {
+				overdue.add("N");
+			} else {
+				limit.setTime(list.get(i).getRentalStart());
+				limit.add(Calendar.DATE, 14);
+				if (new Date().getTime() > limit.getTimeInMillis()) {
+					overdue.add("Y");
+				} else {
+					overdue.add("N");
+				}
+			}
+		}
+		return overdue;
+	}
+	
 }

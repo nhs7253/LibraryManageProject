@@ -10,6 +10,21 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+   <!--Filter  -->
+  <filter>
+  	<filter-name>encodingFilter</filter-name>
+  	<filter-class>kr.co.library.filter.EncodingFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>UTF-8</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>encodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+	<!--여기서 url패턴은 : 사용자가 요청한 url의 서블릿/jsp의 실행전후로 일해라.  -->  
+  </filter-mapping>
+  
   <context-param>
     <param-name>rootPath</param-name>
     <param-value>/LibraryManage</param-value>
@@ -63,6 +78,26 @@
     <url-pattern>/logout</url-pattern>
   </servlet-mapping>
   
+   <!--손용훈 유저정보 수정 -->
+  <servlet>
+    <servlet-name>UserUpDate</servlet-name>
+    <servlet-class>kr.co.library.controller.UserUpDate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserUpDate</servlet-name>
+    <url-pattern>/UserUpDate</url-pattern>
+  </servlet-mapping>
+   
+   <!--손용훈 유저 삭제 -->
+  <servlet>
+    <servlet-name>DeleteUser</servlet-name>
+    <servlet-class>kr.co.library.controller.DeleteUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteUser</servlet-name>
+    <url-pattern>/DeleteUser</url-pattern>
+  </servlet-mapping>
+  
   <!-- 김진광 -대여신청완료 -->
   <servlet>
   	<servlet-name>rentBook</servlet-name>
@@ -91,5 +126,68 @@
   	<url-pattern>/waitListCancel</url-pattern>
   </servlet-mapping>
 
+  <!-- 왕준 : UserInfoReferServlet 등록 -->
+  <servlet>
+  	<servlet-name>userInfoRefer</servlet-name>
+  	<servlet-class>kr.co.library.controller.UserInfoReferServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>userInfoRefer</servlet-name>
+  	<url-pattern>/userInfoRefer</url-pattern>
+  </servlet-mapping>
+
+  <!--박연수 책추가 -->
+  <servlet>
+  	<servlet-name>addbook</servlet-name>
+  	<servlet-class>kr.co.library.controller.AddBookController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>addbook</servlet-name>
+  	<url-pattern>/addBook</url-pattern>
+  </servlet-mapping>
   
+  <!--박연수 책수정 -->
+  <servlet>
+  	<servlet-name>updatebook</servlet-name>
+  	<servlet-class>kr.co.library.controller.UpdateBookController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>updatebook</servlet-name>
+  	<url-pattern>/updateBook</url-pattern>
+  </servlet-mapping>
+  
+  <!--박연수 책삭제-->
+    <servlet>
+  	<servlet-name>deletebook</servlet-name>
+  	<servlet-class>kr.co.library.controller.DeleteBookController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>deletebook</servlet-name>
+  	<url-pattern>/deleteBook</url-pattern>
+  </servlet-mapping>
+  
+  <!--박연수 반납-->
+   <servlet>
+  	<servlet-name>returnbook</servlet-name>
+  	<servlet-class>kr.co.library.controller.ReturnBookController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>returnbook</servlet-name>
+  	<url-pattern>/returnBook</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
+
+  <!-- 왕준 : UserCreateServlet 등록 -->
+  <servlet>
+  	<servlet-name>userCreate</servlet-name>
+  	<servlet-class>kr.co.library.controller.UserCreateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>userCreate</servlet-name>
+  	<url-pattern>/userCreate</url-pattern>
+  </servlet-mapping>
+
 </web-app>
