@@ -208,7 +208,6 @@ public class RentalServiceImpl implements RentalService {
 					pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
 
 			Calendar limit = Calendar.getInstance();
-
 			for (int i = 0; i < list.size(); i++) {
 				if (list.get(i).getRentalEnd() != null) {
 					overdue.add("N");
@@ -267,5 +266,12 @@ public class RentalServiceImpl implements RentalService {
 		int minRanking = Collections.min(rankList);
 
 		return waitDao.selectWaitListByWaitRanking(session, minRanking);
+	}
+	
+
+	@Override
+	public Map<String, Object> PrintCurrentRentalList(int page) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

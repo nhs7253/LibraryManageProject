@@ -175,5 +175,11 @@
 			)
 			WHERE rnum >= #{startIndex}
 	</select>
+	
+	<select id="selectRentalListByEndIsNullCount" resultType="int">
+		SELECT COUNT(*)
+		FROM rental_list
+		WHERE rental_end IS NULL
+	</select>
 
 </mapper>

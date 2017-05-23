@@ -93,4 +93,12 @@ public interface RentalListDao {
 	 * @return
 	 */
 	List<Object> selectRentalListPagingByEndIsNull(SqlSession session, int startIndex, int endIndex);
+	
+	
+	/**
+	 * rental_end가 널인 지를 기준으로 해당 값의 숫자를 반환
+	 * @param session
+	 * @return
+	 */
+	int selectRentalListByEndIsNullCount(SqlSession session);
 }

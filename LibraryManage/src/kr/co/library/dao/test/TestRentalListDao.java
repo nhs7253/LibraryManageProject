@@ -69,6 +69,8 @@ public class TestRentalListDao {
 			
 			System.out.println(dao.selectRentalListPagingByEndIsNull(session, 1, 2));
 			
+			System.out.println(dao.selectRentalListByEndIsNullCount(session));
+			
 			session.commit();
 		} finally {
 			session.close();
