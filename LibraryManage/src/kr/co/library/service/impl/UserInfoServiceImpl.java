@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import exception.UserIDOverlapException;
 import exception.UserNotFoundException;
 import kr.co.library.dao.UserManagementDao;
 import kr.co.library.dao.impl.UserManagementDaoImpl;
@@ -30,10 +31,22 @@ public class UserInfoServiceImpl implements UserInfoService{
 	}
 	
 	@Override
-	public void createUser(UserManagement user) {
-		SqlSession session = factory.openSession();
+	public UserManagement createUser(UserManagement user) throws UserIDOverlapException, IOException {
+
+		SqlSession session = null;
+		try{
+		session = factory.openSession();
+		//아이디중복검사 또는 잘못된값 일경우
+		if(userDao.selectUserManagementListById(session, user.getUserId()) != null || user.getUserId().equals("")){
+			throw new IOException(String.format("ID가 중복 또는 잘못된값을 입력하였습니다.", user.getUserId()));
+		}
 		userDao.insertUserManagement(session, user);
+		session.commit();
+		return user;
+		}finally{
 		session.close();
+		}
+
 		
 	}
 	@Override
@@ -55,16 +68,16 @@ public class UserInfoServiceImpl implements UserInfoService{
 	
 		
 	}
-	@Override
-	public UserManagement searchById(String id) {
 	
+	@Override
+	public UserManagement searchUser(String userId) throws UserIDOverlapException, IOException {
+		//회원의 ID조회
 		SqlSession session = factory.openSession();
-		try{
-			
-		}finally{
+		try {
+			return userDao.selectUserManagementListById(session, userId);
+		} finally {
 			session.close();
 		}
-		return null;
 	}
 	
 	/**
