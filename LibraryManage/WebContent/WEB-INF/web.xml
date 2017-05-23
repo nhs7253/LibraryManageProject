@@ -152,21 +152,6 @@
   	<url-pattern>/waitListCancel</url-pattern>
   </servlet-mapping>
 
-  <!-- 왕준 : UserInfoReferServlet 등록 -->
-  <servlet>
-  	<servlet-name>userInfoRefer</servlet-name>
-  	<servlet-class>kr.co.library.controller.UserInfoReferServlet</servlet-class>
-  </servlet>
-  <servlet-mapping>
-  	<servlet-name>userInfoRefer</servlet-name>
-  	<url-pattern>/userInfoRefer</url-pattern>
-  </servlet-mapping>
-<<<<<<< HEAD
-  
-=======
-
-
->>>>>>> branch 'master' of https://github.com/nhs7253/LibraryManageProject.git
   <!--박연수 책추가 -->
   <servlet>
   	<servlet-name>addbook</servlet-name>
@@ -206,14 +191,17 @@
   	<servlet-name>returnbook</servlet-name>
   	<url-pattern>/returnBook</url-pattern>
   </servlet-mapping>
-  
-<<<<<<< HEAD
-=======
-  
-  
-  
->>>>>>> branch 'master' of https://github.com/nhs7253/LibraryManageProject.git
 
+  <!-- 왕준 : UserInfoReferServlet 등록 -->
+  <servlet>
+  	<servlet-name>userInfoRefer</servlet-name>
+  	<servlet-class>kr.co.library.controller.UserInfoReferServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>userInfoRefer</servlet-name>
+  	<url-pattern>/userInfoRefer</url-pattern>
+  </servlet-mapping>
+  
   <!-- 왕준 : UserCreateServlet 등록 -->
   <servlet>
   	<servlet-name>userCreate</servlet-name>
