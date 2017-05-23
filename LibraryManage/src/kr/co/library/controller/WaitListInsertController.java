@@ -29,7 +29,6 @@ public class WaitListInsertController extends HttpServlet{
 		}
 		session.setAttribute("message", message);
 		
-		
 		resp.sendRedirect("/LibraryManage/rental/test.jsp");
 		
 		

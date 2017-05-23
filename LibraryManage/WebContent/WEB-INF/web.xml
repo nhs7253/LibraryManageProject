@@ -94,7 +94,6 @@
   	<url-pattern>/userInfoRefer</url-pattern>
   </servlet-mapping>
   
-<<<<<<< HEAD
   <!--박연수 책추가 -->
   <servlet>
   	<servlet-name>addbook</servlet-name>
@@ -135,10 +134,7 @@
   	<url-pattern>/returnBook</url-pattern>
   </servlet-mapping>
   
-  
-  
-  
-=======
+
   <!-- 왕준 : UserCreateServlet 등록 -->
   <servlet>
   	<servlet-name>userCreate</servlet-name>
@@ -148,5 +144,5 @@
   	<servlet-name>userCreate</servlet-name>
   	<url-pattern>/userCreate</url-pattern>
   </servlet-mapping>
->>>>>>> branch 'master' of https://github.com/nhs7253/LibraryManageProject.git
+
 </web-app>
