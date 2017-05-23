@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import exception.UserNotFoundException;
 import kr.co.library.dao.UserManagementDao;
 import kr.co.library.dao.impl.UserManagementDaoImpl;
 import kr.co.library.service.UserInfoService;
@@ -36,8 +37,18 @@ public class UserInfoServiceImpl implements UserInfoService{
 		
 	}
 	@Override
-	public void updateUser(UserManagement user) {
-		
+	public void updateUser(UserManagement user) throws UserNotFoundException {
+		SqlSession session = factory.openSession();
+		try {
+			if (userDao.selectUserManagementListById(session, user.getUserId()) == null) {
+				throw new UserNotFoundException(String.format("ID %s 인 회원이 없습니다.", user.getUserId()));
+			}
+			userDao.updateUserManagement(session, user);
+			session.commit();
+		} finally {
+			session.close();
+		}
+
 	}
 	@Override
 	public void dropUSer(String id) {
