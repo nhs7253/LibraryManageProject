@@ -35,6 +35,6 @@ public interface UserInfoService {
 	 * @param userId
 	 * @param penaltyState
 	 */
-	public void clearPenalty(String userId,char penaltyState);
+	public void clearPenalty(String userId);
 	
 }
