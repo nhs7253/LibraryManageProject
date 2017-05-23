@@ -5,10 +5,10 @@ import java.io.IOException;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
-import exception.UserIDOverlapException;
-import exception.UserNotFoundException;
 import kr.co.library.dao.UserManagementDao;
 import kr.co.library.dao.impl.UserManagementDaoImpl;
+import kr.co.library.exception.UserIDOverlapException;
+import kr.co.library.exception.UserNotFoundException;
 import kr.co.library.service.UserInfoService;
 import kr.co.library.util.SqlSessionFactoryManager;
 import kr.co.library.vo.UserManagement;
