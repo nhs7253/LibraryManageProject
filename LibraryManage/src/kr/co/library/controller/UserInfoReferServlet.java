@@ -30,6 +30,7 @@ public class UserInfoReferServlet extends HttpServlet {
 		request.setAttribute("info", user);
 
 		// 결과 응답
+		//요청디스패치
 		request.getRequestDispatcher("/test.jsp").forward(request, response);
 
 	}

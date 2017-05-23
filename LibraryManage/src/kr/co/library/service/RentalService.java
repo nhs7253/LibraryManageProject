@@ -81,5 +81,5 @@ public interface RentalService {
 	public void noticeWaitUser(String userId);
 
 	
-	
+	Map<String, Object> PrintCurrentRentalList(int page);
 }
