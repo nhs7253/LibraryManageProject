@@ -85,4 +85,47 @@
   	<url-pattern>/waitListCancel</url-pattern>
   </servlet-mapping>
   
+  <!--박연수 책추가 -->
+  <servlet>
+  	<servlet-name>addbook</servlet-name>
+  	<servlet-class>kr.co.library.controller.AddBookController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>addbook</servlet-name>
+  	<url-pattern>/addBook</url-pattern>
+  </servlet-mapping>
+  
+  <!--박연수 책수정 -->
+  <servlet>
+  	<servlet-name>updatebook</servlet-name>
+  	<servlet-class>kr.co.library.controller.UpdateBookController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>updatebook</servlet-name>
+  	<url-pattern>/updateBook</url-pattern>
+  </servlet-mapping>
+  
+  <!--박연수 책삭제-->
+    <servlet>
+  	<servlet-name>deletebook</servlet-name>
+  	<servlet-class>kr.co.library.controller.DeleteBookController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>deletebook</servlet-name>
+  	<url-pattern>/deleteBook</url-pattern>
+  </servlet-mapping>
+  
+  <!--박연수 반납-->
+   <servlet>
+  	<servlet-name>returnbook</servlet-name>
+  	<servlet-class>kr.co.library.controller.ReturnBookController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>returnbook</servlet-name>
+  	<url-pattern>/returnBook</url-pattern>
+  </servlet-mapping>
+  
+  
+  
+  
 </web-app>
