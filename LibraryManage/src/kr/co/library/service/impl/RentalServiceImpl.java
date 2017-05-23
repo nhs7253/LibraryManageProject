@@ -55,7 +55,8 @@ public class RentalServiceImpl implements RentalService {
 		waitDao = WaitListDaoImpl.getInstance();
 		userDao = UserManagementDaoImpl.getInstance();
 	}
-
+	
+	
 	@Override
 	public String rentBook(String userId, String bookId) throws FailRentException, FailWaitException {
 		// TODO Auto-generated method stub
@@ -65,24 +66,27 @@ public class RentalServiceImpl implements RentalService {
 		UserManagement user = userDao.selectUserManagementListById(session, userId);
 
 		try {
-			if (book != null && user != null) { //book과 user의 정보가 null값인지 확인하는 조건. 예외 발생되면 FailRentException 발생!
-				if (book.getRentalState() == 'Y' && user.getPenaltyState() == 'N') { //Book의 대여상태와 로그인한 사용자의 ID의 패널티 상태를 비교하는 조건문.
+			// book과 user의 정보가 null값인지 확인하는 조건. 예외 발생되면 FailRentException 발생!
+			if (book != null && user != null) {
+				// Book의 대여상태와 로그인한 사용자의 ID의 패널티 상태를 비교하는 조건문.
+				if (book.getRentalState() == 'Y' && user.getPenaltyState() == 'N') {
 					if (rentalDao.selectRentalListByBookId(session, bookId) == null) {
 						RentalList rentalList = new RentalList(0, userId, bookId, new Date(), new Date());
 						rentalDao.insertRentalList(session, rentalList);
 						session.commit();
-						return "신청완료";
+						return userId + "님 대여완료";
 					} else {
-						throw new FailRentException("이미 대여 신청한 도서입니다.!", userId, bookId);
+						throw new FailRentException("이미 대여중인 도서입니다.!", userId, bookId);
 					}
+					// Book의 상태가 대여중인 상태일 경우.
+				}else if(user.getPenaltyState()=='Y'){
+					throw new FailRentException("대여제한상태입니다.");
+				}else if (book.getRentalState() == 'N') {
 
-				} else if (book.getRentalState() == 'N') { //Book의 상태가 대여중인 상태일 경우.
-					return waitBook(userId, bookId);
+					throw new FailRentException("다른 사람이 대여중입니다. 대여를 원하시면 대기자 신청을 해주세요.");
 				}
-				throw new FailWaitException("대기자 예약 실패 (패널티 상태입니다)", userId);
-			} else {
-				throw new FailRentException("대여에 실패했습니다.!", userId, bookId);
 			}
+			throw new FailRentException("대여실패(BookId, UserId 확인)", userId, bookId);
 		} finally {
 			session.close();
 		}
@@ -155,7 +159,7 @@ public class RentalServiceImpl implements RentalService {
 			WaitList waitList = new WaitList(bookId, userId, 0);
 			waitDao.insertWaitList(session, waitList);
 			session.commit();
-			return "대기자 신청";
+			return "대기자 신청완료";
 		} else {
 			throw new FailWaitException("이미 대기자 신청하셨습니다.", userId);
 		}
