@@ -84,5 +84,23 @@
   	<servlet-name>waitListCancel</servlet-name>
   	<url-pattern>/waitListCancel</url-pattern>
   </servlet-mapping>
+  <!-- 왕준 : UserInfoReferServlet 등록 -->
+  <servlet>
+  	<servlet-name>userInfoRefer</servlet-name>
+  	<servlet-class>kr.co.library.controller.UserInfoReferServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>userInfoRefer</servlet-name>
+  	<url-pattern>/userInfoRefer</url-pattern>
+  </servlet-mapping>
   
+  <!-- 왕준 : UserCreateServlet 등록 -->
+  <servlet>
+  	<servlet-name>userCreate</servlet-name>
+  	<servlet-class>kr.co.library.controller.UserCreateServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>userCreate</servlet-name>
+  	<url-pattern>/userCreate</url-pattern>
+  </servlet-mapping>
 </web-app>
