@@ -277,7 +277,7 @@ public class RentalServiceImpl implements RentalService {
 			overdue = getOverdueInfo(temp);
 			
 			map.put("pageBean", pageBean);
-			map.put("list", list);
+			map.put("list", temp);
 			map.put("name", name);
 			map.put("overdue", overdue);
 		} finally {
@@ -313,8 +313,21 @@ public class RentalServiceImpl implements RentalService {
 
 	@Override
 	public Map<String, Object> PrintAdminWaitList(int page) {
-		// TODO Auto-generated method stub
-		return null;
+		HashMap<String, Object> map = new HashMap<>();
+
+		SqlSession session = factory.openSession();
+		try {
+			int tatalCount = waitDao.selectWaitListCount(session);
+			PagingBean pageBean = new PagingBean(tatalCount, page);
+			List<Object> list = waitDao.selectWaitListPagingJoinBookJoinUser(session,
+					pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+			map.put("pageBean", pageBean);
+			map.put("list", list);
+		} finally {
+			session.close();
+		}
+
+		return map;
 	}
 	
 }

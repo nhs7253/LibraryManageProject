@@ -163,6 +163,14 @@
 			WHERE rnum >= #{startIndex}
 	</select>
 	
+	
+	
+	
+	<select id="selectWaitListCount" resultType="int">
+		SELECT COUNT(*)
+		FROM wait_list
+	</select>
+	
 </mapper>
 
 	
