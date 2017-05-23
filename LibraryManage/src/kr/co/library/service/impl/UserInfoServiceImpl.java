@@ -63,7 +63,7 @@ public class UserInfoServiceImpl implements UserInfoService{
 
 	}
 	@Override
-	public void dropUSer(String userId) throws UserNotFoundException {
+	public void dropUser(String userId) throws UserNotFoundException {
 		SqlSession session = factory.openSession();
 		try {
 			if (userDao.selectUserManagementListById(session, userId) == null) {
