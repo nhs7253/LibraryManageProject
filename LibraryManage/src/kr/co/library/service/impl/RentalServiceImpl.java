@@ -203,8 +203,6 @@ public class RentalServiceImpl implements RentalService {
 			List<RentalList> list = rentalDao.selectRentalListPagingByUserIdToBook(session, userId,
 					pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
 
-			// DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
-
 			Calendar limit = Calendar.getInstance();
 
 			for (int i = 0; i < list.size(); i++) {
@@ -213,7 +211,7 @@ public class RentalServiceImpl implements RentalService {
 				} else {
 					limit.setTime(list.get(i).getRentalStart());
 					limit.add(Calendar.DATE, 14);
-					if (list.get(i).getRentalStart().getTime() > limit.getTimeInMillis()) {
+					if (new Date().getTime() > limit.getTimeInMillis()) {
 						overdue.add("Y");
 					} else {
 						overdue.add("N");

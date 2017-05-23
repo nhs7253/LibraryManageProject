@@ -134,4 +134,5 @@ FROM rental_list;
 			)
 			WHERE rnum >= '2'
 			
-			
+			INSERT INTO rental_list VALUES(rental_no_seq.nextVal, '1', '1', '2017-05-20', NULL);
+			INSERT INTO rental_list VALUES(rental_no_seq.nextVal, '3', '1', '2017-01-01', NULL);
