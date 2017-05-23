@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import kr.co.library.dao.BookDao;
 import kr.co.library.dao.impl.BookDaoImpl;
+import kr.co.library.service.impl.RentalServiceImpl;
 import kr.co.library.util.SqlSessionFactoryManager;
 import kr.co.library.vo.Book;
 
@@ -86,7 +87,7 @@ public class TestBookDao {
 			
 			printBookList(dao.selectBookPagingByKeyword(session, "publisher", "바다",101, 200),"publisher");
 			
-//			selectBookPagingByKeyword
+
 			
 			System.out.println("이상없음");
 			//////////////////////////////////////
