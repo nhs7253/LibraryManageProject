@@ -1,5 +1,6 @@
 package kr.co.library.service;
 
+import exception.UserNotFoundException;
 import kr.co.library.vo.UserManagement;
 
 public interface UserInfoService {
@@ -13,8 +14,9 @@ public interface UserInfoService {
 	/**
 	 * 수정된 User객체를 받아서 회원정보를 수정. 
 	 * @param user
+	 * @throws UserNotFoundException 
 	 */
-	public void updateUser(UserManagement user);
+	public void updateUser(UserManagement user) throws UserNotFoundException;
 	
 	/**
 	 * 회원 id를 받아서 해당회원을 탈퇴처리
