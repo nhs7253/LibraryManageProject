@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import exception.FailWaitException;
+import kr.co.library.exception.FailWaitException;
 import kr.co.library.service.RentalService;
 import kr.co.library.service.impl.RentalServiceImpl;
 
@@ -24,8 +24,8 @@ public class WaitListInsertController extends HttpServlet{
 		
 		try {
 			message = service.waitBook((String)(session.getAttribute("userId")), (String)(session.getAttribute("bookId")));
-		} catch (FailWaitException e) {
-			message = e.getMessage();
+		} catch (FailWaitException fwe) {
+			message = fwe.getMessage();
 		}
 		session.setAttribute("message", message);
 		

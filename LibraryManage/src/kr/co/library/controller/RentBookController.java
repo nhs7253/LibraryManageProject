@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import exception.FailRentException;
-import exception.FailWaitException;
+import kr.co.library.exception.FailRentException;
+import kr.co.library.exception.FailWaitException;
 import kr.co.library.service.RentalService;
 import kr.co.library.service.impl.RentalServiceImpl;
 //Test 완료 - 김진광 170523
@@ -27,10 +27,10 @@ public class RentBookController extends HttpServlet {
 		try {
 			message = service.rentBook((String) (session.getAttribute("userId")),
 					(String) (session.getAttribute("bookId")));
-		} catch (FailRentException e) {
-			message = e.getMessage();
-		} catch (FailWaitException e) {
-			message = e.getMessage();
+		} catch (FailRentException fre) {
+			message = fre.getMessage();
+		} catch (FailWaitException fwe) {
+			message = fwe.getMessage();
 		}
 		session.setAttribute("message", message);
 
