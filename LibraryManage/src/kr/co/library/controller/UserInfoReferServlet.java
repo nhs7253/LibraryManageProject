@@ -26,7 +26,6 @@ public class UserInfoReferServlet extends HttpServlet {
 
 		UserManagement user;
 		user = service.searchUser(userId);
-
 		request.setAttribute("info", user);
 
 		// 결과 응답
