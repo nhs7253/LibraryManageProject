@@ -92,4 +92,10 @@ public class RentalListDaoImpl implements RentalListDao {
 		return session.selectList(namespace + "selectRentalListPagingByEndIsNull", input);
 	}
 
+	@Override
+	public int selectRentalListByEndIsNullCount(SqlSession session) {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+"selectRentalListByEndIsNullCount");
+	}
+
 }
