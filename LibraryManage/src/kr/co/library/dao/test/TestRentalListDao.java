@@ -59,11 +59,15 @@ public class TestRentalListDao {
 			
 //			System.out.println(dao.selectRentalListByUserIdToBook(session, "1"));
 			
-			System.out.println(dao.selectRentalListByUserIdCount(session, "1"));
+			//System.out.println(dao.selectRentalListByUserIdCount(session, "1"));
 			
 			
 			
-			printBookList(dao.selectRentalListPagingByUserIdToBook(session, "2", 1, 2),"selectRentalListPagingByUserIdToBook");
+			//printBookList(dao.selectRentalListPagingByUserIdToBook(session, "2", 1, 2),"selectRentalListPagingByUserIdToBook");
+			
+			
+			
+			System.out.println(dao.selectRentalListPagingByEndIsNull(session, 1, 2));
 			
 			session.commit();
 		} finally {
