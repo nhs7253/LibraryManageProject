@@ -10,6 +10,21 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+   <!--Filter  -->
+  <filter>
+  	<filter-name>encodingFilter</filter-name>
+  	<filter-class>kr.co.library.filter.EncodingFilter</filter-class>
+  	<init-param>
+  		<param-name>encoding</param-name>
+  		<param-value>UTF-8</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>encodingFilter</filter-name>
+  	<url-pattern>/*</url-pattern>
+	<!--여기서 url패턴은 : 사용자가 요청한 url의 서블릿/jsp의 실행전후로 일해라.  -->  
+  </filter-mapping>
+  
   <context-param>
     <param-name>rootPath</param-name>
     <param-value>/LibraryManage</param-value>
