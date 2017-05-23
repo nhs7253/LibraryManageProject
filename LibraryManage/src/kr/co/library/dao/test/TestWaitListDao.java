@@ -62,6 +62,8 @@ public class TestWaitListDao {
 			*/
 			System.out.println(dao.selectWaitListPagingJoinBookJoinUserByUserId(session, "2", 1, 3));
 			
+			System.out.println(dao.selectWaitListPagingJoinBookJoinUser(session, 1, 3));
+			
 			System.out.println("이상없음");
 			//////////////////////////
 			session.commit();

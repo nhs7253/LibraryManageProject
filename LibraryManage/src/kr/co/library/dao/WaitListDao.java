@@ -124,4 +124,13 @@ public interface WaitListDao
 	 * @return
 	 */
 	List<Object> selectWaitListPagingJoinBookJoinUserByUserId(SqlSession session, String userId, int startIndex, int endIndex);
+	
+	/**
+	 * WaitList, Book 테이블의 조인 후 책 제목과 대기 순위를 반환(userId, name, bookId, title, rank)
+	 * @param session
+	 * @param startIndex
+	 * @param endIndex
+	 * @return
+	 */
+	List<Object> selectWaitListPagingJoinBookJoinUser(SqlSession session, int startIndex, int endIndex);
 }
