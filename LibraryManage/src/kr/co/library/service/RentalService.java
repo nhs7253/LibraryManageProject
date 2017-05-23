@@ -3,6 +3,8 @@ package kr.co.library.service;
 import java.util.List;
 import java.util.Map;
 
+import exception.FailRentException;
+import exception.FailWaitException;
 import kr.co.library.vo.RentalList;
 import kr.co.library.vo.WaitList;
 
@@ -16,8 +18,9 @@ public interface RentalService {
 	 * @param userId
 	 * @param bookId
 	 * @return
+	 * @throws FailWaitException 
 	 */
-	public void rentBook(String userId,String bookId);
+	public String rentBook(String userId,String bookId) throws FailRentException, FailWaitException;
 	
 	/**
 	 * 반납처리
@@ -30,15 +33,16 @@ public interface RentalService {
 	 * @param userId
 	 * @param rentalNo
 	 */
-	public void returnBook(String userId,int rentalNo);
+	public void returnBook(String userId,int rentalNo) throws FailRentException, FailWaitException;
 	
 	/**
 	 * 대기처리
 	 * 
 	 * @param userId
 	 * @param BookId
+	 * @return 
 	 */
-	public void waitBook(String userId,String BookId);
+	public String waitBook(String userId,String BookId) throws FailWaitException;
 	
 	/**
 	 * 대기취소처리

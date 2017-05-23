@@ -30,8 +30,8 @@
 		VALUES (#{rentalNo},
 		#{userId},
 		#{bookId},
-		#{rentalStart},
-		#{rentalEnd})
+		SYSDATE,
+		SYSDATE+14)
 	</insert>
 
 	<update id="updateRentalList" parameterType="rentalList">
