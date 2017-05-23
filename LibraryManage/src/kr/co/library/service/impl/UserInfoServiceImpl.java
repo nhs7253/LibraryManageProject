@@ -51,8 +51,17 @@ public class UserInfoServiceImpl implements UserInfoService{
 
 	}
 	@Override
-	public void dropUSer(String id) {
-	
+	public void dropUSer(String userId) throws UserNotFoundException {
+		SqlSession session = factory.openSession();
+		try {
+			if (userDao.selectUserManagementListById(session, userId) == null) {
+				throw new UserNotFoundException(String.format("ID %s 인 회원이 없습니다.", userId));
+			}
+			userDao.deleteUserManagement(session, userId);
+			session.commit();
+		} finally {
+			session.close();
+		}
 		
 	}
 	@Override

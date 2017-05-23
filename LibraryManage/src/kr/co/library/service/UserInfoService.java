@@ -20,9 +20,10 @@ public interface UserInfoService {
 	
 	/**
 	 * 회원 id를 받아서 해당회원을 탈퇴처리
-	 * @param id
+	 * @param userId
+	 * @throws UserNotFoundException 
 	 */
-	public void dropUSer(String id);
+	public void dropUSer(String userId) throws UserNotFoundException;
 
 	/**
 	 * 회원id를 받아서 해당 회원의 정보를 가져옴.
