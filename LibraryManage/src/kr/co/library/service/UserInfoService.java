@@ -15,7 +15,7 @@ public interface UserInfoService {
 	 * @throws UserIDOverlapException
 	 * @throws IOException
 	 */
-	public UserManagement createUser(UserManagement user) throws UserIDOverlapException, IOException;
+	public void createUser(UserManagement user) throws UserIDOverlapException, IOException;
 	
 	/**
 	 * 수정된 User객체를 받아서 회원정보를 수정. 

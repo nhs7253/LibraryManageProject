@@ -31,7 +31,7 @@ public class UserInfoServiceImpl implements UserInfoService{
 	}
 	
 	@Override
-	public UserManagement createUser(UserManagement user) throws UserIDOverlapException, IOException {
+	public void createUser(UserManagement user) throws UserIDOverlapException, IOException {
 
 		SqlSession session = null;
 		try{
@@ -42,7 +42,6 @@ public class UserInfoServiceImpl implements UserInfoService{
 		}
 		userDao.insertUserManagement(session, user);
 		session.commit();
-		return user;
 		}finally{
 		session.close();
 		}
@@ -89,12 +88,6 @@ public class UserInfoServiceImpl implements UserInfoService{
 		}
 	}
 	
-	/**
-	 * 회원id의 연체상태를 변경함
-	 * -연체설정을 (Y->N)해제
-	 * @param userId
-	 * @param penaltyState
-	 */
 	@Override
 	public void clearPenalty(String userId) {
 		SqlSession session = factory.openSession();
