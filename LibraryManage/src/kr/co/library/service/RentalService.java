@@ -10,11 +10,12 @@ public interface RentalService {
 
 	/**
 	 * 대출처리
-	 * 회원이 로그인 후 책의 대출버튼을 눌러서 진행되는 대출과정
-	 * -RentalList에 insert (no,userId,BookId,시작시간,종료시간은 null)
-	 * -Book의 RentalState를 N로 수정
+	 * 원하는 책을 검색 후 대출 신청 버튼을 누르면 Book의 대여 상태와 로그인한 사용자의 대여 패널티 상태를 비교하여 
+	 * 대출, 대기자처리를 해준다. 
+	 *
 	 * @param userId
 	 * @param bookId
+	 * @return
 	 */
 	public void rentBook(String userId,String bookId);
 	
@@ -33,8 +34,7 @@ public interface RentalService {
 	
 	/**
 	 * 대기처리
-	 * 회원이 로그인 후 책의 대기버튼을 눌러서 진행되는 대기과정
-	 * -WaitList에 insert(BookId,user,ranking은 시퀀스)
+	 * 
 	 * @param userId
 	 * @param BookId
 	 */
