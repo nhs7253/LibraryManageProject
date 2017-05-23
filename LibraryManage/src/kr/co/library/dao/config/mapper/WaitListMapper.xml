@@ -25,6 +25,15 @@
 		<result javaType="string" column="rank" property="rank"/>
 	</resultMap>
 	
+	<resultMap type="map" id="admin-waitRank-resultmap">
+		<result javaType="string" column="userId" property="userId"/>
+		<result javaType="string" column="name" property="name"/>
+		<result javaType="string" column="bookId" property="bookId"/>
+		<result javaType="string" column="title" property="title"/>
+		<result javaType="string" column="rank" property="rank"/>
+
+	</resultMap>
+	
 	
 	<insert id="insertWaitList" parameterType="waitlist">
 		<selectKey resultType="int" keyProperty="waitRanking" order="BEFORE">
@@ -129,6 +138,24 @@
 							RANK() OVER (PARTITION BY book_id ORDER BY wait_ranking DESC ) as rk 
 							FROM wait_list) w, book b
 						WHERE w.book_id = b.book_id(+) AND wait_user = #{userId}
+						ORDER BY b.title
+				)
+				WHERE rownum &lt;= #{endIndex}
+			)
+			WHERE rnum >= #{startIndex}
+	</select>
+	
+	<select id="selectWaitListPagingJoinBookJoinUser" parameterType="string" resultMap="admin-waitRank-resultmap">	
+			SELECT userId, name, bookId, title, rank
+			FROM(
+				SELECT b_book_id bookId, b_title title, w_rk rank, w_wait_user userId, rownum rnum, u_user_name name
+				FROM(
+						SELECT b.book_id b_book_id, b.title b_title, w.wait_user w_wait_user, w.rk w_rk, u.user_name u_user_name
+						FROM (
+							SELECT book_id, wait_user,
+							RANK() OVER (PARTITION BY wait_user ORDER BY wait_ranking DESC ) as rk 
+							FROM wait_list) w, book b, user_management u
+						WHERE w.book_id = b.book_id(+) AND  w.wait_user = u.user_id(+)
 						ORDER BY b.title
 				)
 				WHERE rownum &lt;= #{endIndex}

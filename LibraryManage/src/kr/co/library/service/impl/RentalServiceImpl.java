@@ -276,7 +276,6 @@ public class RentalServiceImpl implements RentalService {
 			
 			overdue = getOverdueInfo(temp);
 			
-
 			map.put("pageBean", pageBean);
 			map.put("list", list);
 			map.put("name", name);

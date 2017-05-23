@@ -125,4 +125,22 @@ ORDER BY b.title
 				WHERE rownum <= '3'
 			)
 			WHERE rnum >= '2'
+			
+			
+			
+			SELECT userId, name, bookId, title, rank
+			FROM(
+				SELECT b_book_id bookId, b_title title, w_rk rank, w_wait_user userId, rownum rnum, u_user_name name
+				FROM(
+						SELECT b.book_id b_book_id, b.title b_title, w.wait_user w_wait_user, w.rk w_rk, u.user_name u_user_name
+						FROM (
+							SELECT book_id, wait_user,
+							RANK() OVER (PARTITION BY wait_user ORDER BY wait_ranking DESC ) as rk 
+							FROM wait_list) w, book b, user_management u
+						WHERE w.book_id = b.book_id(+) AND  w.wait_user = u.user_id(+)
+						ORDER BY b.title
+				)
+				WHERE rownum <= '10'
+			)
+			WHERE rnum >= '1'
 
