@@ -10,6 +10,7 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   
+ 
    <!--Filter  -->
   <filter>
   	<filter-name>encodingFilter</filter-name>
@@ -57,6 +58,7 @@
     <url-pattern>/BookSearchByKeyword</url-pattern>
   </servlet-mapping>
   
+
   
   <!-- 노현식 - 관리자 현재 대여 목록 -->
   <servlet>
@@ -79,6 +81,49 @@
   </servlet-mapping>
   
   
+
+
+  <!--손용훈 로그인 -->
+  <servlet>
+    <servlet-name>Login</servlet-name>
+    <servlet-class>kr.co.library.controller.LoginUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Login</servlet-name>
+    <url-pattern>/login</url-pattern>
+  </servlet-mapping>
+  
+  <!--손용훈 로그아웃 -->
+  <servlet>
+    <servlet-name>Logout</servlet-name>
+    <servlet-class>kr.co.library.controller.LogoutServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Logout</servlet-name>
+    <url-pattern>/logout</url-pattern>
+  </servlet-mapping>
+  
+   <!--손용훈 유저정보 수정 -->
+  <servlet>
+    <servlet-name>UserUpDate</servlet-name>
+    <servlet-class>kr.co.library.controller.UserUpDate</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>UserUpDate</servlet-name>
+    <url-pattern>/UserUpDate</url-pattern>
+  </servlet-mapping>
+   
+   <!--손용훈 유저 삭제 -->
+  <servlet>
+    <servlet-name>DeleteUser</servlet-name>
+    <servlet-class>kr.co.library.controller.DeleteUser</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>DeleteUser</servlet-name>
+    <url-pattern>/DeleteUser</url-pattern>
+  </servlet-mapping>
+  
+
   <!-- 김진광 -대여신청완료 -->
   <servlet>
   	<servlet-name>rentBook</servlet-name>
@@ -106,6 +151,7 @@
   	<servlet-name>waitListCancel</servlet-name>
   	<url-pattern>/waitListCancel</url-pattern>
   </servlet-mapping>
+
   <!-- 왕준 : UserInfoReferServlet 등록 -->
   <servlet>
   	<servlet-name>userInfoRefer</servlet-name>
@@ -115,7 +161,7 @@
   	<servlet-name>userInfoRefer</servlet-name>
   	<url-pattern>/userInfoRefer</url-pattern>
   </servlet-mapping>
-  
+
 
   <!--박연수 책추가 -->
   <servlet>
