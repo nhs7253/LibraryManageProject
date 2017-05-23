@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.library.dao.config.mapper.UserManagementMapper">
+
+	<sql id="all-column">
+		user_id,
+		password,
+		user_name,
+		phone_num,
+		email,
+		penalty_state
+	</sql>
+	
+	<resultMap type ="userManagement" id="user-resultmap">
+		<id column = "user_id" property="userId"/>
+		<result column = "password" property="password"/>
+		<result column = "user_name" property="userName"/>
+		<result column = "phone_num" property="phoneNum"/>
+		<result column = "email" property="email"/>
+		<result column = "penalty_state" property="penaltyState"/>
+	</resultMap>
+
+	<insert id="insertUserManagement" parameterType="userManagement">
+		insert into user_management 
+		values (#{userId},#{password},#{userName},#{phoneNum},#{email},#{penaltyState})
+	</insert>
+
+	<update id="updateUserManagement" parameterType="userManagement">
+		update user_management 
+		set password = #{password},
+			user_name = #{userName},
+			phone_num= #{phoneNum},
+			email= #{email},
+			penalty_state= #{penaltyState}
+		where user_id = #{userId}
+	</update>
+
+	<delete id="deleteUserManagement" parameterType="string">
+		delete from user_management
+		where user_id = #{userId}
+	</delete>
+
+	<select id="selectUserManagementList" resultMap="user-resultmap">
+		select <include refid = "all-column"/>
+		from user_management
+	</select>
+
+	<select id = "selectUserManagementListById" resultMap = "user-resultmap" parameterType = "string">
+		select <include refid="all-column"/>
+		from user_management
+		where user_id = #{userId}
+	</select>
+	
+	<select id="selectUserManagementListByUserName" resultMap = "user-resultmap" parameterType = "string">
+		select <include refid="all-column"/>
+		from user_management
+		where user_name like '%'||#{value}||'%'
+		order by user_id
+	</select>
+	
+	<select id = "selectUserManagementCount" resultType="_int">
+		select count(*) from user_management
+	</select>
+	
+</mapper>

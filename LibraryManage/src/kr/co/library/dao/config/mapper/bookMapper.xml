@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.library.dao.config.mapper.bookMapper">
+
+	<sql id="all-column">
+		book_id,
+		title,
+		author,
+		publisher,
+		publish_date,
+		rental_state
+	</sql>
+	
+	 <resultMap type="book" id="book-resultmap">
+	 	<id column="book_id" property="bookId"/>
+	 	<result column="title" property="title"/>
+	 	<result column="author" property="author"/>
+	 	<result column="publisher" property="publisher"/>
+	 	<result column="publish_date" property="publishDate"/>
+	 	<result column="rental_state" property="rentalState"/>
+	 </resultMap>
+	
+	<insert id="insertBook" parameterType="book">
+		INSERT INTO book
+		VALUES (#{bookId},
+				#{title},
+				#{author},
+				#{publisher},
+				#{publishDate},
+				#{rentalState})
+	</insert>
+	
+	<update id="updateBook" parameterType="book">
+		UPDATE book
+		SET title = #{title},
+			author = #{author},
+			publisher = #{publisher},
+			publish_date = #{publishDate},
+			rental_state = #{rentalState}
+		WHERE book_id = #{bookId}
+	</update>
+	
+	<update id="updateRentalState" parameterType="map">
+		UPDATE book
+		SET rental_state = #{rentalState}
+		WHERE book_id = #{bookId}
+	</update>
+	
+	<delete id="deleteBook" parameterType="string">
+		DELETE FROM book
+		WHERE book_id = #{value}
+	</delete>
+	
+	<select id="selectBookList" resultMap="book-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM book
+		ORDER BY title
+	</select>
+	
+	<select id="selectBookListById" parameterType="string" resultMap="book-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM book
+		WHERE book_id = #{value}
+	</select>
+	
+	<select id="selectBookListByTitle" parameterType="string" resultMap="book-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM book
+		WHERE title LIKE '%'||#{value}||'%'
+		ORDER BY title
+	</select>
+	
+	<select id="selectBookCount" resultType="int">
+		SELECT COUNT(*)
+		FROM book
+	</select>
+
+
+
+	<select id="selectBookPaging" parameterType="map" resultMap="book-resultmap">
+		SELECT * FROM (
+   		SELECT book.*, ROW_NUMBER() OVER(ORDER BY title) AS RNUM
+    	FROM book)
+		WHERE RNUM BETWEEN #{startIndex} AND #{endIndex}
+	</select>
+	
+	
+	
+	<select id="selectBookListByAuthor" parameterType="string" resultMap="book-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM book
+		WHERE author LIKE '%'||#{value}||'%'
+		ORDER BY title
+	</select>
+	
+	
+	<select id="selectBookListByPublisher" parameterType="string" resultMap="book-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM book
+		WHERE publisher LIKE '%'||#{value}||'%'
+		ORDER BY title
+	</select>
+	
+
+	
+
+	<select id="selectBookByKeywordCount" parameterType="map" resultType="int" >
+		SELECT COUNT(*)
+		FROM book
+		<choose>
+			<when test="select == 'title'">
+				WHERE title LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test="select == 'author'">
+				WHERE author LIKE '%'||#{keyword}||'%'
+			</when>
+			<when test="select == 'publisher'">
+				WHERE publisher LIKE '%'||#{keyword}||'%'
+			</when>				
+		</choose>
+	</select>
+	
+	
+	<select id="selectBookPagingByKeyword" parameterType="map" resultMap="book-resultmap">
+		SELECT * FROM (
+   		SELECT book.*, ROW_NUMBER() OVER(ORDER BY title) AS RNUM
+    		FROM book
+		<choose>
+			<when test="select == 'title'">
+				WHERE book.title LIKE '%'||#{keyword}||'%')
+			</when>
+			<when test="select == 'author'">
+				WHERE book.author LIKE '%'||#{keyword}||'%')
+			</when>
+			<when test="select == 'publisher'">
+				WHERE book.publisher LIKE '%'||#{keyword}||'%')
+			</when>				
+		</choose>
+		WHERE RNUM BETWEEN #{startIndex} AND #{endIndex}
+	</select>
+	
+	
+	
+
+	
+	
+	
+	
+</mapper>

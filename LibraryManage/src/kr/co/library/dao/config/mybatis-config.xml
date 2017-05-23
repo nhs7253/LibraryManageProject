@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+<configuration>
+
+	<settings>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+	
+	<typeAliases>
+		<package name="kr.co.library.vo"/>
+	</typeAliases>
+	
+	<environments default="dev">
+		<environment id="dev">
+		
+			<transactionManager type="JDBC">
+			</transactionManager>
+			
+			<dataSource type="POOLED">
+				<property name="driver" value="oracle.jdbc.driver.OracleDriver"/>
+				<property name="url" value="jdbc:oracle:thin:@127.0.0.1:1521:XE"/>
+				<property name="username" value="scott"/>
+				<property name="password" value="tiger"/>
+				<property name="poolMaximumActiveConnections" value="100"/>
+			</dataSource>
+			
+		</environment>
+	</environments>
+	
+	<mappers>
+		<mapper resource="kr/co/library/dao/config/mapper/bookMapper.xml"/>
+		<mapper resource="kr/co/library/dao/config/mapper/UserManagementMapper.xml" />
+		<mapper resource="kr/co/library/dao/config/mapper/RentalListMapper.xml" />
+		<mapper resource="kr/co/library/dao/config/mapper/WaitListMapper.xml" />
+	</mappers>
+	
+</configuration>
