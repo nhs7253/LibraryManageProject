@@ -42,7 +42,8 @@
     <url-pattern>/BookSearchByKeyword</url-pattern>
   </servlet-mapping>
   
-  <!-- login -->
+
+  <!--손용훈 로그인 -->
   <servlet>
     <servlet-name>Login</servlet-name>
     <servlet-class>kr.co.library.controller.LoginUser</servlet-class>
@@ -52,5 +53,33 @@
     <url-pattern>/login</url-pattern>
   </servlet-mapping>
   
+  <!-- 김진광 -대여신청완료 -->
+  <servlet>
+  	<servlet-name>rentBook</servlet-name>
+  	<servlet-class>kr.co.library.controller.RentBookController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>rentBook</servlet-name>
+  	<url-pattern>/rentBook</url-pattern>
+  </servlet-mapping>
+  <!-- 김진광-대기자신청 -->
+  <servlet>
+  	<servlet-name>waitListInsert</servlet-name>
+  	<servlet-class>kr.co.library.controller.WaitListInsertController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>waitListInsert</servlet-name>
+  	<url-pattern>/waitListInsert</url-pattern>
+  </servlet-mapping>
+  <!-- 김진광-대기취소 -->
+  <servlet>
+  	<servlet-name>waitListCancel</servlet-name>
+  	<servlet-class>kr.co.library.controller.WaitListCancelController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>waitListCancel</servlet-name>
+  	<url-pattern>/waitListCancel</url-pattern>
+  </servlet-mapping>
+
   
 </web-app>
