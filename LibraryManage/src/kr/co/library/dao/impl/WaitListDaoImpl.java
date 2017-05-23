@@ -76,6 +76,11 @@ public class WaitListDaoImpl implements WaitListDao
 	}
 
 	@Override
+	public WaitList selectWaitListByWaitRanking(SqlSession session, int ranking) {
+		return session.selectOne(namespace + "selectWaitListByWaitRanking", ranking);
+	}
+
+	@Override
 	public int selectWaitListByUserCount(SqlSession session, String waitUser) {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace+"selectWaitListByUserCount",waitUser);

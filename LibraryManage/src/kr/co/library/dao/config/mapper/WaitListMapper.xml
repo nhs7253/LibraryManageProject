@@ -60,6 +60,13 @@
 		ORDER BY wait_ranking 
 	</select>
 	
+	<select id="selectWaitListByWaitRanking" parameterType="_int" resultMap="waitlist-resultmap">
+		SELECT <include refid="all-column"/>
+		FROM wait_list
+		WHERE wait_ranking = #{value}
+		ORDER BY wait_ranking 
+	</select>
+	
 	<select id="selectWaitListByWaitUser" parameterType="string" resultMap="waitlist-resultmap">
 		SELECT <include refid="all-column"/>
 		FROM wait_list

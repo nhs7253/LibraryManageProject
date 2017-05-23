@@ -51,6 +51,15 @@ public interface WaitListDao
 	List<WaitList>selectWaitListByBookId(SqlSession session, String bookId);
 	
 	/**
+	 * 매개변수로 받은 랭킹으로 일치하는 대기목록을 반환
+	 * 랭킹은 시퀀스.
+	 * @param session
+	 * @param ranking
+	 * @return
+	 */
+	WaitList selectWaitListByWaitRanking(SqlSession session, int ranking);
+	
+	/**
 	 * 매개변수로 받은 waitUser와 일치하는 책 목록 반환
 	 * @param session
 	 * @param waitUser

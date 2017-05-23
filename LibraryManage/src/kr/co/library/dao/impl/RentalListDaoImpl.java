@@ -45,6 +45,11 @@ public class RentalListDaoImpl implements RentalListDao {
 	}
 
 	@Override
+	public RentalList selectRentalListByRentalNo(SqlSession session, int rentalNo) {
+		return session.selectOne(namespace + "selectRentalListByRentalNo",rentalNo);
+	}
+	
+	@Override
 	public RentalList selectRentalListByUserId(SqlSession session, String userId) {
 		// TODO Auto-generated method stub
 		return session.selectOne(namespace + "selectRentalListByUserId", userId);

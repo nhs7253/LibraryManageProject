@@ -19,12 +19,12 @@ import kr.co.library.vo.Book;
 
 public class BookServiceImpl implements BookService {
 	private SqlSessionFactory factory;
-	private BookDao dao;
+	private BookDao bookDao;
 	private static BookService instance;
 	
 	private BookServiceImpl() throws IOException{
 		factory = SqlSessionFactoryManager.getInstance().getSqlSessionFactory();
-		dao = BookDaoImpl.getInstance();
+		bookDao = BookDaoImpl.getInstance();
 	}
 	
 	public static BookService getInstance() throws IOException{
@@ -36,29 +36,49 @@ public class BookServiceImpl implements BookService {
 
 	@Override
 	public void addBook(Book book) {
-		// TODO Auto-generated method stub
-		
+		SqlSession session = factory.openSession();
+		try{
+			//null이 들어온건지, 공백인지 체크-> jsp에서할까?
+			
+			bookDao.insertBook(session, book);
+			session.commit();
+		}finally{
+			session.close();
+		}
 	}
-
+	
 	@Override
 	public void updateBook(Book book) {
-		// TODO Auto-generated method stub
+		SqlSession session = factory.openSession();
+		
+		try{
+			bookDao.updateBook(session, book);
+			session.commit();
+		}finally{
+			session.close();
+		}
 		
 	}
 
 	@Override
 	public void deleteBook(String id) {
-		// TODO Auto-generated method stub
+	
+		SqlSession session = factory.openSession();
+		try{
+			bookDao.deleteBook(session, id);
+			session.commit();
+		}finally{
+			session.close();
+		}
 		
 	}
-
 
 	@Override
 	public Book searchByBookId(String bookId) {
 		SqlSession session = factory.openSession();
 		
 		try {
-			return dao.selectBookListById(session, bookId);
+			return bookDao.selectBookListById(session, bookId);
 		} finally {
 			session.close();
 		}
@@ -70,9 +90,9 @@ public class BookServiceImpl implements BookService {
 		HashMap<String, Object> map = new HashMap<>(); 
 		SqlSession session = factory.openSession();
 		try {
-			int tatalCount = dao.selectBookByKeywordCount(session, select, keyword);
+			int tatalCount = bookDao.selectBookByKeywordCount(session, select, keyword);
 			PagingBean pageBean = new PagingBean(tatalCount, page);
-			List<Book> list = dao.selectBookPagingByKeyword(session, select, keyword, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+			List<Book> list = bookDao.selectBookPagingByKeyword(session, select, keyword, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
 			map.put("pageBean", pageBean);
 			map.put("list", list);
 		} finally {

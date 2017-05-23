@@ -59,6 +59,14 @@ public interface RentalListDao {
 	 */
 	List<RentalList> selectRentalListByUserIdToBook(SqlSession session, String bookId);
 	
+
+	/**
+	 * rentalNo로 해당 대출목록을 조회
+	 * @param session
+	 * @param rentalNo
+	 * @return
+	 */
+	RentalList selectRentalListByRentalNo(SqlSession session,int rentalNo);
 	
 	/**
 	 * userId로 select한 대여 내역의 수를 반환
