@@ -40,8 +40,9 @@ public class UserCreateServlet extends HttpServlet{
 		
 		//결과응답
 		request.setAttribute("result", message);
-		
-		request.getRequestDispatcher("/userCreate.jsp").forward(request, response);
+	
+		//리다이렉트
+		response.sendRedirect("/userCreate.jsp");
 	
 	}
 }

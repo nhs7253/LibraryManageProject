@@ -60,7 +60,7 @@ public class RentalServiceImpl implements RentalService {
 	
 	@Override
 	public String rentBook(String userId, String bookId) throws FailRentException, FailWaitException {
-		// TODO Auto-generated method stub
+
 		SqlSession session = factory.openSession();
 
 		Book book = bookDao.selectBookListById(session, bookId);
