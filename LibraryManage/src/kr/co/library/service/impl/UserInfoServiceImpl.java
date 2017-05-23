@@ -31,14 +31,14 @@ public class UserInfoServiceImpl implements UserInfoService{
 	}
 	
 	@Override
-	public void createUser(UserManagement user) throws UserIDOverlapException, IOException {
+	public void createUser(UserManagement user) throws UserIDOverlapException {
 
 		SqlSession session = null;
 		try{
 		session = factory.openSession();
 		//아이디중복검사 또는 잘못된값 일경우
 		if(userDao.selectUserManagementListById(session, user.getUserId()) != null || user.getUserId().equals("")){
-			throw new IOException(String.format("ID가 중복 또는 잘못된값을 입력하였습니다.", user.getUserId()));
+			throw new UserIDOverlapException(String.format("ID가 중복 또는 잘못된값을 입력하였습니다.", user.getUserId()));
 		}
 		userDao.insertUserManagement(session, user);
 		session.commit();

@@ -2,6 +2,8 @@ package kr.co.library.service;
 
 import java.util.Map;
 
+import exception.BookIdException;
+import exception.BookNotFoundException;
 import kr.co.library.vo.Book;
 
 public interface BookService {
@@ -12,7 +14,7 @@ public interface BookService {
 	 * - 이미 있는 책인지 중복체크
 	 * @param book
 	 */
-	public void addBook(Book book);
+	public void addBook(Book book)throws BookIdException;
 		
 	/**
 	 * 수정된 Book 객체의 정보를 받아서 같은 id를 제외한 정보를 수정.
@@ -20,7 +22,7 @@ public interface BookService {
 	 * -없는 책인지 체크
 	 * @param book
 	 */
-	public void updateBook(Book book);
+	public void updateBook(Book book) throws BookNotFoundException;
 	
 	/**
 	 * Book의 id를 받아서 해당 책의 정보를 삭제.
@@ -28,7 +30,7 @@ public interface BookService {
 	 * -없는id인지 체크
 	 * @param id
 	 */
-	public void deleteBook(String id);
+	public void deleteBook(String id) throws BookNotFoundException;
 	
 	
 	//public List<Book> searchByAuthor(String author);

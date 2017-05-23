@@ -8,6 +8,8 @@ import java.util.Map;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import exception.BookIdException;
+import exception.BookNotFoundException;
 import kr.co.library.dao.BookDao;
 import kr.co.library.dao.impl.BookDaoImpl;
 import kr.co.library.service.BookService;
@@ -35,11 +37,12 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void addBook(Book book) {
+	public void addBook(Book book) throws BookIdException {
 		SqlSession session = factory.openSession();
 		try{
-			//null이 들어온건지, 공백인지 체크-> jsp에서할까?
-			
+			if(bookDao.selectBookListById(session, book.getBookId())!=null || book.getBookId().equals("")){
+				throw new BookIdException("책의 id입력이 잘못 되었습니다.");
+			}
 			bookDao.insertBook(session, book);
 			session.commit();
 		}finally{
@@ -48,10 +51,12 @@ public class BookServiceImpl implements BookService {
 	}
 	
 	@Override
-	public void updateBook(Book book) {
+	public void updateBook(Book book) throws BookNotFoundException{
 		SqlSession session = factory.openSession();
-		
 		try{
+			if(bookDao.selectBookListById(session, book.getBookId())==null){
+				throw new BookNotFoundException(String.format("입력하신 id인 %s의 책의 정보가 없습니다.", book.getBookId()));
+			}
 			bookDao.updateBook(session, book);
 			session.commit();
 		}finally{
@@ -61,10 +66,13 @@ public class BookServiceImpl implements BookService {
 	}
 
 	@Override
-	public void deleteBook(String id) {
+	public void deleteBook(String id) throws BookNotFoundException {
 	
 		SqlSession session = factory.openSession();
 		try{
+			if(bookDao.selectBookListById(session, id)==null){
+				throw new BookNotFoundException(String.format("입력하신 id인 %s의 책의 정보가 없습니다.", id));
+			}
 			bookDao.deleteBook(session, id);
 			session.commit();
 		}finally{
