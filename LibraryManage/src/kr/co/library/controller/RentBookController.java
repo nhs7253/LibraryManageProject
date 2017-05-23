@@ -8,8 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import exception.FailRentException;
-import exception.FailWaitException;
+import kr.co.library.exception.FailRentException;
+import kr.co.library.exception.FailWaitException;
 import kr.co.library.service.RentalService;
 import kr.co.library.service.impl.RentalServiceImpl;
 //Test 완료 - 김진광 170523
