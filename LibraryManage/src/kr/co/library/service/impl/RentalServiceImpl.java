@@ -286,6 +286,12 @@ public class RentalServiceImpl implements RentalService {
 		return map;
 	}
 	
+	/**
+	 * List<RentalList>를 받아 연체 정보를 계산해 주는 메소드
+	 * List<String>를 리턴함
+	 * @param list
+	 * @return
+	 */
 	public List<String> getOverdueInfo(List<RentalList> list){
 		List<String> overdue = new ArrayList<>();
 		Calendar limit = Calendar.getInstance();
@@ -303,6 +309,12 @@ public class RentalServiceImpl implements RentalService {
 			}
 		}
 		return overdue;
+	}
+
+	@Override
+	public Map<String, Object> PrintAdminWaitList(int page) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }
