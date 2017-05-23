@@ -48,8 +48,9 @@ td{
 			<td>저자</td>
 			<td>출판사</td>
 			<td>발간일</td>
+			<td>대여자ID</td>
+			<td>대여자</td>
 			<td>빌린날짜</td>
-			<td>반납날짜</td>
 			<td>연체여부</td>
 		</tr>
 	</thead>
@@ -66,8 +67,9 @@ td{
 				<td>${rent.book.author}</td>
 				<td>${rent.book.publisher}</td>
 				<td>${rent.book.publishDate}</td>
+				<td>${rent.userId}</td>
+				<td>${requestScope.name[Status.index]}</td>
 				<td>${rent.rentalStart}</td>
-				<td>${rent.rentalEnd}</td>
 				<td>${requestScope.overdue[Status.index]}</td>
 			</tr>
 		</c:forEach>
@@ -82,7 +84,7 @@ td{
 														페이징 처리
 			###################################################### --%>
 	<!-- 첫페이지로 이동 -->
-	<a href="${initParam.rootPath }/RentalList?page=1&userId=${requestScope.userId}">첫페이지</a>
+	<a href="${initParam.rootPath }/RentalListAdmin?page=1">첫페이지</a>
 	
 
 	<!--
@@ -92,7 +94,7 @@ td{
 	<c:choose>
 		<c:when test="${requestScope.pageBean.previousPageGroup}">
 			<!-- 이전페이지 그룹이 있다면 : isPreviousPageGroup() -->
-			<a href="${initParam.rootPath }/RentalList?page=${requestScope.pageBean.beginPage-1}&userId=${requestScope.userId}">◀</a>
+			<a href="${initParam.rootPath }/RentalListAdmin?page=${requestScope.pageBean.beginPage-1}">◀</a>
 		</c:when>
 		<c:otherwise>
 			◀
@@ -113,7 +115,7 @@ td{
 		<c:choose>
 			<c:when test="${page != requestScope.pageBean.page}">
 				<!-- 현재페이지가 아니라면 -->
-				<a href="${initParam.rootPath }/RentalList?page=${page}&userId=${requestScope.userId}">${page }&nbsp;&nbsp;</a>
+				<a href="${initParam.rootPath }/RentalListAdmin?page=${page}">${page }&nbsp;&nbsp;</a>
 			</c:when>
 			<c:otherwise>
 				[${page}]&nbsp;&nbsp;
@@ -130,7 +132,7 @@ td{
 	 -->
 	<c:choose>
 		<c:when test="${requestScope.pageBean.nextPageGroup}">
-			<a href="${initParam.rootPath }/RentalList?page=${requestScope.pageBean.endPage+1}&userId=${requestScope.userId}">▶</a>
+			<a href="${initParam.rootPath }/RentalListAdmin?page=${requestScope.pageBean.endPage+1}">▶</a>
 		</c:when>
 		<c:otherwise>
 			▶
@@ -141,7 +143,7 @@ td{
 	
 	
 	<!-- 마지막 페이지로 이동 -->
-	<a href="${initParam.rootPath }/RentalList?page=${requestScope.pageBean.totalPage}&userId=${requestScope.userId}">마지막 페이지</a>
+	<a href="${initParam.rootPath }/RentalListAdmin?page=${requestScope.pageBean.totalPage}">마지막 페이지</a>
 	
 
 </p>

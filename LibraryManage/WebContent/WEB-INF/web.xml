@@ -57,6 +57,28 @@
     <url-pattern>/BookSearchByKeyword</url-pattern>
   </servlet-mapping>
   
+  
+  <!-- 노현식 - 관리자 현재 대여 목록 -->
+  <servlet>
+    <servlet-name>RentalListAdmin</servlet-name>
+    <servlet-class>kr.co.library.controller.RentalListAdminController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RentalListAdmin</servlet-name>
+    <url-pattern>/RentalListAdmin</url-pattern>
+  </servlet-mapping>
+  
+    <!-- 노현식 - 관리자 대기 목록 -->
+  <servlet>
+    <servlet-name>WaitListAdmin</servlet-name>
+    <servlet-class>kr.co.library.controller.WaitListAdminController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>WaitListAdmin</servlet-name>
+    <url-pattern>/WaitListAdmin</url-pattern>
+  </servlet-mapping>
+  
+  
   <!-- 김진광 -대여신청완료 -->
   <servlet>
   	<servlet-name>rentBook</servlet-name>
@@ -94,7 +116,7 @@
   	<url-pattern>/userInfoRefer</url-pattern>
   </servlet-mapping>
   
-<<<<<<< HEAD
+
   <!--박연수 책추가 -->
   <servlet>
   	<servlet-name>addbook</servlet-name>
@@ -138,7 +160,7 @@
   
   
   
-=======
+
   <!-- 왕준 : UserCreateServlet 등록 -->
   <servlet>
   	<servlet-name>userCreate</servlet-name>
@@ -148,5 +170,5 @@
   	<servlet-name>userCreate</servlet-name>
   	<url-pattern>/userCreate</url-pattern>
   </servlet-mapping>
->>>>>>> branch 'master' of https://github.com/nhs7253/LibraryManageProject.git
+
 </web-app>

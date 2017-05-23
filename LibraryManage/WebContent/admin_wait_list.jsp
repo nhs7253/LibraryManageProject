@@ -43,14 +43,11 @@ td{
 <table>
 	<thead>
 		<tr>
-			<td>책ID</td>
-			<td>제목</td>
-			<td>저자</td>
-			<td>출판사</td>
-			<td>발간일</td>
-			<td>빌린날짜</td>
-			<td>반납날짜</td>
-			<td>연체여부</td>
+			<td>예약자ID</td>
+			<td>이름</td>
+			<td>예약도서ID</td>
+			<td>도서제목</td>
+			<td>대기순위</td>
 		</tr>
 	</thead>
 	<tbody>
@@ -59,16 +56,13 @@ td{
 														조회된 item 출력 
 			###################################################### --%>
 		
-		<c:forEach items="${requestScope.list }" var="rent" varStatus="Status">
+		<c:forEach items="${requestScope.list }" var="wait">
 			<tr>
-				<td>${rent.bookId}</td>
-				<td>${rent.book.title}</td>
-				<td>${rent.book.author}</td>
-				<td>${rent.book.publisher}</td>
-				<td>${rent.book.publishDate}</td>
-				<td>${rent.rentalStart}</td>
-				<td>${rent.rentalEnd}</td>
-				<td>${requestScope.overdue[Status.index]}</td>
+				<td>${wait.userId}</td>
+				<td>${wait.name}</td>
+				<td>${wait.bookId}</td>
+				<td>${wait.title}</td>
+				<td>${wait.rank}</td>
 			</tr>
 		</c:forEach>
 		
@@ -82,7 +76,7 @@ td{
 														페이징 처리
 			###################################################### --%>
 	<!-- 첫페이지로 이동 -->
-	<a href="${initParam.rootPath }/RentalList?page=1&userId=${requestScope.userId}">첫페이지</a>
+	<a href="${initParam.rootPath }/WaitListAdmin?page=1">첫페이지</a>
 	
 
 	<!--
@@ -92,7 +86,7 @@ td{
 	<c:choose>
 		<c:when test="${requestScope.pageBean.previousPageGroup}">
 			<!-- 이전페이지 그룹이 있다면 : isPreviousPageGroup() -->
-			<a href="${initParam.rootPath }/RentalList?page=${requestScope.pageBean.beginPage-1}&userId=${requestScope.userId}">◀</a>
+			<a href="${initParam.rootPath }/WaitListAdmin?page=${requestScope.pageBean.beginPage-1}">◀</a>
 		</c:when>
 		<c:otherwise>
 			◀
@@ -113,7 +107,7 @@ td{
 		<c:choose>
 			<c:when test="${page != requestScope.pageBean.page}">
 				<!-- 현재페이지가 아니라면 -->
-				<a href="${initParam.rootPath }/RentalList?page=${page}&userId=${requestScope.userId}">${page }&nbsp;&nbsp;</a>
+				<a href="${initParam.rootPath }/WaitListAdmin?page=${page}">${page }&nbsp;&nbsp;</a>
 			</c:when>
 			<c:otherwise>
 				[${page}]&nbsp;&nbsp;
@@ -130,7 +124,7 @@ td{
 	 -->
 	<c:choose>
 		<c:when test="${requestScope.pageBean.nextPageGroup}">
-			<a href="${initParam.rootPath }/RentalList?page=${requestScope.pageBean.endPage+1}&userId=${requestScope.userId}">▶</a>
+			<a href="${initParam.rootPath }/WaitListAdmin?page=${requestScope.pageBean.endPage+1}">▶</a>
 		</c:when>
 		<c:otherwise>
 			▶
@@ -141,7 +135,7 @@ td{
 	
 	
 	<!-- 마지막 페이지로 이동 -->
-	<a href="${initParam.rootPath }/RentalList?page=${requestScope.pageBean.totalPage}&userId=${requestScope.userId}">마지막 페이지</a>
+	<a href="${initParam.rootPath }/WaitListAdmin?page=${requestScope.pageBean.totalPage}">마지막 페이지</a>
 	
 
 </p>
