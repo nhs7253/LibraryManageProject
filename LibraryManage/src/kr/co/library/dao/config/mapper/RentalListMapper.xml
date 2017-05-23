@@ -88,7 +88,13 @@
 		WHERE user_id = #{value}
 	</select>
 	
-	
+	<select id="selectRentalListByRentalNo" parameterType = "string" resultMap = "rentalList-resultmap">
+		resultMap="rentalList-resultmap">
+		SELECT
+		<include refid="all-column" />
+		FROM RENTAL_LIST
+		WHERE rental_no = #{value}
+	</select>
 	
 	<select id="selectRentalListPagingByUserIdToBook" parameterType="string" resultMap="rentalList-book-resultmap">
 		SELECT rental_no, user_id, book_id, rental_start, rental_end, 

@@ -74,7 +74,7 @@ public interface RentalService {
 	 * @param userId
 	 * @param email
 	 */
-	public void noticeWaitUser(String userId,String email);
+	public void noticeWaitUser(String userId);
 
 	
 	
