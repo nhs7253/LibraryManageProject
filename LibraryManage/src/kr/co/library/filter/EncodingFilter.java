@@ -15,22 +15,22 @@ public class EncodingFilter implements Filter{
 	
 	@Override
 	public void destroy() {
-		System.out.println("EncodingFilter.destroy() 실행");
+//		System.out.println("EncodingFilter.destroy() 실행");
 	}
 
 	@Override
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
-		System.out.println("EncodingFilter.doFilter()-전처리작업");
+//		System.out.println("EncodingFilter.doFilter()-전처리작업");
 		request.setCharacterEncoding(encoding);
 		chain.doFilter(request, response);
-		System.out.println("EncodingFilter.doFilter()-후처리작업");
+//		System.out.println("EncodingFilter.doFilter()-후처리작업");
 	}
 
 	@Override
 	public void init(FilterConfig config) throws ServletException {
 		this.encoding = config.getInitParameter("encoding");
-		System.out.println("EncodingFilter.init()실행"+encoding);
+//		System.out.println("EncodingFilter.init()실행"+encoding);
 	}
 
 }

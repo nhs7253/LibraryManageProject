@@ -38,7 +38,7 @@ td{
 </style>
 </head>
 <body>
-<h2>도서 목록</h2>
+<h2>도서 대출 예약 목록(관리자)</h2>
 
 <table>
 	<thead>

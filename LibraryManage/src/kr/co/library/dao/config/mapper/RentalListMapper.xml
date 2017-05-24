@@ -100,7 +100,7 @@
 		WHERE rental_no = #{value}
 	</select>
 	
-	<select id="selectRentalListPagingByUserIdToBook" parameterType="string" resultMap="rentalList-book-resultmap">
+	<select id="selectRentalListPagingByUserIdToBook" parameterType="map" resultMap="rentalList-book-resultmap">
 		SELECT rental_no, user_id, book_id, rental_start, rental_end, 
 				   title, author, publisher, publish_date, rental_state
 			FROM(
@@ -136,7 +136,7 @@
 	</select>
 	
 	
-	<select id="selectRentalListPagingByEndIsNull" parameterType="string" resultMap="rentalList-book-uesrName-resultmap">
+	<select id="selectRentalListPagingByEndIsNull" parameterType="map" resultMap="rentalList-book-uesrName-resultmap">
 			SELECT rental_no, user_id, book_id, rental_start, rental_end, 
 				   title, author, publisher, publish_date, rental_state,
 				   user_name
@@ -168,6 +168,9 @@
 					FROM rental_list r, book b, user_management u
 					WHERE r.book_id = b.book_id(+) AND r.user_id = u.user_id(+)
 					AND r.rental_end IS NULL
+					<if test="userId != null and userId != ''">
+						AND r.user_id = #{userId}
+					</if>
 					ORDER BY r.rental_start DESC
 				)
 				WHERE rownum &lt;= #{endIndex}

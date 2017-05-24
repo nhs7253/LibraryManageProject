@@ -40,6 +40,16 @@ td{
 <body>
 <h2>도서 목록</h2>
 
+<form action="${initParam.rootPath }/BookSearchByKeyword" method="post">
+<select name="select">
+    <option value="title">제목</option>
+    <option value="author">저자</option>
+    <option value="publisher">출판사</option>
+</select>
+	<input type="text" name="keyword"/>
+	<input type="submit" value="검색"/>
+</form> <br />
+
 <table>
 	<thead>
 		<tr>
