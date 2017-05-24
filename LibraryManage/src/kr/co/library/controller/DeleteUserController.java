@@ -11,7 +11,7 @@ import kr.co.library.exception.UserNotFoundException;
 import kr.co.library.service.impl.UserInfoServiceImpl;
 
 
-public class DeleteUser extends HttpServlet 
+public class DeleteUserController extends HttpServlet 
 {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

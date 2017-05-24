@@ -12,7 +12,7 @@ import kr.co.library.service.UserInfoService;
 import kr.co.library.service.impl.UserInfoServiceImpl;
 import kr.co.library.vo.UserManagement;
 
-public class UserCreateServlet extends HttpServlet{
+public class UserCreateController extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

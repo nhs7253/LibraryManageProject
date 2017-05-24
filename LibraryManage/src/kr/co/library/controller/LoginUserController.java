@@ -14,7 +14,7 @@ import kr.co.library.dao.impl.UserManagementDaoImpl;
 import kr.co.library.exception.LoginFailException;
 import kr.co.library.vo.UserManagement;
 
-public class LoginUser extends HttpServlet {
+public class LoginUserController extends HttpServlet {
 	private SqlSession session;
 
 	@Override

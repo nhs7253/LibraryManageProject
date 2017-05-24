@@ -13,7 +13,7 @@ import kr.co.library.service.UserInfoService;
 import kr.co.library.service.impl.UserInfoServiceImpl;
 import kr.co.library.vo.UserManagement;
 
-public class UserInfoReferServlet extends HttpServlet {
+public class UserInfoReferController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
