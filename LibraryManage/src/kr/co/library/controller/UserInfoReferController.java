@@ -21,6 +21,8 @@ public class UserInfoReferController extends HttpServlet {
 //	TEST : 	session.setAttribute("userId", "kwang0101");
 		String userId = (String) session.getAttribute("userId");
 
+		
+
 		// 비지니스 로직 - Model 호출
 		UserInfoService service = UserInfoServiceImpl.getInstance();
 

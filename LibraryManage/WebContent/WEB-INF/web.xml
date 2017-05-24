@@ -198,6 +198,7 @@
   	<url-pattern>/userInfoRefer</url-pattern>
   </servlet-mapping>
   
+
   <!-- 왕준 : UserCreateServlet 등록 -->
   <servlet>
   	<servlet-name>userCreate</servlet-name>

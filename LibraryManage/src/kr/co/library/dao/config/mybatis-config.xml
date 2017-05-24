@@ -32,6 +32,8 @@
 		<mapper resource="kr/co/library/dao/config/mapper/UserManagementMapper.xml" />
 		<mapper resource="kr/co/library/dao/config/mapper/RentalListMapper.xml" />
 		<mapper resource="kr/co/library/dao/config/mapper/WaitListMapper.xml" />
+		<mapper resource="kr/co/library/dao/config/mapper/AdministratorMapper.xml"/>
+		
 	</mappers>
 	
 </configuration>
