@@ -107,22 +107,18 @@ public class UserInfoServiceImpl implements UserInfoService{
 		 * 인증 메세지
 		 */
 		@Override
-		public UserManagement authenticate(String userId, String password)throws LoginFailException {
-			SqlSession session = factory.openSession();
+		public UserManagement authenticate(String userId, String password){
+		SqlSession session = factory.openSession();
 			UserManagement user = UserManagementDaoImpl.getInstance().selectUserManagementListById(session, userId);
-			if (user != null)// 비밀번호 조회
+			
+			if (user != null)
 			{
-				if (password.equals(user.getPassword())) {
+				if (password.equals(user.getPassword())) {// 비밀번호 조회
 					return user;
-				} else// PW가 틀린경우
-				{
-					throw new LoginFailException("비밀번호가 틀렸습니다.");
 				}
-			} else// ID 인증 실패
-			{
-				throw new LoginFailException("ID가 틀렸습니다.");
 			}
+			return null;
 		}
-		
 	
 }
+		

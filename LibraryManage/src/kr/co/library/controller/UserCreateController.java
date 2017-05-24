@@ -22,7 +22,7 @@ public class UserCreateController extends HttpServlet{
 		//pw
 		String password = request.getParameter("password");
 		//이름
-		String name = request.getParameter("name");
+		String name = request.getParameter("userName");
 		//폰번호
 		String phoneNum = request.getParameter("phoneNum");
 		//이메일

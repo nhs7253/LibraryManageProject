@@ -58,6 +58,6 @@ public interface UserInfoService {
 	 * @return
 	 * @throws LoginFailException
 	 */
-	public UserManagement authenticate(String userId, String password) throws LoginFailException;
+	public UserManagement authenticate(String userId, String password);
 	
 }
