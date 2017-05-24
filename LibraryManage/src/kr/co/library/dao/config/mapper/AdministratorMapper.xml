@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.library.dao.config.mapper.AdministratorMapper">
+
+
+<sql id="all-column">
+	administrator_id,
+	administrator_pw,
+	administrator_section
+</sql>
+
+<resultMap type="administrator" id="admin-resultmap">
+	<id column="administrator_id" property="administratorId"/>
+	<result column="administrator_pw" property="administratorPw"/>
+	<result column="administrator_section" property="administratorSection"/>
+</resultMap>
+
+
+
+
+<insert id = "insertAdministrator" parameterType="Administrator">
+INSERT INTO administrator
+VALUES (#{administratorId}, 
+		#{administratorPw},
+		#{administratorSection})
+</insert>
+
+
+<delete id = "deleteAdministrator" parameterType="string">
+DELETE FROM administrator
+WHERE administrator_id = #{administratorId}
+</delete>
+
+<select id = "selectAdminstratorById" parameterType= "string" resultMap="admin-resultmap">
+SELECT <include refid="all-column"/>
+FROM administrator
+WHERE administrator_id = #{administratorId}
+</select>
+
+
+
+
+
+
+
+
+
+
+
+</mapper>

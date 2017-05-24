@@ -20,7 +20,7 @@ public class UserManagementDaoImpl implements UserManagementDao{
 	
 	@Override
 	public int insertUserManagement(SqlSession session, UserManagement user) {
-		return session.delete(namespace+"insertUserManagement",user);
+		return session.insert(namespace+"insertUserManagement",user);
 	}
 
 	@Override
