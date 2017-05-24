@@ -136,11 +136,17 @@ public class RentalServiceImpl implements RentalService {
 
 			// ======================================반납후 책 처리
 			String bookId = rentalList.getBookId();
+			
+			System.out.println("String bookId = rentalList.getBookId() = " + bookId);
+			
 			// 대기목록에 이 책있는지 조회
 			List<WaitList> waitLists = waitDao.selectWaitListByBookId(session, bookId);
 			if (waitLists.isEmpty()) {
 				// 해당 책이 대기목록에 없단것.그러면 책의 렌탈상태를 Y로 수정.
 				Book book = bookDao.selectBookListById(session, bookId);
+				
+				System.out.println("DAO = "+ book);
+				
 				bookDao.updateBook(session, new Book(book.getBookId(), book.getTitle(), book.getAuthor(),
 						book.getPublisher(), book.getPublishDate(), 'Y'));
 			} else {// 책이 대기목록에 있다는것.
