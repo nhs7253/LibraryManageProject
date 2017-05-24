@@ -101,11 +101,16 @@ public class RentalServiceImpl implements RentalService {
 		try {
 			// 현재시간
 			Date current = new Date();
-			RentalList rentalList = rentalDao.selectRentalListByRentalNo(session, rentalNo);
+			
+			RentalList rentalList = rentalDao.selectRentalListByRentalNo(session,rentalNo);
 			// 반납시간만 현재시간으로 재설정.
+			
+			System.out.println(rentalList.getBookId());
+			
 			RentalList updateRental = new RentalList(rentalList.getRentalNo(), rentalList.getUserId(),
 					rentalList.getBookId(), rentalList.getRentalStart(), current);
 
+			
 			// 재설정한 대출목록으로 수정.
 			rentalDao.updateRentalList(session, updateRental);
 

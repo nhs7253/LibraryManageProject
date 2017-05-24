@@ -22,7 +22,40 @@ public class UserCreateServlet extends HttpServlet{
 		//pw
 		String password = request.getParameter("password");
 		//이름
-		String name = request.getParameter("name");
+		String name = request.getParameter("userName");
+		//폰번호
+		String phoneNum = request.getParameter("phoneNum");
+		//이메일
+		String email = request.getParameter("email");
+		//연체상태는 입력받으면 안되지.
+		String message = "회원가입이 완료되었습니다.";
+		//비지니스 로직
+		
+		System.out.println(new UserManagement(userId, password, name, phoneNum, email, 'N'));
+		
+		UserInfoService service = UserInfoServiceImpl.getInstance();
+		 try {
+			service.createUser(new UserManagement(userId, password, name, phoneNum, email, 'N'));
+		} catch (UserIDOverlapException e) {
+			message = "중복된 ID 또는 잘못된값입니다.";
+		}
+
+		
+		//결과응답
+		//request.setAttribute("result", message);
+	
+		//리다이렉트
+		//response.sendRedirect("/userCreate.jsp");
+		
+		
+		
+		
+/*		//요청파라미터 조회
+		String userId = request.getParameter("userId");
+		//pw
+		String password = request.getParameter("password");
+		//이름
+		String name = request.getParameter("userName");
 		//폰번호
 		String phoneNum = request.getParameter("phoneNum");
 		//이메일
@@ -32,17 +65,17 @@ public class UserCreateServlet extends HttpServlet{
 		//비지니스 로직
 		UserInfoService service = UserInfoServiceImpl.getInstance();
 		 try {
-			service.createUser(new UserManagement(userId, password, name, phoneNum, email, 'n'));
+			service.createUser(new UserManagement(userId, password, name, phoneNum, email, 'N'));
 		} catch (UserIDOverlapException e) {
 			message = "중복된 ID 또는 잘못된값입니다.";
 		}
 
 		
 		//결과응답
-		request.setAttribute("result", message);
+		//request.setAttribute("result", message);
 	
 		//리다이렉트
-		response.sendRedirect("/userCreate.jsp");
-	
+		//response.sendRedirect("/userCreate.jsp");
+*/	
 	}
 }

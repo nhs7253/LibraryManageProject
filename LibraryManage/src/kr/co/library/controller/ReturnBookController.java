@@ -20,11 +20,11 @@ public class ReturnBookController extends HttpServlet{
 		
 		HttpSession session = req.getSession();
 		
-		session.setAttribute("userId", "user1");
-		session.setAttribute("rentalNo", "1");
+		
+		String userId = (String) req.getParameter("userId");
+		int rentalNo = Integer.parseInt((String)req.getParameter("rentalNo"));
 
-		String userId = (String) session.getAttribute("userId");
-		int rentalNo = (int) session.getAttribute("rentalNo");
+		System.out.println(userId + rentalNo);
 		
 		RentalService service = RentalServiceImpl.getInstance();
 		try {

@@ -93,9 +93,8 @@
 		WHERE user_id = #{value}
 	</select>
 	
-	<select id="selectRentalListByRentalNo" parameterType = "string" resultMap = "rentalList-resultmap">
-		resultMap="rentalList-resultmap">
-		SELECT
+	<select id="selectRentalListByRentalNo" parameterType = "int" resultMap = "rentalList-resultmap">
+		select 
 		<include refid="all-column" />
 		FROM RENTAL_LIST
 		WHERE rental_no = #{value}
