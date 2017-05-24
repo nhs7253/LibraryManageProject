@@ -5,6 +5,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
 
 <h1>책등록</h1>

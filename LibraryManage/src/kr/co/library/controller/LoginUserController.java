@@ -41,11 +41,11 @@ public class LoginUserController extends HttpServlet {
 				if(admin==null)//admin 조회
 				{
 					// 로그인성공 session 생성 ->
-					HttpSession session = req.getSession();
+				HttpSession session = req.getSession();
 				session.setAttribute("loginInfo", user);// 회원정보 관리
-				req.getRequestDispatcher("/login/userInfo.jsp").forward(req, resp);
+				req.getRequestDispatcher("/forUser/main.jsp").forward(req, resp);
 				//req.setAttribute("errorMessage", e.getMessage());// Exception오류 메세지
-				req.getRequestDispatcher("/login/login_main.jsp").forward(req, resp);// 전달 경로
+				req.getRequestDispatcher("/forUser/login.jsp").forward(req, resp);// 전달 경로
 				
 				}
 				else//user
@@ -53,9 +53,9 @@ public class LoginUserController extends HttpServlet {
 					// 로그인성공 session 생성 ->
 					HttpSession session = req.getSession();
 					session.setAttribute("loginInfo", admin);//admin
-					req.getRequestDispatcher("/login/admin.jsp").forward(req, resp);
+					req.getRequestDispatcher("/forAdmin/admin_index.jsp").forward(req, resp);
 					//req.setAttribute("errorMessage", e.getMessage());// Exception오류 메세지
-					req.getRequestDispatcher("/login/login_main.jsp").forward(req, resp);
+					req.getRequestDispatcher("/forUser/login.jsp").forward(req, resp);
 				}
 			}
 			

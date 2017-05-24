@@ -3,9 +3,11 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자</title>
+<title>Insert title here</title>
 </head>
+<%@include file = "/forAdmin/admin_menu.jsp" %>
+
 <body>
-<h1>관리자 페이지</h1>
+<h2>관리자페이지입니다.</h2>
 </body>
 </html>

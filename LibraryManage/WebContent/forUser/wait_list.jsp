@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href="./css/view_table.css">
 </head>
+<%@include file = "/forUser/user_menu.jsp" %>
 <body>
    <h2>대기 목록</h2>
 

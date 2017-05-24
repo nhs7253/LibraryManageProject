@@ -5,8 +5,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<%@include file = "/forUser/user_menu.jsp" %>
+
 <body>
-<a href="">로그인</a> <a href="">회원가입</a> <br />
 <h2>도서검색</h2>
 
 <form action="${initParam.rootPath }/BookSearchByKeyword" method="post">

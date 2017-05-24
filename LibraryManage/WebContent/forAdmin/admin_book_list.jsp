@@ -10,14 +10,9 @@
 
 
 </head>
-<%@include file = "/forUser/user_menu.jsp" %>
+<%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
-
-	
 	<h2>도서 목록</h2>
-
-	
-	
 	<form action="${initParam.rootPath }/BookSearchByKeyword" method="post">
 	<select name="select">
 	    <option value="title">제목</option>
@@ -37,6 +32,7 @@
 				<td>출판사</td>
 				<td>발간일</td>
 				<td>대여여부</td>
+				<td>버튼</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -53,18 +49,23 @@
 					<td>${book.publisher}</td>
 					<td>${book.publishDate}</td>
 					<td>${book.rentalState}</td>
+					<td>
+					<c:choose>
+						<c:when test = "${book.rentalState eq 'Y'.charAt(0)}">
+							<form action ="${initParam.rootPath}/rentbook"  method = "post">
+							<input type="submit" value = "대출" onclick="alert('대출완료');" /></form>
+						</c:when>
+						<c:otherwise>
+							<form action ="${initParam.rootPath}/waitListInsert"  method = "post">
+							<input type="submit" value = "예약" onclick="alert('예약완료');" /></form>
+						</c:otherwise>
+					</c:choose>
+					</td>
 				</tr>
 			</c:forEach>
-			
-			
-			
 		</tbody>
 	</table>
-	
 
-	
-	
-	
 	<p>
 		<%--######################################################
 															페이징 처리

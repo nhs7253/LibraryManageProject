@@ -6,6 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<%@include file = "/forUser/user_menu.jsp" %>
 <body>
 
 <h2>마이페이지</h2>
@@ -28,7 +29,7 @@
 														조회된 item 출력 
 			###################################################### --%>
 		
-		<c:forEach items="${requestScope.list }" var="user" varStatus="Status">
+		<c:forEach items="${sessionScope.list }" var="user" varStatus="Status">
 			<tr>
 				<td>${user.userId}</td>
 				<td>${user.password}</td>
@@ -42,7 +43,6 @@
 		</c:forEach>
 	</tbody>
 </table>
-<%-- <a href="${initParam.rootPath }/WaitList?userId=1">유저의 예약 목록 (2)</a> <br /> --%>
 
 <a href = "${initParam.rootPath }/RentalList">나의 대출목록</a>
 <a href ="${initParam.rootPath }/WaitList">나의 대기목록</a>
