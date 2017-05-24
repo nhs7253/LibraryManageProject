@@ -32,7 +32,8 @@ public class UserCreateController extends HttpServlet{
 		//비지니스 로직
 		UserInfoService service = UserInfoServiceImpl.getInstance();
 		 try {
-			service.createUser(new UserManagement(userId, password, name, phoneNum, email, 'n'));
+
+			service.createUser(new UserManagement(userId, password, name, phoneNum, email, 'N'));
 		} catch (UserIDOverlapException e) {
 			message = "중복된 ID 또는 잘못된값입니다.";
 		}
@@ -43,6 +44,7 @@ public class UserCreateController extends HttpServlet{
 	
 		//리다이렉트
 		response.sendRedirect("/userCreate.jsp");
+
 	
 	}
 }

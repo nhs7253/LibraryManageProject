@@ -26,6 +26,7 @@ import kr.co.library.exception.FailRentException;
 import kr.co.library.exception.FailWaitException;
 import kr.co.library.exception.UserNotFoundException;
 import kr.co.library.service.RentalService;
+import kr.co.library.util.MailSender;
 import kr.co.library.util.PagingBean;
 import kr.co.library.util.SqlSessionFactoryManager;
 import kr.co.library.vo.Book;
@@ -152,7 +153,7 @@ public class RentalServiceImpl implements RentalService {
 				rentBook(firstWaitRankUserId, bookId);
 
 				// 1순위 대기자에게 대출했다고 이메일알림보내기
-				noticeWaitUser(firstWaitRankUserId);
+				MailSender.getInstance().sendMail(userDao.selectUserManagementListById(session, firstWaitRankUserId).getEmail(), firstWaitRankUser.getBook().getTitle());
 
 				// 1순위 대기자를 대기목록에 삭제,
 				waitDao.deleteWaitList(session, firstWaitRankUserId, bookId);
@@ -190,22 +191,6 @@ public class RentalServiceImpl implements RentalService {
 			session.close();
 		}
 
-	}
-
-	@Override
-	public void noticeWaitUser(String userId) {
-		SqlSession session = factory.openSession();
-
-		try {
-			UserManagement user = userDao.selectUserManagementListById(session, userId);
-			String email = user.getEmail();
-
-			// 이메일보내기
-
-			session.commit();
-		} finally {
-			session.close();
-		}
 	}
 
 	@Override
