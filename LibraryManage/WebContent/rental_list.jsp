@@ -39,7 +39,7 @@ td{
 </head>
 <body>
 <h2>도서 목록</h2>
-${requestScope.rentalList.overdue}
+
 <table>
 	<thead>
 		<tr>

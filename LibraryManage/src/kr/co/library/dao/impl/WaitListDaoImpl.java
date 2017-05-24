@@ -122,5 +122,11 @@ public class WaitListDaoImpl implements WaitListDao
 		input.put("endIndex",String.valueOf(endIndex));
 		return session.selectList(namespace+"selectWaitListPagingJoinBookJoinUser", input);
 	}
+
+	@Override
+	public int selectWaitListCount(SqlSession session) {
+		// TODO Auto-generated method stub
+		return session.selectOne(namespace+"selectWaitListCount");
+	}
 	
 }

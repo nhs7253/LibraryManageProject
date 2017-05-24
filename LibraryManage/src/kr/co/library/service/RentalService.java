@@ -85,7 +85,7 @@ public interface RentalService {
 	 * @param page
 	 * @return
 	 */
-	Map<String, Object> PrintCurrentRentalList(int page);
+	Map<String, Object> PrintCurrentRentalList(int page, String userId);
 	
 	
 	/**

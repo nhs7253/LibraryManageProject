@@ -11,6 +11,8 @@ CREATE TABLE wait_list(
 
 DROP TABLE wait_list;
 
+INSERT INTO wait_list VALUES('897','kite',rental_no_seq.nextVal);
+
 CREATE SEQUENCE wait_ranking_seq;
 
 SELECT * 

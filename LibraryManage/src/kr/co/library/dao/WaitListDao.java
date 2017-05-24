@@ -133,4 +133,11 @@ public interface WaitListDao
 	 * @return
 	 */
 	List<Object> selectWaitListPagingJoinBookJoinUser(SqlSession session, int startIndex, int endIndex);
+	
+	/**
+	 * 전체 waitUser의 숫자를 반환
+	 * @param session
+	 * @return
+	 */
+	int selectWaitListCount(SqlSession session);
 }

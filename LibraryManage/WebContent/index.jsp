@@ -18,9 +18,13 @@
 	<input type="submit" value="검색"/>
 </form> <br />
 
+<a href="${initParam.rootPath }/RentalList?userId=1">유저의 대여 목록 로그 (1)</a> <br />
 
-<a href="${initParam.rootPath }/RentalList?userId=1">유저의 대여 목록 (1)</a> <br />
+<a href="${initParam.rootPath }/WaitList?userId=1">유저의 예약 목록 (2)</a> <br />
 
-<a href="${initParam.rootPath }/WaitList?userId=1">유저의 대기 목록 (2)</a>
+<a href="${initParam.rootPath }/RentalListAdmin">현재 대여 목록 (관리자)</a> <br />
+
+<a href="${initParam.rootPath }/WaitListAdmin">도서 대출 예약 목록(관리자)</a> <br />
+
 </body>
 </html>

@@ -75,16 +75,13 @@
 		FROM book
 	</select>
 
-
-
 	<select id="selectBookPaging" parameterType="map" resultMap="book-resultmap">
 		SELECT * FROM (
    		SELECT book.*, ROW_NUMBER() OVER(ORDER BY title) AS RNUM
     	FROM book)
 		WHERE RNUM BETWEEN #{startIndex} AND #{endIndex}
 	</select>
-	
-	
+		
 	
 	<select id="selectBookListByAuthor" parameterType="string" resultMap="book-resultmap">
 		SELECT <include refid="all-column"/>

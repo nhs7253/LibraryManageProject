@@ -19,6 +19,26 @@ public class RentBookController extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
 		String message;
+
+		String userId = req.getParameter("userId");
+		String bookId = req.getParameter("bookId");
+		
+		
+		RentalService service = RentalServiceImpl.getInstance();
+		try {
+			message = service.rentBook(userId,bookId);
+		} catch (FailRentException e) {
+			message = e.getMessage();
+		} catch (FailWaitException e) {
+			message = e.getMessage();
+		}
+		session.setAttribute("message", message);
+
+		resp.sendRedirect("/LibraryManage/rental/test.jsp");
+		
+		
+		/*		HttpSession session = req.getSession();
+		String message;
 		session.setAttribute("userId", "userId");
 		session.setAttribute("bookId", "bookId");
 
@@ -34,6 +54,6 @@ public class RentBookController extends HttpServlet {
 		}
 		session.setAttribute("message", message);
 
-		resp.sendRedirect("/LibraryManage/rental/test.jsp");
+		resp.sendRedirect("/LibraryManage/rental/test.jsp");*/
 	}
 }

@@ -41,7 +41,7 @@ public class RentalListDaoImpl implements RentalListDao {
 	@Override
 	public List<RentalList> selectRentalList(SqlSession session) {
 		// TODO Auto-generated method stub
-		return session.selectList(namespace + "selectRentalList", session);
+		return session.selectList(namespace + "selectRentalList");
 	}
 
 	@Override
@@ -50,15 +50,15 @@ public class RentalListDaoImpl implements RentalListDao {
 	}
 	
 	@Override
-	public RentalList selectRentalListByUserId(SqlSession session, String userId) {
+	public List<RentalList> selectRentalListByUserId(SqlSession session, String userId) {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace + "selectRentalListByUserId", userId);
+		return session.selectList(namespace + "selectRentalListByUserId", userId);
 	}
 
 	@Override
-	public RentalList selectRentalListByBookId(SqlSession session, String bookId) {
+	public List<RentalList> selectRentalListByBookId(SqlSession session, String bookId) {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace + "selectRentalListByBookId", bookId);
+		return session.selectList(namespace + "selectRentalListByBookId", bookId);
 	}
 
 	@Override
@@ -84,9 +84,12 @@ public class RentalListDaoImpl implements RentalListDao {
 	}
 
 	@Override
-	public List<Object> selectRentalListPagingByEndIsNull(SqlSession session, int startIndex, int endIndex) {
+	public List<Object> selectRentalListPagingByEndIsNull(SqlSession session, String userId , int startIndex, int endIndex) {
 		// TODO Auto-generated method stub
 		Map<String, String> input = new HashMap<String, String>();
+//		if(userId.isEmpty())
+//			userId = null;
+		input.put("userId",userId);
 		input.put("startIndex",String.valueOf(startIndex));
 		input.put("endIndex",String.valueOf(endIndex));
 		return session.selectList(namespace + "selectRentalListPagingByEndIsNull", input);
