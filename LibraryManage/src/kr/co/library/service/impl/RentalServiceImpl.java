@@ -257,7 +257,7 @@ public class RentalServiceImpl implements RentalService {
 	}
 
 	@Override
-	public Map<String, Object> PrintCurrentRentalList(int page) {
+	public Map<String, Object> PrintCurrentRentalList(int page, String userId) {
 		HashMap<String, Object> map = new HashMap<>();
 		List<String> name = new ArrayList<>();
 		List<String> overdue = null;
@@ -266,7 +266,7 @@ public class RentalServiceImpl implements RentalService {
 		try {
 			int tatalCount = rentalDao.selectRentalListByEndIsNullCount(session);
 			PagingBean pageBean = new PagingBean(tatalCount, page);
-			List<Object> list = rentalDao.selectRentalListPagingByEndIsNull(session, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+			List<Object> list = rentalDao.selectRentalListPagingByEndIsNull(session, userId, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
 			List<RentalList> temp = new ArrayList<>();
 
 			for(int i=0;i<list.size();i++){
