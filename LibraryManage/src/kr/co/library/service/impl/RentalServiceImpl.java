@@ -26,7 +26,6 @@ import kr.co.library.exception.FailRentException;
 import kr.co.library.exception.FailWaitException;
 import kr.co.library.exception.UserNotFoundException;
 import kr.co.library.service.RentalService;
-import kr.co.library.util.MailSender;
 import kr.co.library.util.PagingBean;
 import kr.co.library.util.SqlSessionFactoryManager;
 import kr.co.library.vo.Book;
@@ -66,28 +65,22 @@ public class RentalServiceImpl implements RentalService {
 		// 왜셀렉문 2개나오냐
 		Book book = bookDao.selectBookListById(session, bookId);
 		UserManagement user = userDao.selectUserManagementListById(session, userId);
-	
+
 		try {
 			// book과 user의 정보가 null값인지 확인하는 조건. 예외 발생되면 FailRentException 발생!
 			if (book != null && user != null) {
 
 				// Book의 대여상태와 로그인한 사용자의 ID의 패널티 상태를 비교하는 조건문.
 				if (book.getRentalState() == 'Y' && user.getPenaltyState() == 'N') {
-						
-					
-					if (rentalDao.selectRentalListByBookId(session, bookId).isEmpty()) {
-						RentalList rentalList = new RentalList(0, userId, bookId, new Date(), new Date());
-						rentalDao.insertRentalList(session, rentalList);
-						bookDao.updateBook(session, new Book(book.getBookId(), book.getTitle(), book.getAuthor(),
-								book.getPublisher(), book.getPublishDate(), 'N'));
-						session.commit();
-						return userId + "님 대여완료";
-					} else {
-						
-						throw new FailRentException("이미 대여중인 도서입니다.!", userId, bookId);
-					}
 
-					// Book의 상태가 대여중인 상태일 경우.
+					RentalList rentalList = new RentalList(0, userId, bookId, new Date(), null);
+					rentalDao.insertRentalList(session, rentalList);
+					bookDao.updateBook(session, new Book(book.getBookId(), book.getTitle(), book.getAuthor(),
+							book.getPublisher(), book.getPublishDate(), 'N'));
+					session.commit();
+					return userId + "님 대여완료";
+				} else if (book.getRentalState() == 'N') {
+					throw new FailRentException("대여중인 도서입니다.!", userId, bookId);
 				} else if (user.getPenaltyState() == 'Y') {
 					throw new FailRentException("대여제한상태입니다.");
 				} else if (book.getRentalState() == 'N') {
@@ -96,7 +89,6 @@ public class RentalServiceImpl implements RentalService {
 			}
 
 			throw new FailRentException("대여실패(BookId, UserId 확인)", userId, bookId);
-
 		} finally {
 			session.close();
 		}
@@ -153,7 +145,6 @@ public class RentalServiceImpl implements RentalService {
 				rentBook(firstWaitRankUserId, bookId);
 
 				// 1순위 대기자에게 대출했다고 이메일알림보내기
-				MailSender.getInstance().sendMail(userDao.selectUserManagementListById(session, firstWaitRankUserId).getEmail(), firstWaitRankUser.getBook().getTitle());
 
 				// 1순위 대기자를 대기목록에 삭제,
 				waitDao.deleteWaitList(session, firstWaitRankUserId, bookId);
@@ -192,6 +183,7 @@ public class RentalServiceImpl implements RentalService {
 		}
 
 	}
+
 
 	@Override
 	public Map<String, Object> PrintRentalList(int page, String userId) {
