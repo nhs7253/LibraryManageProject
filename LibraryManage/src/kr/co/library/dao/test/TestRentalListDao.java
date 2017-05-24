@@ -27,7 +27,12 @@ public class TestRentalListDao {
 		RentalListDao dao = RentalListDaoImpl.getInstance();
 		SqlSession session = null;
 		try {
+			
+
 			session = factory.openSession();
+			
+					
+			
 			/*
 			dao.insertRentalList(session, new RentalList(1, "1", "1", new Date(), new Date()));
 			printBookList(dao.selectRentalList(session),"insertRentalList");
@@ -67,7 +72,9 @@ public class TestRentalListDao {
 			
 			
 			
-			System.out.println(dao.selectRentalListPagingByEndIsNull(session, 1, 2));
+			System.out.println(dao.selectRentalListPagingByEndIsNull(session, null, 1, 10));
+			
+			System.out.println(dao.selectRentalListPagingByEndIsNull(session, "1", 1, 10));
 			
 			System.out.println(dao.selectRentalListByEndIsNullCount(session));
 			

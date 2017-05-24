@@ -42,14 +42,14 @@ public interface RentalListDao {
 	 * @param userId
 	 * @return
 	 */
-	RentalList selectRentalListByUserId(SqlSession session, String userId );
+	List<RentalList> selectRentalListByUserId(SqlSession session, String userId );
 	/**
 	 * BookId로 조회
 	 * @param session
 	 * @param bookId
 	 * @return
 	 */
-	RentalList selectRentalListByBookId(SqlSession session, String bookId);
+	List<RentalList> selectRentalListByBookId(SqlSession session, String bookId);
 	
 	/**
 	 * UserId를 통해 book 테이블의 정보를 함꼐 조회한다.  (rental_start를 기준으로 내림 차순)
@@ -92,7 +92,7 @@ public interface RentalListDao {
 	 * @param endIndex
 	 * @return
 	 */
-	List<Object> selectRentalListPagingByEndIsNull(SqlSession session, int startIndex, int endIndex);
+	List<Object> selectRentalListPagingByEndIsNull(SqlSession session, String userId, int startIndex, int endIndex);
 	
 	
 	/**

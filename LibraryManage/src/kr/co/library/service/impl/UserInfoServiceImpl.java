@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import kr.co.library.dao.UserManagementDao;
 import kr.co.library.dao.impl.UserManagementDaoImpl;
+import kr.co.library.exception.LoginFailException;
 import kr.co.library.exception.UserIDOverlapException;
 import kr.co.library.exception.UserNotFoundException;
 import kr.co.library.service.UserInfoService;
@@ -102,5 +103,26 @@ public class UserInfoServiceImpl implements UserInfoService{
 			session.close();
 		}
 	}
+		/**
+		 * 인증 메세지
+		 */
+		@Override
+		public UserManagement authenticate(String userId, String password)throws LoginFailException {
+			SqlSession session = factory.openSession();
+			UserManagement user = UserManagementDaoImpl.getInstance().selectUserManagementListById(session, userId);
+			if (user != null)// 비밀번호 조회
+			{
+				if (password.equals(user.getPassword())) {
+					return user;
+				} else// PW가 틀린경우
+				{
+					throw new LoginFailException("비밀번호가 틀렸습니다.");
+				}
+			} else// ID 인증 실패
+			{
+				throw new LoginFailException("ID가 틀렸습니다.");
+			}
+		}
+		
 	
 }

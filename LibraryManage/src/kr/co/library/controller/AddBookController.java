@@ -17,7 +17,11 @@ public class AddBookController extends HttpServlet{
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
+		
 		//HttpSession session = req.getSession();
+		/*String id = (String) session.getAttribute("userId");
+		if(id == 관리자인지)
+		*/		
 		
 		String bookId = req.getParameter("bookId");
 		String title = req.getParameter("title");
@@ -26,9 +30,9 @@ public class AddBookController extends HttpServlet{
 		String publishDate = req.getParameter("publishDate");
 	//	String rentalState = req.getParameter("rentalState");
 		
-		Book book = new Book(bookId,title,author,publisher,publishDate,'Y');
+		System.out.println(bookId);
 		try{
-			BookServiceImpl.getInstance().addBook(book);
+			BookServiceImpl.getInstance().addBook(new Book(bookId,title,author,publisher,publishDate,'Y'));
 		}catch(BookIdException e){
 			e.printStackTrace();
 		}

@@ -12,3 +12,4 @@ insert into user_management values('kite','kitesoo','박연수','01099900','kite
 DROP TABLE user_management;
 
 select * from USER_MANAGEMENT;
+

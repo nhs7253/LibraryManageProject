@@ -20,6 +20,7 @@ public class UserInfoReferController extends HttpServlet {
 		HttpSession session = request.getSession();
 //	TEST : 	session.setAttribute("userId", "kwang0101");
 		String userId = (String) session.getAttribute("userId");
+
 		
 
 		// 비지니스 로직 - Model 호출
@@ -27,6 +28,7 @@ public class UserInfoReferController extends HttpServlet {
 
 		UserManagement user;
 		user = service.searchUser(userId);
+
 		request.setAttribute("info", user);
 
 		// 결과 응답

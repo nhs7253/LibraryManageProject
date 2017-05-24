@@ -9,9 +9,23 @@ CREATE TABLE rental_list(
 );
 
 CREATE SEQUENCE rental_no_seq;
+drop sequence rental_no_seq;
 
-INSERT INTO rental_list VALUES(rental_no_seq.nextVal, 'user01', 'book01', SYSDATE, SYSDATE);
+		select 
+			rental_no,
+		user_id,
+		book_id,
+		rental_start,
+		rental_end
+		FROM RENTAL_LIST
+		WHERE rental_no = 3;
+
+
+INSERT INTO rental_list VALUES(rental_no_seq.nextVal, '사용자1', '897', SYSDATE, null);
+INSERT INTO rental_list VALUES(rental_no_seq.nextVal, 'ㅂㅂㅂ', '123', SYSDATE, null);
 DELETE FROM rental_list WHERE user_id='user01'
+
+select * from rental_list where rental_no =3;
 
 DELETE TABLE rental_list;
 
@@ -181,3 +195,43 @@ FROM rental_list;
 			SELECT COUNT(*)
 			FROM rental_list
 			WHERE rental_end IS NULL
+			
+			
+			
+			SELECT rental_no, user_id, book_id, rental_start, rental_end, 
+				   title, author, publisher, publish_date, rental_state,
+				   user_name
+			FROM(
+				SELECT rownum rnum,
+					   rental_no_max rental_no, 
+					   user_id_max user_id, 
+					   book_id_max book_id, 
+					   rental_start_max rental_start,
+					   rental_end_max rental_end,
+					   title_max title, 
+					   author_max author, 
+					   publisher_max publisher, 
+					   publish_date_max publish_date, 
+					   rental_state_max rental_state,
+					   user_name_max user_name
+				FROM(
+					SELECT r.rental_no rental_no_max, 
+						   r.user_id user_id_max, 
+						   r.book_id book_id_max, 
+						   r.rental_start rental_start_max,
+						   r.rental_end rental_end_max,
+						   b.title title_max, 
+						   b.author author_max, 
+						   b.publisher publisher_max, 
+						   b.publish_date publish_date_max, 
+						   b.rental_state rental_state_max,
+						   u.user_name user_name_max
+					FROM rental_list r, book b, user_management u
+					WHERE r.book_id = b.book_id(+) AND r.user_id = u.user_id(+)
+					AND r.rental_end IS NULL
+					AND r.user_id = '1'
+					ORDER BY r.rental_start DESC
+				)
+				WHERE rownum <= '10'
+			)
+			WHERE rnum >= '1'

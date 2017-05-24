@@ -56,39 +56,45 @@ public class RentalServiceImpl implements RentalService {
 		waitDao = WaitListDaoImpl.getInstance();
 		userDao = UserManagementDaoImpl.getInstance();
 	}
-	
-	
+
 	@Override
 	public String rentBook(String userId, String bookId) throws FailRentException, FailWaitException {
 
 		SqlSession session = factory.openSession();
 
+		// 왜셀렉문 2개나오냐
 		Book book = bookDao.selectBookListById(session, bookId);
 		UserManagement user = userDao.selectUserManagementListById(session, userId);
 
 		try {
 			// book과 user의 정보가 null값인지 확인하는 조건. 예외 발생되면 FailRentException 발생!
 			if (book != null && user != null) {
+
 				// Book의 대여상태와 로그인한 사용자의 ID의 패널티 상태를 비교하는 조건문.
 				if (book.getRentalState() == 'Y' && user.getPenaltyState() == 'N') {
+					
 					if (rentalDao.selectRentalListByBookId(session, bookId) == null) {
-						RentalList rentalList = new RentalList(0, userId, bookId, new Date(), new Date());
+						RentalList rentalList = new RentalList(0, userId, bookId, new Date(), null);
 						rentalDao.insertRentalList(session, rentalList);
+						bookDao.updateBook(session, new Book(book.getBookId(), book.getTitle(), book.getAuthor(),
+								book.getPublisher(), book.getPublishDate(), 'N'));
 						session.commit();
 						return userId + "님 대여완료";
 					} else {
 						throw new FailRentException("이미 대여중인 도서입니다.!", userId, bookId);
 					}
-					// Book의 상태가 대여중인 상태일 경우.
-				}else if(user.getPenaltyState()=='Y'){
-					throw new FailRentException("대여제한상태입니다.");
-				}else if (book.getRentalState() == 'N') {
 
+					// Book의 상태가 대여중인 상태일 경우.
+				} else if (user.getPenaltyState() == 'Y') {
+					throw new FailRentException("대여제한상태입니다.");
+				} else if (book.getRentalState() == 'N') {
 					throw new FailRentException("다른 사람이 대여중입니다. 대여를 원하시면 대기자 신청을 해주세요.");
 				}
 			}
+		
 			throw new FailRentException("대여실패(BookId, UserId 확인)", userId, bookId);
-		} finally {
+		
+		}finally {
 			session.close();
 		}
 
@@ -101,11 +107,16 @@ public class RentalServiceImpl implements RentalService {
 		try {
 			// 현재시간
 			Date current = new Date();
-			RentalList rentalList = rentalDao.selectRentalListByRentalNo(session, rentalNo);
+			
+			RentalList rentalList = rentalDao.selectRentalListByRentalNo(session,rentalNo);
 			// 반납시간만 현재시간으로 재설정.
+			
+			System.out.println(rentalList.getBookId());
+			
 			RentalList updateRental = new RentalList(rentalList.getRentalNo(), rentalList.getUserId(),
 					rentalList.getBookId(), rentalList.getRentalStart(), current);
 
+			
 			// 재설정한 대출목록으로 수정.
 			rentalDao.updateRentalList(session, updateRental);
 
@@ -257,7 +268,7 @@ public class RentalServiceImpl implements RentalService {
 	}
 
 	@Override
-	public Map<String, Object> PrintCurrentRentalList(int page) {
+	public Map<String, Object> PrintCurrentRentalList(int page, String userId) {
 		HashMap<String, Object> map = new HashMap<>();
 		List<String> name = new ArrayList<>();
 		List<String> overdue = null;
@@ -266,7 +277,7 @@ public class RentalServiceImpl implements RentalService {
 		try {
 			int tatalCount = rentalDao.selectRentalListByEndIsNullCount(session);
 			PagingBean pageBean = new PagingBean(tatalCount, page);
-			List<Object> list = rentalDao.selectRentalListPagingByEndIsNull(session, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+			List<Object> list = rentalDao.selectRentalListPagingByEndIsNull(session, userId, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
 			List<RentalList> temp = new ArrayList<>();
 
 			for(int i=0;i<list.size();i++){

@@ -10,9 +10,9 @@ import javax.servlet.http.HttpServletResponse;
 import kr.co.library.exception.UserIDOverlapException;
 import kr.co.library.service.UserInfoService;
 import kr.co.library.service.impl.UserInfoServiceImpl;
-import kr.co.library.vo.UserManagement;
+import kr.co.library.vo.UserManagement; 
 
-public class UserCreateController extends HttpServlet{
+public class UserCreateServlet extends HttpServlet{
 	
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -32,8 +32,7 @@ public class UserCreateController extends HttpServlet{
 		//비지니스 로직
 		UserInfoService service = UserInfoServiceImpl.getInstance();
 		 try {
-
-			service.createUser(new UserManagement(userId, password, name, phoneNum, email, 'N'));
+			service.createUser(new UserManagement(userId, password, name, phoneNum, email, 'n'));
 		} catch (UserIDOverlapException e) {
 			message = "중복된 ID 또는 잘못된값입니다.";
 		}
@@ -44,7 +43,6 @@ public class UserCreateController extends HttpServlet{
 	
 		//리다이렉트
 		response.sendRedirect("/userCreate.jsp");
-
 	
 	}
 }
