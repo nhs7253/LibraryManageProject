@@ -68,6 +68,7 @@ public class TestBookDao {
 
 			
 			
+			/*
 			System.out.println(dao.selectBookByKeywordCount(session,"title","바다"));
 			
 			System.out.println(dao.selectBookByKeywordCount(session,"author","바다"));
@@ -79,9 +80,9 @@ public class TestBookDao {
 			printBookList(dao.selectBookPagingByKeyword(session, "author", "바다",101, 200),"author");
 			
 			printBookList(dao.selectBookPagingByKeyword(session, "publisher", "바다",101, 200),"publisher");
+			*/
 			
-
-			
+		
 			System.out.println("이상없음");
 			//////////////////////////////////////
 			session.commit();

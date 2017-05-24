@@ -11,6 +11,10 @@ CREATE TABLE book(
 
 select * from book;
 
+select * 
+from book
+WHERE book_id = '1';
+
 SELECT COUNT(*)
 FROM book
 WHERE title LIKE '%바다%';
