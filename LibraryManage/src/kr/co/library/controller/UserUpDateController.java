@@ -7,10 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-
-import org.apache.ibatis.session.SqlSession;
-
-import kr.co.library.dao.impl.UserManagementDaoImpl;
+import kr.co.library.exception.UserNotFoundException;
+import kr.co.library.service.impl.UserInfoServiceImpl;
 import kr.co.library.vo.UserManagement;
 
 
@@ -19,26 +17,29 @@ public class UserUpDateController extends HttpServlet
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
-		HttpSession session = req.getSession();
-		UserManagement user = new UserManagement();
 		
-		String id =req.getParameter("id");
+		HttpSession session = req.getSession(); 
+		
+		//jsp에서 수정한 데이터를 받음.
 		String password =req.getParameter("password");
 		String name =req.getParameter("name");
 		String phoneNum =req.getParameter("phoneNum");
 		String email =req.getParameter("eamil");
 		
-		UserManagement userInfo = new UserManagement(id,password,name,phoneNum,email,user.getPenaltyState());
+		
+		
+		UserManagement user = new UserManagement(((UserManagement)session.getAttribute("loginInfo")).getUserId(),password,name,phoneNum,email,((UserManagement)session.getAttribute("loginInfo")).getPenaltyState());
+		
 		
 		try
 		{
-			UserManagementDaoImpl.getInstance().updateUserManagement((SqlSession) session, userInfo);
+			UserInfoServiceImpl.getInstance().updateUser(user);
 		}
-		catch(Exception e)
+		catch(UserNotFoundException e)
 		{
 			e.printStackTrace();
 		}
-		resp.sendRedirect("//");
+		resp.sendRedirect("/LibraryManage/login/userInfo.jsp");
 	}
 	
 	

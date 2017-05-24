@@ -9,6 +9,9 @@ CREATE TABLE user_management(
 )
 
 insert into user_management values('kite','kitesoo','박연수','01099900','kite_90@naver.com','N');
+insert into user_management values('aa','aa','aa','11','aa@.aaa.com''N');
+insert into user_management values('bb','aa','bb','22','bb@bb.com','Y');
+insert into user_management values('ccc','aa','cc','33','cc@cc.com','N');
 DROP TABLE user_management;
 
 select * from USER_MANAGEMENT;

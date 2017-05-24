@@ -24,11 +24,14 @@ public class LoginUserController extends HttpServlet {
 
 		try {
 			UserInfoService service = UserInfoServiceImpl.getInstance();
+			//id,password조회
 			UserManagement user = service.authenticate(id, password);
+			
+			
 			// 로그인성공 session 생성 ->
 			HttpSession session = req.getSession();
-			session.setAttribute("longinInfo", user);// 회원정보 관리
-			req.getRequestDispatcher("/login/login_main.jsp").forward(req, resp);// 전달 <-jsp아직 미생성
+			session.setAttribute("loginInfo", user);// 회원정보 관리
+			req.getRequestDispatcher("/login/userInfo.jsp").forward(req, resp);// 전달 <-jsp아직 미생성
 
 		} catch (LoginFailException e) {
 			req.setAttribute("errorMessage", e.getMessage());// Exception오류 메세지
