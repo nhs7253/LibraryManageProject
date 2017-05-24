@@ -72,13 +72,6 @@ public interface RentalService {
 	 */
 	public Map<String, Object> PrintWaitList(int page, String userId);
 	
-	/**
-	 * 대기자에게 알림 이메일 보내기
-	 * 도서반납시 해당 도서의 1순위 대기자의 이메일로 대기중인 도서가 반납되었다고 메일을 전송함.
-	 * @param userId
-	 * @param email
-	 */
-	public void noticeWaitUser(String userId);
 
 	/**
 	 * 현재 대출 목록을 읽어오는 서비스 (관리자)
