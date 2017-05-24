@@ -77,40 +77,30 @@ public class RentalServiceImpl implements RentalService {
 				// Book의 대여상태와 로그인한 사용자의 ID의 패널티 상태를 비교하는 조건문.
 				if (book.getRentalState() == 'Y' && user.getPenaltyState() == 'N') {
 					// 대기자 우선순위 확인 & 대기자 없을시 신청 가능
-<<<<<<< HEAD
-					if (waitList.get(0).getWaitUser().equals(userId) || waitList.isEmpty()) {
-						RentalList rentalList = new RentalList(0, userId, bookId, new Date(), null);
-						rentalDao.insertRentalList(session, rentalList);
-						bookDao.updateBook(session, new Book(book.getBookId(), book.getTitle(), book.getAuthor(),
-								book.getPublisher(), book.getPublishDate(), 'N'));
-=======
 					// 1. 원하는책의 대기자가 없는 조건.
 					if (waitList.isEmpty()) {
 						rentBookInsert(session, userId, bookId);
 						session.commit();
 						return userId + "님 대여완료";
-						// 2. 원하는 책의 대기자 1순위일 경우 대여신청 (대여신청완료 동시에 대기순위에서  삭제해줘야한다.)
+						// 2. 원하는 책의 대기자 1순위일 경우 대여신청 (대여신청완료 동시에 대기순위에서
+						// 삭제해줘야한다.)
 					} else if (waitList.get(0).getWaitUser().equals(userId)) {
 						rentBookInsert(session, userId, bookId);
 						waitDao.deleteWaitList(session, userId, bookId);
->>>>>>> branch 'master' of https://github.com/nhs7253/LibraryManageProject.git
 						session.commit();
 						return userId + "님 대여완료";
 					} else {
 						throw new FailRentException("대기 우선순위 확인부탁드립니다.");
 					}
 				} else if (book.getRentalState() == 'N') {
-<<<<<<< HEAD
-					throw new FailRentException("대여중인 도서입니다.!", userId, bookId);
-=======
 					throw new FailRentException("대여중인 도서입니다.!(대기자신청하세요)", userId, bookId);
->>>>>>> branch 'master' of https://github.com/nhs7253/LibraryManageProject.git
 				} else if (user.getPenaltyState() == 'Y') {
 					throw new FailRentException("대여제한상태입니다.");
 				} else if (book.getRentalState() == 'N') {
 					throw new FailRentException("다른 사람이 대여중입니다. 대여를 원하시면 대기자 신청을 해주세요.");
 				}
 			}
+
 			throw new FailRentException("대여실패(BookId, UserId 확인)", userId, bookId);
 		} finally {
 			session.close();
@@ -158,34 +148,21 @@ public class RentalServiceImpl implements RentalService {
 		SqlSession session = factory.openSession();
 
 		try {
-<<<<<<< HEAD
-=======
-
->>>>>>> branch 'master' of https://github.com/nhs7253/LibraryManageProject.git
 			Date current = new Date();
 
 			RentalList rentalList = rentalDao.selectRentalListByRentalNo(session, rentalNo);
 			String bookId = rentalList.getBookId();
-<<<<<<< HEAD
-			
-			//반납시간설정
-			RentalList updateRental = new RentalList(rentalList.getRentalNo(), rentalList.getUserId(),rentalList.getBookId(), rentalList.getRentalStart(), current);
-=======
 
 			// 반납시간설정
 			RentalList updateRental = new RentalList(rentalList.getRentalNo(), rentalList.getUserId(),
 					rentalList.getBookId(), rentalList.getRentalStart(), current);
->>>>>>> branch 'master' of https://github.com/nhs7253/LibraryManageProject.git
+
 			rentalDao.updateRentalList(session, updateRental);
 
-			//반납시간-대출시간이 2주일보다 길면 연체상태를 Y로 수정.
+			// 반납시간-대출시간이 2주일보다 길면 연체상태를 Y로 수정.
 			Date startTime = updateRental.getRentalStart();
 			Date EndTime = updateRental.getRentalEnd();
-<<<<<<< HEAD
-			
-=======
 
->>>>>>> branch 'master' of https://github.com/nhs7253/LibraryManageProject.git
 			// 2주 = 1209600000밀리초
 			if (EndTime.getTime() - startTime.getTime() > 1209600000) {
 				// 대출기간이 2주 이상이라면 ,연체Y설정
@@ -193,30 +170,7 @@ public class RentalServiceImpl implements RentalService {
 				userDao.updateUserManagement(session, new UserManagement(user.getUserId(), user.getPassword(),
 						user.getUserName(), user.getPhoneNum(), user.getEmail(), 'Y'));
 			}
-			
-			//RentalState상태 변경 N->Y
-			Book book = bookDao.selectBookListById(session, bookId);
-			bookDao.updateBook(session, new Book(book.getBookId(), book.getTitle(), book.getAuthor(),book.getPublisher(), book.getPublishDate(), 'Y'));			
-			
-			
-			//====================================================================================================
-			/*// 대기목록에 이 책있는지 조회
-			ArrayList<WaitList> waitLists = (ArrayList) waitDao.selectWaitListByBookId(session, bookId);
 
-<<<<<<< HEAD
-			if (!waitLists.isEmpty()){// 책이 대기목록에 있다는것.
-				
-				WaitList firstWait = waitLists.get(0);
-				rentBook(firstWait.getWaitUser(), bookId);
-				
-				// 1순위 대기자에게 대출했다고 이메일알림보내기
-				MailSender.getInstance().sendMail(userDao.selectUserManagementListById(session, firstWait.getWaitUser()).getEmail(), 
-						firstWait.getBook().getTitle());
-				
-				// 1순위 대기자를 대기목록에 삭제,
-				waitDao.deleteWaitList(session, firstWait.getWaitUser(), bookId);
-			}*/
-=======
 			// RentalState상태 변경 N->Y
 			Book book = bookDao.selectBookListById(session, bookId);
 			bookDao.updateBook(session, new Book(book.getBookId(), book.getTitle(), book.getAuthor(),
@@ -241,41 +195,11 @@ public class RentalServiceImpl implements RentalService {
 			 * // 1순위 대기자를 대기목록에 삭제, waitDao.deleteWaitList(session,
 			 * firstWait.getWaitUser(), bookId); }
 			 */
->>>>>>> branch 'master' of https://github.com/nhs7253/LibraryManageProject.git
 			session.commit();
 		} finally {
 			session.close();
 		}
 	}
-
-/*	public void nextRent(int rentalNo) throws NoWaitException{
-		
-		SqlSession session = factory.openSession();
-		try {
-			
-			RentalList rentalList = rentalDao.selectRentalListByRentalNo(session, rentalNo);
-			String bookId = rentalList.getBookId();
-			
-			List<WaitList> waitLists = waitDao.selectWaitListByBookId(session, bookId);
-
-			if (!waitLists.isEmpty()) {// 책이 대기목록에 있다는것.
-
-				WaitList firstWait = waitLists.get(0);
-					rentBook(firstWait.getWaitUser(), bookId);
-			
-
-				// 1순위 대기자에게 대출했다고 이메일알림보내기
-				MailSender.getInstance().sendMail(
-						userDao.selectUserManagementListById(session, firstWait.getWaitUser()).getEmail(),
-						firstWait.getBook().getTitle());
-
-				// 1순위 대기자를 대기목록에 삭제,
-				waitDao.deleteWaitList(session, firstWait.getWaitUser(), bookId);
-			}
-		} finally {
-			session.close();
-		}
-	}*/
 
 	@Override
 	public String waitBook(String userId, String bookId) throws FailWaitException {
