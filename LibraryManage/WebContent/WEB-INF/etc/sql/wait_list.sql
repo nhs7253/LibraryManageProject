@@ -23,6 +23,7 @@ WHERE book_id = '2' AND wait_user = '2'
 		
 SELECT w.book_id, w.wait_user, w.wait_ranking,
 	   b.book_id, b.title, b.author, b.publisher, b.publish_date, b.rental_state,
+	   
 	   u.user_id, u.password, u.user_name, u.phone_num, u.email, u.penalty_state
 FROM wait_list w, book b, user_management u
 WHERE w.book_id = b.book_id(+) AND w.wait_user = u.user_id(+)
