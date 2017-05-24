@@ -2,6 +2,9 @@ package kr.co.library.service;
 
 import java.io.IOException;
 
+import org.apache.ibatis.session.SqlSession;
+
+import kr.co.library.exception.LoginFailException;
 import kr.co.library.exception.UserIDOverlapException;
 import kr.co.library.exception.UserNotFoundException;
 import kr.co.library.vo.UserManagement;
@@ -47,5 +50,14 @@ public interface UserInfoService {
 	 * @param penaltyState
 	 */
 	public void clearPenalty(String userId);
+	
+	/**
+	 * 아이디 인증 메소드
+	 * @param userId
+	 * @param password
+	 * @return
+	 * @throws LoginFailException
+	 */
+	public UserManagement authenticate(String userId, String password) throws LoginFailException;
 	
 }
