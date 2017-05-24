@@ -6,6 +6,7 @@
 <title>로그인</title>
 </head>
 <body>
+
 <h1>로그인</h1>
 <%if(request.getAttribute("errorMessage")!=null){%>
 <span style ="color:red;"><%=request.getAttribute("errorMessage") %></span>
