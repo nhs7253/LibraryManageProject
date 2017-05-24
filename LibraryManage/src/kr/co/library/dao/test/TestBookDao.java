@@ -29,7 +29,7 @@ public class TestBookDao {
 			session = factory.openSession();
 			//////////////////////////////////////
 		
-			/*
+			
 			dao.insertBook(session, new Book("44512","제목1","저자1","출판1","1111",'N'));
 			
 			printBookList(dao.selectBookList(session),"insetBook");
@@ -56,24 +56,17 @@ public class TestBookDao {
 			
 			printBookList(dao.selectBookPaging(session, 101, 200),"selectBookPaging");
 			
-			printBookList(dao.selectBookPagingByTitle(session,"바다" ,101, 200),"selectBookPagingByTitle");
-			
-			System.out.println(dao.selectBookByTitleCount(session, "바다"));
 			
 			
 			printBookList(dao.selectBookListByAuthor(session, "바다"),"selectBookListByPublisher");
 			
-			printBookList(dao.selectBookPagingByAuthor(session,"바다" ,11, 20),"selectBookPagingByAuthor");
-			
-			System.out.println(dao.selectBookByAuthorCount(session, "바다"));
+
 			
 			
 			printBookList(dao.selectBookListByPublisher(session, "바다"),"selectBookListByPublisher");
 			
-			printBookList(dao.selectBookPagingByPublisher(session,"바다" ,101, 200),"selectBookPagingByPublisher");
+
 			
-			System.out.println(dao.selectBookByPublisherCount(session, "바다"));
-			*/
 			
 			System.out.println(dao.selectBookByKeywordCount(session,"title","바다"));
 			

@@ -1,12 +1,12 @@
 package kr.co.library.service;
 
-import java.util.List;
 import java.util.Map;
+
+import org.apache.ibatis.session.SqlSession;
 
 import kr.co.library.exception.FailRentException;
 import kr.co.library.exception.FailWaitException;
-import kr.co.library.vo.RentalList;
-import kr.co.library.vo.WaitList;
+import kr.co.library.exception.NoWaitException;
 
 public interface RentalService {
 
@@ -88,4 +88,9 @@ public interface RentalService {
 	 * @return
 	 */
 	Map<String, Object> PrintAdminWaitList(int page);
+	
+	//public String rentWaitFirst(SqlSession session, String userId, String bookId) throws FailRentException, FailWaitException;
+	
+	
+	
 }

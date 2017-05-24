@@ -36,7 +36,7 @@
 		#{userId},
 		#{bookId},
 		SYSDATE,
-		SYSDATE+14)
+		null)
 	</insert>
 
 	<update id="updateRentalList" parameterType="rentalList">
