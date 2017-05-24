@@ -26,7 +26,6 @@ import kr.co.library.exception.FailRentException;
 import kr.co.library.exception.FailWaitException;
 import kr.co.library.exception.UserNotFoundException;
 import kr.co.library.service.RentalService;
-import kr.co.library.util.MailSender;
 import kr.co.library.util.PagingBean;
 import kr.co.library.util.SqlSessionFactoryManager;
 import kr.co.library.vo.Book;
@@ -58,6 +57,15 @@ public class RentalServiceImpl implements RentalService {
 		userDao = UserManagementDaoImpl.getInstance();
 	}
 
+	public void rentBookInsert(SqlSession session, String userId, String bookId) {
+		Book book = bookDao.selectBookListById(session, bookId);
+
+		RentalList rentalList = new RentalList(0, userId, bookId, new Date(), null);
+		rentalDao.insertRentalList(session, rentalList);
+		bookDao.updateBook(session, new Book(book.getBookId(), book.getTitle(), book.getAuthor(), book.getPublisher(),
+				book.getPublishDate(), 'N'));
+	}
+
 	@Override
 	public String rentBook(String userId, String bookId) throws FailRentException, FailWaitException {
 
@@ -66,28 +74,29 @@ public class RentalServiceImpl implements RentalService {
 		// 왜셀렉문 2개나오냐
 		Book book = bookDao.selectBookListById(session, bookId);
 		UserManagement user = userDao.selectUserManagementListById(session, userId);
-	
+		List<WaitList> waitList = waitDao.selectWaitListByBookId(session, bookId);
 		try {
-			// book과 user의 정보가 null값인지 확인하는 조건. 예외 발생되면 FailRentException 발생!
+			// book과 user 값이 올바른 값인지 확인하는 조건문 -> 예외 발생되면 FailRentException 발생!
 			if (book != null && user != null) {
-
 				// Book의 대여상태와 로그인한 사용자의 ID의 패널티 상태를 비교하는 조건문.
 				if (book.getRentalState() == 'Y' && user.getPenaltyState() == 'N') {
-						
-					
-					if (rentalDao.selectRentalListByBookId(session, bookId).isEmpty()) {
-						RentalList rentalList = new RentalList(0, userId, bookId, new Date(), new Date());
-						rentalDao.insertRentalList(session, rentalList);
-						bookDao.updateBook(session, new Book(book.getBookId(), book.getTitle(), book.getAuthor(),
-								book.getPublisher(), book.getPublishDate(), 'N'));
+					// 대기자 우선순위 확인 & 대기자 없을시 신청 가능
+					// 1. 원하는책의 대기자가 없는 조건.
+					if (waitList.isEmpty()) {
+						rentBookInsert(session, userId, bookId);
+						session.commit();
+						return userId + "님 대여완료";
+						// 2. 원하는 책의 대기자 1순위일 경우 대여신청 (대여신청완료 동시에 대기순위에서  삭제해줘야한다.)
+					} else if (waitList.get(0).getWaitUser().equals(userId)) {
+						rentBookInsert(session, userId, bookId);
+						waitDao.deleteWaitList(session, userId, bookId);
 						session.commit();
 						return userId + "님 대여완료";
 					} else {
-						
-						throw new FailRentException("이미 대여중인 도서입니다.!", userId, bookId);
+						throw new FailRentException("대기 우선순위 확인부탁드립니다.");
 					}
-
-					// Book의 상태가 대여중인 상태일 경우.
+				} else if (book.getRentalState() == 'N') {
+					throw new FailRentException("대여중인 도서입니다.!(대기자신청하세요)", userId, bookId);
 				} else if (user.getPenaltyState() == 'Y') {
 					throw new FailRentException("대여제한상태입니다.");
 				} else if (book.getRentalState() == 'N') {
@@ -96,7 +105,6 @@ public class RentalServiceImpl implements RentalService {
 			}
 
 			throw new FailRentException("대여실패(BookId, UserId 확인)", userId, bookId);
-
 		} finally {
 			session.close();
 		}
@@ -108,56 +116,53 @@ public class RentalServiceImpl implements RentalService {
 		SqlSession session = factory.openSession();
 
 		try {
-			// 현재시간
+
 			Date current = new Date();
 
 			RentalList rentalList = rentalDao.selectRentalListByRentalNo(session, rentalNo);
-			// 반납시간만 현재시간으로 재설정.
+			String bookId = rentalList.getBookId();
 
-			System.out.println(rentalList.getBookId());
-
+			// 반납시간설정
 			RentalList updateRental = new RentalList(rentalList.getRentalNo(), rentalList.getUserId(),
 					rentalList.getBookId(), rentalList.getRentalStart(), current);
-
-			// 재설정한 대출목록으로 수정.
 			rentalDao.updateRentalList(session, updateRental);
 
 			// 반납시간-대출시간이 2주일보다 길면 연체상태를 Y로 수정.
 			Date startTime = updateRental.getRentalStart();
 			Date EndTime = updateRental.getRentalEnd();
-			// 2주 = 1209600000밀리초
 
+			// 2주 = 1209600000밀리초
 			if (EndTime.getTime() - startTime.getTime() > 1209600000) {
 				// 대출기간이 2주 이상이라면 ,연체Y설정
 				UserManagement user = userDao.selectUserManagementListById(session, userId);
 				userDao.updateUserManagement(session, new UserManagement(user.getUserId(), user.getPassword(),
 						user.getUserName(), user.getPhoneNum(), user.getEmail(), 'Y'));
-
 			}
 
-			// ======================================반납후 책 처리
-			String bookId = rentalList.getBookId();
-			// 대기목록에 이 책있는지 조회
-			List<WaitList> waitLists = waitDao.selectWaitListByBookId(session, bookId);
-			if (waitLists.isEmpty()) {
-				// 해당 책이 대기목록에 없단것.그러면 책의 렌탈상태를 Y로 수정.
-				Book book = bookDao.selectBookListById(session, bookId);
-				bookDao.updateBook(session, new Book(book.getBookId(), book.getTitle(), book.getAuthor(),
-						book.getPublisher(), book.getPublishDate(), 'Y'));
-			} else {// 책이 대기목록에 있다는것.
+			// RentalState상태 변경 N->Y
+			Book book = bookDao.selectBookListById(session, bookId);
+			bookDao.updateBook(session, new Book(book.getBookId(), book.getTitle(), book.getAuthor(),
+					book.getPublisher(), book.getPublishDate(), 'Y'));
 
-				// 해당책 대기목록들을 넣고 대기1순위 객체를 찾아옴.
-				WaitList firstWaitRankUser = MinWaitRanking(session, waitLists);
-
-				String firstWaitRankUserId = firstWaitRankUser.getWaitUser();
-				rentBook(firstWaitRankUserId, bookId);
-
-				// 1순위 대기자에게 대출했다고 이메일알림보내기
-				MailSender.getInstance().sendMail(userDao.selectUserManagementListById(session, firstWaitRankUserId).getEmail(), firstWaitRankUser.getBook().getTitle());
-
-				// 1순위 대기자를 대기목록에 삭제,
-				waitDao.deleteWaitList(session, firstWaitRankUserId, bookId);
-			}
+			// ====================================================================================================
+			/*
+			 * // 대기목록에 이 책있는지 조회 ArrayList<WaitList> waitLists = (ArrayList)
+			 * waitDao.selectWaitListByBookId(session, bookId);
+			 * 
+			 * if (!waitLists.isEmpty()){// 책이 대기목록에 있다는것.
+			 * 
+			 * WaitList firstWait = waitLists.get(0);
+			 * rentBook(firstWait.getWaitUser(), bookId);
+			 * 
+			 * // 1순위 대기자에게 대출했다고 이메일알림보내기
+			 * MailSender.getInstance().sendMail(userDao.
+			 * selectUserManagementListById(session,
+			 * firstWait.getWaitUser()).getEmail(),
+			 * firstWait.getBook().getTitle());
+			 * 
+			 * // 1순위 대기자를 대기목록에 삭제, waitDao.deleteWaitList(session,
+			 * firstWait.getWaitUser(), bookId); }
+			 */
 			session.commit();
 		} finally {
 			session.close();

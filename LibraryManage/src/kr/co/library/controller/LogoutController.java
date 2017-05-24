@@ -16,6 +16,6 @@ public class LogoutController extends HttpServlet
 	HttpSession session =req.getSession();
 	session.invalidate();
 	
-	req.getRequestDispatcher("경로지정 필요").forward(req, resp);
+	req.getRequestDispatcher("/login/login_main.jsp").forward(req, resp);
 	}
 }

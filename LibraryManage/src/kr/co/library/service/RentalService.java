@@ -3,6 +3,8 @@ package kr.co.library.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
+
 import kr.co.library.exception.FailRentException;
 import kr.co.library.exception.FailWaitException;
 import kr.co.library.vo.RentalList;
@@ -10,6 +12,14 @@ import kr.co.library.vo.WaitList;
 
 public interface RentalService {
 
+	/**
+	 * rentBook Insert - 중복되는 명령어라 따로 분리.
+	 * @param session
+	 * @param userId
+	 * @param bookId
+	 */
+	public void rentBookInsert(SqlSession session, String userId, String bookId);
+	
 	/**
 	 * 대출처리
 	 * 원하는 책을 검색 후 대출 신청 버튼을 누르면 Book의 대여 상태와 로그인한 사용자의 대여 패널티 상태를 비교하여 
