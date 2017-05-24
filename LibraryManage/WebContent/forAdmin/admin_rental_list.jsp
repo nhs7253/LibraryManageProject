@@ -11,14 +11,14 @@
 <h2>현재 대여 목록 (관리자)</h2>
 
 <form action="${initParam.rootPath }/RentalListAdmin" method="post">
-	<input type="text" name="userId"/>
+	회원id <input type="text" name="userId"/>
 	<input type="submit" value="검색"/>
 </form> <br />
 
 <table>
 	<thead>
 		<tr>
-			<td>책ID</td>
+			<td>책ID</td> 
 			<td>제목</td>
 			<td>저자</td>
 			<td>출판사</td>
@@ -27,6 +27,7 @@
 			<td>대여자</td>
 			<td>빌린날짜</td>
 			<td>연체여부</td>
+			<td></td>
 		</tr>
 	</thead>
 	<tbody>
@@ -46,6 +47,8 @@
 				<td>${requestScope.name[Status.index]}</td>
 				<td>${rent.rentalStart}</td>
 				<td>${requestScope.overdue[Status.index]}</td>
+				<td><form action = "${initParam.rootPath }/returnBook?rentalNo=${rent.rentalNo}" method = "post">
+				<input type="submit" value = "반납" onclick="alert('반납완료');" /></form></td>
 			</tr>
 		</c:forEach>
 		

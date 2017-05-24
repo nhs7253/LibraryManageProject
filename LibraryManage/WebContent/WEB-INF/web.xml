@@ -14,8 +14,6 @@
 		<welcome-file>main.jsp</welcome-file>
 	</welcome-file-list>
 
-
-
 	<!--Filter -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>
