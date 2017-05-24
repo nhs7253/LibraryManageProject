@@ -32,7 +32,7 @@ public class AddBookController extends HttpServlet{
 		
 		System.out.println(bookId);
 		try{
-			BookServiceImpl.getInstance().addBook(new Book(bookId,title,author,publisher,publishDate,'y'));
+			BookServiceImpl.getInstance().addBook(new Book(bookId,title,author,publisher,publishDate,'Y'));
 		}catch(BookIdException e){
 			e.printStackTrace();
 		}
