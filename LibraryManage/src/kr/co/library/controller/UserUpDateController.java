@@ -14,7 +14,7 @@ import kr.co.library.dao.impl.UserManagementDaoImpl;
 import kr.co.library.vo.UserManagement;
 
 
-public class UserUpDate extends HttpServlet
+public class UserUpDateController extends HttpServlet
 {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

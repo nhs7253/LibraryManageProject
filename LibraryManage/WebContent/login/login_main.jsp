@@ -13,7 +13,7 @@
 <form action="/LibraryManage/login" method="post">
 
  ID : <input type="text" name="id"><br>
- PW : <input type="text" name="password"><br>
+ PW : <input type="password" name="password"><br>
  <p>
  <button type="submit">로그인</button>
 </form>
