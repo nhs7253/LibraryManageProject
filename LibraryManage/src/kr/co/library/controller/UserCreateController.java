@@ -22,12 +22,14 @@ public class UserCreateController extends HttpServlet{
 		//pw
 		String password = request.getParameter("password");
 		//이름
-		String name = request.getParameter("name");
+		String name = request.getParameter("userName");
 		//폰번호
 		String phoneNum = request.getParameter("phoneNum");
 		//이메일
 		String email = request.getParameter("email");
 		//연체상태는 입력받으면 안되지.
+		
+	
 		String message = "회원가입이 완료되었습니다.";
 		//비지니스 로직
 		UserInfoService service = UserInfoServiceImpl.getInstance();
@@ -43,8 +45,8 @@ public class UserCreateController extends HttpServlet{
 		request.setAttribute("result", message);
 	
 		//리다이렉트
-		response.sendRedirect("/userCreate.jsp");
-
+//		response.sendRedirect("/LibraryManage/userCreate.jsp");
+		//요청디스
 	
 	}
 }

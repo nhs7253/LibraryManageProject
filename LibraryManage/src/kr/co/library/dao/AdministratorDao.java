@@ -25,5 +25,7 @@ public interface AdministratorDao {
 	 * @param adminId
 	 * @return
 	 */
-	Administrator selectAdminstratorById(SqlSession session, String adminId);
+	Administrator selectAdministratorById(SqlSession session, String adminId);
+	
+	
 }

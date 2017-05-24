@@ -24,4 +24,6 @@ public interface AdministratorService {
 	 * @return
 	 */
 	public Administrator selectAdministratorById(String adminId);
+	
+	
 }

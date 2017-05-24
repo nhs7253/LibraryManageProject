@@ -34,7 +34,7 @@ public class AdministratorServiceImpl implements AdministratorService{
 		
 		try{
 		session = factory.openSession();
-		if(adminDao.selectAdminstratorById(session, admin.getAdministratorId())!=null||admin.getAdministratorId().equals("")){
+		if(adminDao.selectAdministratorById(session, admin.getAdministratorId())!=null||admin.getAdministratorId().equals("")){
 			throw new AdminOverlapException(String.format("ID가 중복 또는 잘못된 값을 입력하였습니다.", admin.getAdministratorId()));
 		}
 		adminDao.insertAdministrator(session, admin);
@@ -52,7 +52,7 @@ public class AdministratorServiceImpl implements AdministratorService{
 		try{
 			session = factory.openSession();
 		
-		if(adminDao.selectAdminstratorById(session, adminId)==null){
+		if(adminDao.selectAdministratorById(session, adminId)==null){
 			throw new AdminNotFoundException(String.format("ID %s 인 회원이 없습니다.", adminId));
 		
 		}
@@ -62,17 +62,18 @@ public class AdministratorServiceImpl implements AdministratorService{
 			session.close();
 		}
 	}
-		
 	@Override
 	public Administrator selectAdministratorById(String adminId) {
 		SqlSession session = factory.openSession();
-		
 		try {
-			return adminDao.selectAdminstratorById(session, adminId);
+			return adminDao.selectAdministratorById(session, adminId);
 		} finally {
 			session.close();
 		}
+		
 	}
+		
+	
 	
 	
 }

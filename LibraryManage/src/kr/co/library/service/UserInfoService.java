@@ -60,4 +60,6 @@ public interface UserInfoService {
 	 */
 	public UserManagement authenticate(String userId, String password) throws LoginFailException;
 	
+	
+	
 }

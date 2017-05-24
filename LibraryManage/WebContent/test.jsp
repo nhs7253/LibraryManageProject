@@ -6,7 +6,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-${requestScope.info.userId }
+<h1>회원정보조회</h1>
+
+
+	${requestScope.info.userId }
 	${requestScope.info.userName }
 	${requestScope.info.password }
 </body>
