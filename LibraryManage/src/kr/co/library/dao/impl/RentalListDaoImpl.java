@@ -50,15 +50,15 @@ public class RentalListDaoImpl implements RentalListDao {
 	}
 	
 	@Override
-	public RentalList selectRentalListByUserId(SqlSession session, String userId) {
+	public List<RentalList> selectRentalListByUserId(SqlSession session, String userId) {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace + "selectRentalListByUserId", userId);
+		return session.selectList(namespace + "selectRentalListByUserId", userId);
 	}
 
 	@Override
-	public RentalList selectRentalListByBookId(SqlSession session, String bookId) {
+	public List<RentalList> selectRentalListByBookId(SqlSession session, String bookId) {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace + "selectRentalListByBookId", bookId);
+		return session.selectList(namespace + "selectRentalListByBookId", bookId);
 	}
 
 	@Override
