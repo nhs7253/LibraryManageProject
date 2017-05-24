@@ -24,8 +24,8 @@ public class WaitListInsertController extends HttpServlet{
 		
 		try {
 			message = service.waitBook((String)(session.getAttribute("userId")), (String)(session.getAttribute("bookId")));
-		} catch (FailWaitException e) {
-			message = e.getMessage();
+		} catch (FailWaitException fwe) {
+			message = fwe.getMessage();
 		}
 		session.setAttribute("message", message);
 		

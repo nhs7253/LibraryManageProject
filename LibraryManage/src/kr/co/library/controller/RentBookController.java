@@ -23,10 +23,8 @@ public class RentBookController extends HttpServlet {
 		String userId = req.getParameter("userId");
 		String bookId = req.getParameter("bookId");
 		
-		System.out.println(userId+bookId);
 		
 		RentalService service = RentalServiceImpl.getInstance();
-
 		try {
 			message = service.rentBook(userId,bookId);
 		} catch (FailRentException e) {
@@ -34,7 +32,7 @@ public class RentBookController extends HttpServlet {
 		} catch (FailWaitException e) {
 			message = e.getMessage();
 		}
-	//	session.setAttribute("message", message);
+		session.setAttribute("message", message);
 
 		resp.sendRedirect("/LibraryManage/rental/test.jsp");
 		
@@ -49,10 +47,10 @@ public class RentBookController extends HttpServlet {
 		try {
 			message = service.rentBook((String) (session.getAttribute("userId")),
 					(String) (session.getAttribute("bookId")));
-		} catch (FailRentException e) {
-			message = e.getMessage();
-		} catch (FailWaitException e) {
-			message = e.getMessage();
+		} catch (FailRentException fre) {
+			message = fre.getMessage();
+		} catch (FailWaitException fwe) {
+			message = fwe.getMessage();
 		}
 		session.setAttribute("message", message);
 

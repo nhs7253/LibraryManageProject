@@ -66,22 +66,24 @@ public class RentalServiceImpl implements RentalService {
 		// 왜셀렉문 2개나오냐
 		Book book = bookDao.selectBookListById(session, bookId);
 		UserManagement user = userDao.selectUserManagementListById(session, userId);
-
+	
 		try {
 			// book과 user의 정보가 null값인지 확인하는 조건. 예외 발생되면 FailRentException 발생!
 			if (book != null && user != null) {
 
 				// Book의 대여상태와 로그인한 사용자의 ID의 패널티 상태를 비교하는 조건문.
 				if (book.getRentalState() == 'Y' && user.getPenaltyState() == 'N') {
+						
 					
-					if (rentalDao.selectRentalListByBookId(session, bookId) == null) {
-						RentalList rentalList = new RentalList(0, userId, bookId, new Date(), null);
+					if (rentalDao.selectRentalListByBookId(session, bookId).isEmpty()) {
+						RentalList rentalList = new RentalList(0, userId, bookId, new Date(), new Date());
 						rentalDao.insertRentalList(session, rentalList);
 						bookDao.updateBook(session, new Book(book.getBookId(), book.getTitle(), book.getAuthor(),
 								book.getPublisher(), book.getPublishDate(), 'N'));
 						session.commit();
 						return userId + "님 대여완료";
 					} else {
+						
 						throw new FailRentException("이미 대여중인 도서입니다.!", userId, bookId);
 					}
 
@@ -92,10 +94,10 @@ public class RentalServiceImpl implements RentalService {
 					throw new FailRentException("다른 사람이 대여중입니다. 대여를 원하시면 대기자 신청을 해주세요.");
 				}
 			}
-		
+
 			throw new FailRentException("대여실패(BookId, UserId 확인)", userId, bookId);
-		
-		}finally {
+
+		} finally {
 			session.close();
 		}
 
@@ -108,16 +110,15 @@ public class RentalServiceImpl implements RentalService {
 		try {
 			// 현재시간
 			Date current = new Date();
-			
-			RentalList rentalList = rentalDao.selectRentalListByRentalNo(session,rentalNo);
+
+			RentalList rentalList = rentalDao.selectRentalListByRentalNo(session, rentalNo);
 			// 반납시간만 현재시간으로 재설정.
-			
+
 			System.out.println(rentalList.getBookId());
-			
+
 			RentalList updateRental = new RentalList(rentalList.getRentalNo(), rentalList.getUserId(),
 					rentalList.getBookId(), rentalList.getRentalStart(), current);
 
-			
 			// 재설정한 대출목록으로 수정.
 			rentalDao.updateRentalList(session, updateRental);
 
@@ -268,16 +269,17 @@ public class RentalServiceImpl implements RentalService {
 		try {
 			int tatalCount = rentalDao.selectRentalListByEndIsNullCount(session);
 			PagingBean pageBean = new PagingBean(tatalCount, page);
-			List<Object> list = rentalDao.selectRentalListPagingByEndIsNull(session, userId, pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+			List<Object> list = rentalDao.selectRentalListPagingByEndIsNull(session, userId,
+					pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
 			List<RentalList> temp = new ArrayList<>();
 
-			for(int i=0;i<list.size();i++){
-				temp.add((RentalList) ((Map<String, Object>)list.get(i)).get("list"));
-				name.add((String) ((Map<String, Object>)list.get(i)).get("user_name"));
+			for (int i = 0; i < list.size(); i++) {
+				temp.add((RentalList) ((Map<String, Object>) list.get(i)).get("list"));
+				name.add((String) ((Map<String, Object>) list.get(i)).get("user_name"));
 			}
-			
+
 			overdue = getOverdueInfo(temp);
-			
+
 			map.put("pageBean", pageBean);
 			map.put("list", temp);
 			map.put("name", name);
@@ -287,14 +289,14 @@ public class RentalServiceImpl implements RentalService {
 		}
 		return map;
 	}
-	
+
 	/**
-	 * List<RentalList>를 받아 연체 정보를 계산해 주는 메소드
-	 * List<String>를 리턴함
+	 * List<RentalList>를 받아 연체 정보를 계산해 주는 메소드 List<String>를 리턴함
+	 * 
 	 * @param list
 	 * @return
 	 */
-	public List<String> getOverdueInfo(List<RentalList> list){
+	public List<String> getOverdueInfo(List<RentalList> list) {
 		List<String> overdue = new ArrayList<>();
 		Calendar limit = Calendar.getInstance();
 		for (int i = 0; i < list.size(); i++) {
@@ -321,8 +323,8 @@ public class RentalServiceImpl implements RentalService {
 		try {
 			int tatalCount = waitDao.selectWaitListCount(session);
 			PagingBean pageBean = new PagingBean(tatalCount, page);
-			List<Object> list = waitDao.selectWaitListPagingJoinBookJoinUser(session,
-					pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
+			List<Object> list = waitDao.selectWaitListPagingJoinBookJoinUser(session, pageBean.getBeginItemInPage(),
+					pageBean.getEndItemInPage());
 			map.put("pageBean", pageBean);
 			map.put("list", list);
 		} finally {
@@ -331,5 +333,5 @@ public class RentalServiceImpl implements RentalService {
 
 		return map;
 	}
-	
+
 }
