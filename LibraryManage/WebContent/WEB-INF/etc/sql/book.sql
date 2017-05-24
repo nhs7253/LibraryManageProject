@@ -9,6 +9,7 @@ CREATE TABLE book(
 	rental_state CHAR(1)
 );
 
+select * from book;
 
 SELECT COUNT(*)
 FROM book
