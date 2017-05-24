@@ -25,7 +25,7 @@
 	</select>
 		<input type="text" name="keyword"/>
 		<input type="submit" value="검색"/>
-	</form> <br />
+	</form> <br>
 	
 	<table>
 		<thead>

@@ -17,6 +17,11 @@ import kr.co.library.service.impl.RentalServiceImpl;
 public class ReturnBookController extends HttpServlet{
 
 	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		doPost(request, response);
+	}
+	
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		HttpSession session = req.getSession();
@@ -36,7 +41,7 @@ public class ReturnBookController extends HttpServlet{
 			e.printStackTrace();
 		} 
 		
-		resp.sendRedirect("");
+		resp.sendRedirect("/LibraryManage/forAdmin/admin_rental_list.jsp");
 		
 	}
 }
