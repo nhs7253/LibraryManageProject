@@ -10,6 +10,7 @@ import javax.servlet.http.HttpSession;
 
 import kr.co.library.exception.FailRentException;
 import kr.co.library.exception.FailWaitException;
+import kr.co.library.exception.NoWaitException;
 import kr.co.library.service.RentalService;
 import kr.co.library.service.impl.RentalServiceImpl;
 
@@ -29,10 +30,11 @@ public class ReturnBookController extends HttpServlet{
 		RentalService service = RentalServiceImpl.getInstance();
 		try {
 			service.returnBook(userId,rentalNo);
+			
 		} catch (FailRentException | FailWaitException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
 		
 		resp.sendRedirect("");
 		

@@ -7,8 +7,6 @@
 </head>
 <body>
 
-
-
 <h1>책등록</h1>
 <form action="/LibraryManage/addBook" method = "post">
 	책id: <input type = "text" name = "bookId"><br>

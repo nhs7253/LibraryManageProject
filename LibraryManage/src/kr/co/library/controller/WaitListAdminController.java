@@ -37,7 +37,7 @@ public class WaitListAdminController extends HttpServlet {
 		request.setAttribute("pageBean", map.get("pageBean"));
 		
 		
-		request.getRequestDispatcher("/admin_wait_list.jsp").forward(request, response);
+		request.getRequestDispatcher("forAdmin/admin_wait_list.jsp").forward(request, response);
 		} catch(Exception e){
 			//에러페이지로 이동
 			e.printStackTrace();

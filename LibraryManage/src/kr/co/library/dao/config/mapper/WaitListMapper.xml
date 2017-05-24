@@ -23,6 +23,7 @@
 	<resultMap type="map" id="waitRank-resultmap">
 		<result javaType="string" column="title" property="title"/>
 		<result javaType="string" column="rank" property="rank"/>
+		<result javaType="string" column="bookId" property="bookId"/>
 	</resultMap>
 	
 	<resultMap type="map" id="admin-waitRank-resultmap">
@@ -128,11 +129,11 @@
 	</select>
 	
 	<select id="selectWaitListPagingJoinBookJoinUserByUserId" parameterType="string" resultMap="waitRank-resultmap">	
-			SELECT title, rank
+			SELECT title, rank, bookId
 			FROM(
-				SELECT b_title title, w_rk rank, rownum rnum
+				SELECT b_title title, w_rk rank, rownum rnum, w_book_id bookId
 				FROM(
-						SELECT b.title b_title,  w.rk w_rk
+						SELECT b.title b_title,  w.rk w_rk, w.book_id w_book_id
 						FROM (
 							SELECT book_id, wait_user,
 							RANK() OVER (PARTITION BY book_id ORDER BY wait_ranking DESC ) as rk 

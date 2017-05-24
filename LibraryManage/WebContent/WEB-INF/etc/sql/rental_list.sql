@@ -22,7 +22,7 @@ drop sequence rental_no_seq;
 
 
 INSERT INTO rental_list VALUES(rental_no_seq.nextVal, '사용자1', '897', SYSDATE, null);
-INSERT INTO rental_list VALUES(rental_no_seq.nextVal, 'ㅂㅂㅂ', '123', SYSDATE, null);
+INSERT INTO rental_list VALUES(rental_no_seq.nextVal, 'ㅂㅂㅂ', '새새책', SYSDATE, null);
 DELETE FROM rental_list WHERE user_id='user01'
 
 select * from rental_list where rental_no =3;
