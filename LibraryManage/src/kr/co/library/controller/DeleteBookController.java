@@ -28,7 +28,7 @@ public class DeleteBookController extends HttpServlet{
 		}
 		
 		//session.setAttribute("", "");
-		resp.sendRedirect("/LibraryManage/testBook.jsp");
+		resp.sendRedirect("/LibraryManage/forAdmin/book_manage.jsp");
 		
 	}
 	

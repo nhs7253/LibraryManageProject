@@ -42,7 +42,7 @@
 		</c:forEach>
 	</tbody>
 </table>
-
+<%-- <a href="${initParam.rootPath }/WaitList?userId=1">유저의 예약 목록 (2)</a> <br /> --%>
 
 <a href = "${initParam.rootPath }/RentalList">나의 대출목록</a>
 <a href ="${initParam.rootPath }/WaitList">나의 대기목록</a>

@@ -8,7 +8,7 @@
 <link rel="stylesheet" type="text/css" href="./css/view_table.css">
 </head>
 <body>
-   <h2>도서 목록</h2>
+   <h2>대기 목록</h2>
 
    <table>
       <thead>

@@ -46,7 +46,7 @@ public class RentalListController extends HttpServlet {
 		
 		
 
-		request.getRequestDispatcher("/forUser/MyPage.jsp").forward(request, response);
+		request.getRequestDispatcher("/forUser/rental_list.jsp").forward(request, response);
 
 		} catch(Exception e){
 			//에러페이지로 이동

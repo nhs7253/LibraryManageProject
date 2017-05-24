@@ -17,6 +17,9 @@
  PW : <input type="password" name="password"><br>
  <p>
  <button type="submit">로그인</button>
+<!--Exception 발생  -->
+<%--  <form action = "${initParam.rootPath }/userCreate" method = "post">
+	<input type="submit" value = "회원가입" /></form> --%>
 </form>
 </body>
 </html>
