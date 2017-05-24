@@ -146,3 +146,13 @@ ORDER BY b.title
 			)
 			WHERE rnum >= '1'
 
+			
+			
+		SELECT *
+		FROM wait_list
+		WHERE book_id = '3'
+		ORDER BY wait_ranking 
+
+		
+		select *
+		from wait_list
