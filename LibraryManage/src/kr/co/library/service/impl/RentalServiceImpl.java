@@ -199,22 +199,6 @@ public class RentalServiceImpl implements RentalService {
 	}
 
 	@Override
-	public void noticeWaitUser(String userId) {
-		SqlSession session = factory.openSession();
-
-		try {
-			UserManagement user = userDao.selectUserManagementListById(session, userId);
-			String email = user.getEmail();
-
-			// 이메일보내기
-
-			session.commit();
-		} finally {
-			session.close();
-		}
-	}
-
-	@Override
 	public Map<String, Object> PrintRentalList(int page, String userId) {
 		HashMap<String, Object> map = new HashMap<>();
 		List<String> overdue = null;
