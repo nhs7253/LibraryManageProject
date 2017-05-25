@@ -61,14 +61,6 @@
 		<url-pattern>/BookSearchByKeyword</url-pattern>
 	</servlet-mapping>
 	
-	<servlet>
-		<servlet-name>BookSearchByKeywordForAdmin</servlet-name>
-		<servlet-class>kr.co.library.controller.BookSearchByKeywordControllerForAdmin</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>BookSearchByKeywordForAdmin</servlet-name>
-		<url-pattern>/BookSearchByKeywordForAdmin</url-pattern>
-	</servlet-mapping>
 
 	<!-- 노현식 - 관리자 현재 대여 목록 -->
 	<servlet>
