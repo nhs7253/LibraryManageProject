@@ -23,7 +23,7 @@ form {
 <%@include file = "/forUser/user_menu.jsp" %>
 	<body>
 		<h2>도서검색</h2>
-
+		
 		<form action="${initParam.rootPath }/BookSearchByKeyword" method="post">
 		<select name="select">
 			<option value="title">제목</option>
@@ -34,6 +34,6 @@ form {
 			<input type="submit" value="검색"/>
 		</form> 
 
-		<br />
+		<br/>
 	</body>
 </html>

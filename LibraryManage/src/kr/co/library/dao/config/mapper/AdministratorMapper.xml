@@ -30,7 +30,7 @@ VALUES (#{administratorId},
 DELETE FROM administrator
 WHERE administrator_id = #{administratorId}
 </delete>
-
+			
 <select id = "selectAdministratorById" parameterType= "string" resultMap="admin-resultmap">
 SELECT <include refid="all-column"/>
 FROM administrator

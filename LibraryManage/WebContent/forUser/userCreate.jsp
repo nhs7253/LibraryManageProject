@@ -14,9 +14,9 @@ PW : <input type="password" name="password"> <br>
 폰 넘버 : <input type="text" name="phoneNum"> <br>
 이메일 :	<input type="text" name="email"> <br>
 
-<input type="submit" value="가입"> <br>
+<input type="submit" value="가입"> 
 
-<a href="/LibraryManage/userInfoRefer">정보조회 테스트</a>
+
 </form>
 </body>
 </html>
