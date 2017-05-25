@@ -27,10 +27,11 @@ public class AdministratorDaoImpl implements AdministratorDao {
 	}
 
 	@Override
-	public Administrator selectAdminstratorById(SqlSession session, String adminId) {
+	public Administrator selectAdministratorById(SqlSession session, String adminId) {
 
 		return session.selectOne(namespace+"selectAdminstratorById", adminId);
 	}
+
 	
 	
 	

@@ -31,7 +31,7 @@ public class TestAdministratorDao {
 		int de = dao.deleteAdministrator(session, "manager2");
 		System.out.println(de);
 		//3.id으로 조회
-		System.out.println(dao.selectAdminstratorById(session, "manager3"));
+		System.out.println(dao.selectAdministratorById(session, "manager3"));
 		session.commit();
 		}finally{
 		session.close();	
