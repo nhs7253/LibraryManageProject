@@ -12,7 +12,6 @@
 <%@include file = "/forUser/user_menu.jsp" %>
 
 <body>
-<h2>마이페이지</h2>
 
 
 
