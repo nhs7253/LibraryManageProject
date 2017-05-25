@@ -23,7 +23,7 @@ public class WaitListInsertController extends HttpServlet {
 		RentalService service = RentalServiceImpl.getInstance();
 		String message;
 		
-		if (req.getParameter("userId") == null) {
+		if (session.getAttribute("loginInfo") == null) {
 			try {
 				throw new LoginFailException("로그인이 필요합니다.");
 			} catch (LoginFailException lfe) {
@@ -37,9 +37,19 @@ public class WaitListInsertController extends HttpServlet {
 			} catch (FailWaitException fwe) {
 				message = fwe.getMessage();
 			}
-
+			
 			session.setAttribute("waitMessage", message);
-			resp.sendRedirect("/LibraryManage/forUser/main.jsp");
+			
+			int page = 1; //기본페이지가 1
+			
+			String select = req.getParameter("select");
+			String keyword = req.getParameter("keyword");
+
+			try{
+				page = Integer.parseInt(req.getParameter("page")); //보려는 페이지번호 조회.
+			}catch (Exception e) {}
+			
+			resp.sendRedirect(String.format("/LibraryManage/BookSearchByKeyword?select=%s&keyword=%s&page=%d", select, keyword, page));
 
 		}
 	}
