@@ -28,7 +28,6 @@ public class LoginController extends HttpServlet {
 		String mainPassword = req.getParameter("password");
 		HttpSession session = req.getSession();// session 생성
 		
-//		System.out.println(session.getAttribute("returnURL"));
 		
 		String returnURL = (String) session.getAttribute("returnURL");
 		if(returnURL==null || returnURL.startsWith("null")){
@@ -52,9 +51,7 @@ public class LoginController extends HttpServlet {
 																					// 집어넣음
 				session.setAttribute("loginInfo", userInfo);// 회원정보를 담음
 				
-				System.out.println("retrunURL = "+ returnURL);
-				
-				
+
 				session.removeAttribute("returnURL");
 	
 				req.getRequestDispatcher(returnURL.replace(getServletContext().getInitParameter("rootPath"),"")).forward(req, resp);
