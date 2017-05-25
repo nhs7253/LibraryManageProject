@@ -38,6 +38,7 @@ public class RentalListController extends HttpServlet {
 		RentalService service = RentalServiceImpl.getInstance();
 		Map<String, Object> map = service.PrintRentalList(page, userId);
 		
+//		System.out.println("RentalListController - list : " + map.get("list"));
 			
 		//3. 결과 응답 - View 호출
 		request.setAttribute("list", map.get("list"));
