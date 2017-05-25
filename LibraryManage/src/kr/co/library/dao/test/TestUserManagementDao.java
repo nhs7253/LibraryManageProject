@@ -48,6 +48,8 @@ public class TestUserManagementDao {
 			
 			//7.전체수 카운트
 			//System.out.println(dao.selectUserManagementCount(session));
+			
+			System.out.println(dao.selectUserManagementPagingList(session, 1, 10));
 			session.commit();
 		} finally {
 			session.close();

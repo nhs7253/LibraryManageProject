@@ -18,6 +18,8 @@
             <td>제목</td>
             <td>대기 순위</td>
             <td>대기상태</td>
+            <td></td>
+            
          </tr>
       </thead>
       <tbody>
@@ -39,6 +41,7 @@
                      <input type="submit" value="대기취소">
                   </form>
               </td>
+    
             </tr>
          </c:forEach>
       </tbody>
