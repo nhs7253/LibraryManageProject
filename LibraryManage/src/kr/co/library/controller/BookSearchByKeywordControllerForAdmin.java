@@ -1,20 +1,19 @@
 package kr.co.library.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.Enumeration;
 import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import kr.co.library.service.RentalService;
-import kr.co.library.service.impl.RentalServiceImpl;
-import kr.co.library.vo.RentalList;
-import kr.co.library.vo.UserManagement;
+import kr.co.library.service.BookService;
+import kr.co.library.service.impl.BookServiceImpl;
 
-public class RentalListController extends HttpServlet {
+public class BookSearchByKeywordControllerForAdmin extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
@@ -26,34 +25,36 @@ public class RentalListController extends HttpServlet {
 		try{
 		//1. 요청파라미터 조회 + 검증
 		int page = 1; //기본페이지가 1
-		String userId = "";
+		String select = "";
+		String keyword = "";
 		
-//		userId = request.getParameter("userId");
-		userId = ((UserManagement)request.getSession().getAttribute("loginInfo")).getUserId();
+		
+		select = request.getParameter("select");
+		keyword = request.getParameter("keyword");
+
 		try{
 			page = Integer.parseInt(request.getParameter("page")); //보려는 페이지번호 조회.
 		}catch (Exception e) {}
 		
 		//2. 비지니스 로직 - Model 호출
-		RentalService service = RentalServiceImpl.getInstance();
-		Map<String, Object> map = service.PrintRentalList(page, userId);
+		BookService service = BookServiceImpl.getInstance();
+		Map<String, Object> map = service.searchByKeyword(page, select, keyword);
 		
-			
 		//3. 결과 응답 - View 호출
 		request.setAttribute("list", map.get("list"));
-		request.setAttribute("overdue", map.get("overdue"));
 		request.setAttribute("pageBean", map.get("pageBean"));
-		request.setAttribute("userId", userId);
+		request.setAttribute("select", select);
+		request.setAttribute("keyword", keyword);
 		
 		
+		request.getRequestDispatcher("/forAdmin/admin_book_list.jsp").forward(request, response);
 		
-
-		request.getRequestDispatcher("/forUser/rental_list.jsp").forward(request, response);
-
 		} catch(Exception e){
 			//에러페이지로 이동
 			e.printStackTrace();
 		}
+		
+		
 	}
 }
 
