@@ -81,9 +81,6 @@
 	</c:choose>
 	
 	
-	
-	
-	
 	<!-- 
 		현재 page가 속한 page 그룹내의 페이지들 링크.
 		현재 pageGroup의 시작page ~ 끝 page

@@ -13,7 +13,7 @@
 <%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
 	<h2>도서 목록</h2>
-	<form action="${initParam.rootPath }/BookSearchByKeyword" method="post">
+	<form action="${initParam.rootPath }/BookSearchByKeywordForAdmin" method="post">
 	<select name="select">
 	    <option value="title">제목</option>
 	    <option value="author">저자</option>
