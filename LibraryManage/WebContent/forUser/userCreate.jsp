@@ -6,11 +6,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="userCreate" method="post">
+<form action="/LibraryManage/userCreate" method="post">
 
 ID : <input type ="text" name="userId">	<br>
 PW : <input type="password" name="password"> <br>
-이름 : <input type="text" name="name"> <br>
+이름 : <input type="text" name="userName"> <br>
 폰 넘버 : <input type="text" name="phoneNum"> <br>
 이메일 :	<input type="text" name="email"> <br>
 
