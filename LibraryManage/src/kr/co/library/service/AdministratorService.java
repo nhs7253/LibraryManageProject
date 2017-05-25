@@ -25,9 +25,11 @@ public interface AdministratorService {
 	 */
 	public Administrator selectAdministratorById(String adminId);
 	
+
 	/**
 	 * 관리자 로그인 
 	 * @throws AdminNotFoundException 
 	 */
 	public Administrator adminLoging(String adminId, String adminpassword) throws AdminNotFoundException;
+
 }

@@ -1,6 +1,8 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="kr.co.library.vo.UserManagement"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,9 +10,12 @@
 <title>Insert title here</title>
 </head>
 <%@include file = "/forUser/user_menu.jsp" %>
+
 <body>
 
+
 <h2>마이페이지</h2>
+
 <table>
 	<thead>
 		<tr>
@@ -47,6 +52,9 @@
 <a href = "">회원탈퇴</a>
 <a href = "${initParam.rootPath }/RentalList">나의 대출목록</a>
 <a href ="${initParam.rootPath }/WaitList">나의 대기목록</a>
+
+
+
 
 </body>
 </html>
