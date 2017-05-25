@@ -25,13 +25,10 @@ public class BookSearchByKeywordController extends HttpServlet {
 		try{
 		//1. 요청파라미터 조회 + 검증
 		int page = 1; //기본페이지가 1
-		String select = "";
-		String keyword = "";
 		
-		
-		select = request.getParameter("select");
-		keyword = request.getParameter("keyword");
-
+		String select = request.getParameter("select");
+		String keyword = request.getParameter("keyword");
+		HttpSession session = request.getSession();
 		try{
 			page = Integer.parseInt(request.getParameter("page")); //보려는 페이지번호 조회.
 		}catch (Exception e) {}
@@ -46,9 +43,12 @@ public class BookSearchByKeywordController extends HttpServlet {
 		request.setAttribute("select", select);
 		request.setAttribute("keyword", keyword);
 		
-		
-		request.getRequestDispatcher("/forUser/book_list.jsp").forward(request, response);
-		
+		if(session.getAttribute("adminInfo")!=null){
+			request.getRequestDispatcher("/forAdmin/admin_book_list.jsp").forward(request, response);
+			//request.getRequestDispatcher("/forUser/book_list.jsp").forward(request, response);
+		}else if(session.getAttribute("adminInfo")==null){
+			request.getRequestDispatcher("/forUser/book_list.jsp").forward(request, response);
+		}
 		} catch(Exception e){
 			//에러페이지로 이동
 			e.printStackTrace();

@@ -20,7 +20,7 @@ public class WaitListCancelController extends HttpServlet {
 		RentalService service = RentalServiceImpl.getInstance();
 		service.cancelWaitBook(req.getParameter("userId"), req.getParameter("bookId"));
 
-		resp.sendRedirect("/LibraryManage/WaitList?userId=${requestScope.userId}");
+		resp.sendRedirect("/LibraryManage/WaitList?userId="+(String)session.getAttribute("userId"));
 	}
 
 }

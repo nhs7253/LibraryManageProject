@@ -22,6 +22,10 @@ form {
 </head>
 <%@include file = "/forUser/user_menu.jsp" %>
 	<body>
+	<c:if test="${sessionScope.waitMessage != null}">
+	<script>alert('${sessionScope.waitMessage}')</script>
+	<c:remove scope="session" var="waitMessage"/>
+</c:if>
 		<h2>도서검색</h2>
 
 		<form action="${initParam.rootPath }/BookSearchByKeyword" method="post">

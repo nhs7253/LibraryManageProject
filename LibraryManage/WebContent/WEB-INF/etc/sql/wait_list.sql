@@ -105,12 +105,12 @@ ORDER BY b.title
 							SELECT book_id, wait_user,
 							RANK() OVER (PARTITION BY book_id ORDER BY wait_ranking DESC ) as rk 
 							FROM wait_list) w, book b, user_management u
-						WHERE w.book_id = b.book_id(+) AND w.wait_user = u.user_id AND wait_user = '3'
+						WHERE w.book_id = b.book_id(+) AND w.wait_user = u.user_id AND wait_user = 'userId2'
 						ORDER BY b.title
 				)
 				WHERE rownum <= '3'
 			)
-			WHERE rnum >= '2'
+			WHERE rnum >= '1'
 			
 			
 			SELECT title, rank
@@ -122,12 +122,12 @@ ORDER BY b.title
 							SELECT book_id, wait_user,
 							RANK() OVER (PARTITION BY book_id ORDER BY wait_ranking DESC ) as rk 
 							FROM wait_list) w, book b
-						WHERE w.book_id = b.book_id(+) AND wait_user = '3'
+						WHERE w.book_id = b.book_id(+) AND wait_user = 'userId2'
 						ORDER BY b.title
 				)
 				WHERE rownum <= '3'
 			)
-			WHERE rnum >= '2'
+			WHERE rnum >= '1'
 			
 			
 			
@@ -138,7 +138,7 @@ ORDER BY b.title
 						SELECT b.book_id b_book_id, b.title b_title, w.wait_user w_wait_user, w.rk w_rk, u.user_name u_user_name
 						FROM (
 							SELECT book_id, wait_user,
-							RANK() OVER (PARTITION BY wait_user ORDER BY wait_ranking DESC ) as rk 
+							RANK() OVER (PARTITION BY book_id ORDER BY wait_ranking ) as rk 
 							FROM wait_list) w, book b, user_management u
 						WHERE w.book_id = b.book_id(+) AND  w.wait_user = u.user_id(+)
 						ORDER BY b.title
@@ -151,9 +151,19 @@ ORDER BY b.title
 			
 		SELECT *
 		FROM wait_list
-		WHERE book_id = '3'
+		WHERE user_id = 'userId'
 		ORDER BY wait_ranking 
 
 		
 		select *
 		from wait_list
+		
+		
+		
+		
+SELECT w.book_id, w.wait_user, w.rk, b.title
+FROM (
+		SELECT book_id, wait_user,
+		RANK() OVER (PARTITION BY book_id ORDER BY wait_ranking ) as rk 
+		FROM wait_list) w, book b, user_management u
+WHERE w.book_id = b.book_id(+) AND w.wait_user = u.user_id
