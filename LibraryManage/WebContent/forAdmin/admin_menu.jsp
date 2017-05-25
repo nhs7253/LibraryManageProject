@@ -35,8 +35,8 @@ a:active {
 </c:if>
 <div>
 	<a href = "/LibraryManage/forAdmin/book_manage.jsp" >책정보관리</a>
-	<a href = "/LibraryManage/forAdmin/admin_book_list.jsp" >도서대출</a>
-	<a href = "/LibraryManage/forAdmin/admin_rental_list.jsp" >도서반납</a>
+	<a href = "/LibraryManage/BookSearchByKeyword?select=title" >도서대출</a>
+	<a href = "/LibraryManage/RentalListAdmin" >도서반납</a>
 	<a href = "/LibraryManage/allUser" >전체회원목록</a>
 	<a href = "/LibraryManage/WaitListAdmin" >도서예약현황</a>
 </div>
