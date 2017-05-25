@@ -8,8 +8,8 @@ import kr.co.library.vo.Book;
 
 public interface BookService {
 
-	/**
-	 * Book 객체를 입력받아서 새로운 책정보를 추가.
+	/**    
+	 * Book객체를 입력받아서 새로운 책정보를 추가.
 	 * - null이 들어왔을때 체크
 	 * - 이미 있는 책인지 중복체크
 	 * @param book

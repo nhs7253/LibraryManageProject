@@ -29,7 +29,7 @@
 														조회된 item 출력 
 			###################################################### --%>
 		
-		<c:forEach items="${sessionScope.list }" var="user" varStatus="Status">
+		<c:forEach items="${sessionScope.userInfo }" var="user" varStatus="Status">
 			<tr>
 				<td>${user.userId}</td>
 				<td>${user.password}</td>
