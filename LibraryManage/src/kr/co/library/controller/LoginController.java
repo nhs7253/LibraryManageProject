@@ -72,7 +72,7 @@ public class LoginController extends HttpServlet {
 				
 				session.removeAttribute("returnURL");
 				
-				req.getRequestDispatcher("/forUser/admin.jsp").forward(req, resp);// 전달
+				req.getRequestDispatcher("/forAdmin/admin_index.jsp").forward(req, resp);// 전달
 			} catch (AdminNotFoundException e)// 에러메시지 전송
 			{
 				req.setAttribute("errorMessage", e.getMessage());// 응답하면 관리할
