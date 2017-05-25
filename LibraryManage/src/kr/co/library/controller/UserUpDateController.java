@@ -20,20 +20,30 @@ public class UserUpDateController extends HttpServlet
 		
 		HttpSession session = req.getSession(); 
 		
+		
+		
 		//jsp에서 수정한 데이터를 받음.
 		String password =req.getParameter("password");
 		String name =req.getParameter("name");
 		String phoneNum =req.getParameter("phoneNum");
 		String email =req.getParameter("email");
 		
+		System.out.println("phoneNum = "  + phoneNum);
 		
-		UserManagement user = new UserManagement(((UserManagement)session.getAttribute("loginInfo")).getUserId(),
-				password,name,phoneNum,email,((UserManagement)session.getAttribute("loginInfo")).getPenaltyState());
-		
+		UserManagement user = new UserManagement(
+					((UserManagement)session.getAttribute("loginInfo")).getUserId(),
+					password,
+					name,
+					phoneNum,
+					email,
+					((UserManagement)session.getAttribute("loginInfo")).getPenaltyState()
+				);
+		System.out.println("user"  + user);
 		
 		try
 		{
 			UserInfoServiceImpl.getInstance().updateUser(user);
+			req.getSession().setAttribute("loginInfo", user);
 		}
 		catch(UserNotFoundException e)
 		{

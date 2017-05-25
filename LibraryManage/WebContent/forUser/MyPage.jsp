@@ -50,6 +50,7 @@
    </tbody>
 </table>
 <a href = "">회원탈퇴</a>
+<a href = "/LibraryManage/forUser/userUpdate.jsp">회원정보수정</a>
 <a href = "${initParam.rootPath }/RentalList">나의 대출목록</a>
 <a href ="${initParam.rootPath }/WaitList">나의 대기목록</a>
 

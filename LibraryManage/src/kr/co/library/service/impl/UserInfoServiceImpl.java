@@ -56,6 +56,7 @@ public class UserInfoServiceImpl implements UserInfoService{
 	@Override
 	public void updateUser(UserManagement user) throws UserNotFoundException {
 		SqlSession session = factory.openSession();
+		System.out.println("Service 실행됨 1");
 		try {
 			if (userDao.selectUserManagementListById(session, user.getUserId()) == null) {
 				throw new UserNotFoundException(String.format("ID %s 인 회원이 없습니다.", user.getUserId()));
