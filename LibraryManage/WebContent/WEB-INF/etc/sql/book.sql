@@ -8,8 +8,13 @@ CREATE TABLE book(
 	publish_date VARCHAR2(30),
 	rental_state CHAR(1)
 );
-
+insert into book values('8ds8s58', '자바의의정엉', '와썹', '푸른하늘', '2017-05-25', 'N');
+insert into book values('8ds8s590', '푸쉬푸쉬', '와썹', '푸른하늘', '2017-05-24', 'Y');
 select * from book;
+
+select * 
+from book
+WHERE book_id = '1';
 
 SELECT COUNT(*)
 FROM book

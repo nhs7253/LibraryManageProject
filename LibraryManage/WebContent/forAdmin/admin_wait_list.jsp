@@ -5,38 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<style type="text/css">
-a:link{
-	/*방문하지 않은 링크 설정.*/
-	text-decoration:none; /*밑줄 안나오도록 처리.*/
-	color:green;
-}
-a:visited{
-	/*방문한 링크 설정*/
-	text-decoration: none;
-	color:green;
-}
-a:hover{
-	/*마우스 포인터가 올라간 시점의 설정.*/
-	text-decoration: underline;
-	color:red;
-}
-a:active{
-	/*마우스를 링크에 클릭하는 시점*/
-	color:blue;
-}
-table, td{
-	border: 1px solid gray;
-}
-table{
-	border-collapse: collapse;
-	width: 500px;
-}
-td{
-	padding: 10px;
-}
-</style>
+<link rel="stylesheet" type="text/css" href ="./css/view_table.css">
 </head>
+<%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
 <h2>도서 대출 예약 목록(관리자)</h2>
 
@@ -94,9 +65,6 @@ td{
 	</c:choose>
 	
 	
-	
-	
-	
 	<!-- 
 		현재 page가 속한 page 그룹내의 페이지들 링크.
 		현재 pageGroup의 시작page ~ 끝 page
@@ -113,10 +81,7 @@ td{
 				[${page}]&nbsp;&nbsp;
 			</c:otherwise>
 		</c:choose>
-		
 	</c:forEach>
-	
-	
 	
 	<!-- 
 		다음페이지 그룹으로 이동

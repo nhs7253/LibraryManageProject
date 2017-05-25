@@ -6,6 +6,7 @@
 <title>로그인</title>
 </head>
 <body>
+
 <h1>로그인</h1>
 <%if(request.getAttribute("errorMessage")!=null){%>
 <span style ="color:red;"><%=request.getAttribute("errorMessage") %></span>
@@ -16,6 +17,9 @@
  PW : <input type="password" name="password"><br>
  <p>
  <button type="submit">로그인</button>
+<!--Exception 발생  -->
+<%--  <form action = "${initParam.rootPath }/userCreate" method = "post">
+	<input type="submit" value = "회원가입" /></form> --%>
 </form>
 </body>
 </html>

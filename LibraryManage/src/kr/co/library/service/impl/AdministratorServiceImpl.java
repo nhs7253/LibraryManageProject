@@ -63,7 +63,7 @@ public class AdministratorServiceImpl implements AdministratorService{
 		}
 	}
 	@Override
-	public Administrator selectAdministratorById(String adminId) {
+	public Administrator selectAdministratorById(String adminId){
 		SqlSession session = factory.openSession();
 		try {
 			return adminDao.selectAdministratorById(session, adminId);

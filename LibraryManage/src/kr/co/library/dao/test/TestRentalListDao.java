@@ -68,9 +68,10 @@ public class TestRentalListDao {
 			
 			
 			
-			//printBookList(dao.selectRentalListPagingByUserIdToBook(session, "2", 1, 2),"selectRentalListPagingByUserIdToBook");
+			printBookList(dao.selectRentalListPagingByUserIdToBook(session, "2", 1, 10),"selectRentalListPagingByUserIdToBook");
 			
 			
+			printBookList(dao.selectRentalListPagingByUserIdToBook(session, "", 1, 10),"selectRentalListPagingByUserIdToBook");
 			
 			System.out.println(dao.selectRentalListPagingByEndIsNull(session, null, 1, 10));
 			

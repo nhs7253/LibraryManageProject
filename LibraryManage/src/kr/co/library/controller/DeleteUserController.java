@@ -33,6 +33,6 @@ public class DeleteUserController extends HttpServlet
 			e.printStackTrace();
 		}
 		
-		resp.sendRedirect("/LibraryManage/login/DeleteUser.jsp");
+		resp.sendRedirect("/LibraryManage/forUser/MyPage.jsp");
 	}
 }

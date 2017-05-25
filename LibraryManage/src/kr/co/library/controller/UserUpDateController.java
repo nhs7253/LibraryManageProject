@@ -24,11 +24,11 @@ public class UserUpDateController extends HttpServlet
 		String password =req.getParameter("password");
 		String name =req.getParameter("name");
 		String phoneNum =req.getParameter("phoneNum");
-		String email =req.getParameter("eamil");
+		String email =req.getParameter("email");
 		
 		
-		
-		UserManagement user = new UserManagement(((UserManagement)session.getAttribute("loginInfo")).getUserId(),password,name,phoneNum,email,((UserManagement)session.getAttribute("loginInfo")).getPenaltyState());
+		UserManagement user = new UserManagement(((UserManagement)session.getAttribute("loginInfo")).getUserId(),
+				password,name,phoneNum,email,((UserManagement)session.getAttribute("loginInfo")).getPenaltyState());
 		
 		
 		try
@@ -39,9 +39,8 @@ public class UserUpDateController extends HttpServlet
 		{
 			e.printStackTrace();
 		}
-		resp.sendRedirect("/LibraryManage/login/userInfo.jsp");
+		resp.sendRedirect("/LibraryManage/forUser/MyPage.jsp");
 	}
 	
-	
-	
+
 }

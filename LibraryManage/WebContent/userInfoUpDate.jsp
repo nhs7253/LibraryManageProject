@@ -7,6 +7,8 @@
 <title>정보</title>
 </head>
 <body>
+<%UserManagement user = new UserManagement(); %>
+
 <form action="/LibraryManage/UserUpDate" method="post"><br>
 회원 ID : <%=((UserManagement)session.getAttribute("loginInfo")).getUserId() %><br>
 회원 password : <input type="password" name="password"><br>

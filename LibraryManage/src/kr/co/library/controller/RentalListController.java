@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import kr.co.library.service.RentalService;
 import kr.co.library.service.impl.RentalServiceImpl;
+import kr.co.library.vo.RentalList;
 
 public class RentalListController extends HttpServlet {
 
@@ -35,17 +36,18 @@ public class RentalListController extends HttpServlet {
 		RentalService service = RentalServiceImpl.getInstance();
 		Map<String, Object> map = service.PrintRentalList(page, userId);
 		
-		
-		
+			
 		//3. 결과 응답 - View 호출
 		request.setAttribute("list", map.get("list"));
 		request.setAttribute("overdue", map.get("overdue"));
 		request.setAttribute("pageBean", map.get("pageBean"));
 		request.setAttribute("userId", userId);
 		
-
 		
-		request.getRequestDispatcher("/rental_list.jsp").forward(request, response);
+		
+
+		request.getRequestDispatcher("/forUser/rental_list.jsp").forward(request, response);
+
 		} catch(Exception e){
 			//에러페이지로 이동
 			e.printStackTrace();
