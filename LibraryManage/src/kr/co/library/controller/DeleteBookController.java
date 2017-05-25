@@ -11,25 +11,30 @@ import javax.servlet.http.HttpSession;
 import kr.co.library.exception.BookNotFoundException;
 import kr.co.library.service.impl.BookServiceImpl;
 
-public class DeleteBookController extends HttpServlet{
+public class DeleteBookController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		//HttpSession session = req.getSession();
-		
-		String bookId = req.getParameter("bookId");
-		
-		try {
-			BookServiceImpl.getInstance().deleteBook(bookId);
-		} catch (BookNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+
+		HttpSession session = req.getSession();
+		String message="";
+
+		// 관리자아이디로 로그인 되었을때
+		if (session.getAttribute("adminInfo") != null) {
+			String bookId = req.getParameter("bookId");
+			try {
+				message = BookServiceImpl.getInstance().deleteBook(bookId);
+			} catch (BookNotFoundException e) {
+				message = e.getMessage();
+			}
+			session.setAttribute("deleteBookMessage", message);
+			resp.sendRedirect("/LibraryManage/forAdmin/book_manage.jsp");
+		} else {
+			// 관리자 아이디로 로그인되지 않았을때
+			session.setAttribute("NoAdminMessage", "관리자가 아닙니다.");
+			resp.sendRedirect("/LibraryManage/forAdmin/book_manage.jsp");
 		}
-		
-		//session.setAttribute("", "");
-		resp.sendRedirect("/LibraryManage/forAdmin/book_manage.jsp");
-		
+
 	}
-	
+
 }

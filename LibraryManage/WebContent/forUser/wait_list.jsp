@@ -18,7 +18,7 @@
             <td>제목</td>
             <td>대기 순위</td>
             <td>대기상태</td>
-            <td></td>
+           
             
          </tr>
       </thead>
@@ -91,7 +91,7 @@
 
             </c:when>
             <c:otherwise>
-            ${page}]&nbsp;&nbsp;
+            [${page}]&nbsp;&nbsp;
          </c:otherwise>
          </c:choose>
 

@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.co.library.exception.FailRentException;
+import kr.co.library.exception.FailReturnException;
 import kr.co.library.exception.FailWaitException;
 import kr.co.library.exception.NoWaitException;
 import kr.co.library.service.RentalService;
@@ -25,23 +26,22 @@ public class ReturnBookController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		HttpSession session = req.getSession();
-		
-		
-		String userId = (String) req.getParameter("userId");
-		int rentalNo = Integer.parseInt((String)req.getParameter("rentalNo"));
+		String message;
 
-		System.out.println(userId + rentalNo);
-		
+		String userId = (String) req.getParameter("userId");
+		int rentalNo = Integer.parseInt((String) req.getParameter("rentalNo"));
+
 		RentalService service = RentalServiceImpl.getInstance();
+
 		try {
-			service.returnBook(userId,rentalNo);
-			
-		} catch (FailRentException | FailWaitException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+			message = service.returnBook(userId, rentalNo);
+		} catch (FailReturnException e) {
+			message = e.getMessage();
+		}
+
+		session.setAttribute("returnMessage", message);
 		
 		resp.sendRedirect("/LibraryManage/forAdmin/admin_rental_list.jsp");
-		
+
 	}
 }
