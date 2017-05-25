@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.core.ApplicationContext;
-
 import kr.co.library.exception.AdminNotFoundException;
 import kr.co.library.exception.LoginFailException;
 import kr.co.library.service.AdministratorService;
