@@ -29,8 +29,8 @@
                <td>${wait.title}</td>
                <td>${wait.rank}</td>
                <td>
-               	  <form action="waitListCancel">
-                     <input type="hidden" name="userId" value="${requestScope.userId }">
+               	  <form action="waitListCancel" method="post" style="float: none;">
+                     <input type="hidden" name="userId" value="${sessionScope.userId }">
                      <input type="hidden" name="bookId" value="${wait.bookId }">
                      <input type="submit" value="대기취소">
                   </form>

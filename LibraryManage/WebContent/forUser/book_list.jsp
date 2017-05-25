@@ -34,7 +34,7 @@
 				<td>저자</td>
 				<td>출판사</td>
 				<td>발간일</td>
-				<td>대여여부</td>
+				<td>대여가능여부</td>
 				<td>대여신청</td>
 			</tr>
 		</thead>
@@ -55,14 +55,19 @@
 					<td>${book.rentalState}</td>
 					<c:choose>
 						<c:when test="${book.rentalState eq 'Y'.charAt(0)}">
-							<td>
-							<input type="button" onclick="AAA();" value="대여신청"/>
+							<td><input type="button" onclick="rentAlert();" value="대여신청" />
 							</td>
 						</c:when>
 						<c:otherwise>
-							<td>
-							<input type="button"  value="대기신청"/>
-							</td>
+						<td>
+
+							<form action="/LibraryManage/waitListInsert" method="post" style="float: none;">
+							<input type="hidden" name="userId">
+							<input type="hidden" name="bookId" value="bookId">
+							<input type="submit" value="대기신청">
+							</form>
+	
+						</td>
 						</c:otherwise>
 					</c:choose>
 				</tr>
@@ -71,12 +76,13 @@
 		</tbody>
 	</table>
 
-	<script type="text/javascript">
-		function AAA(
-			var returnValue = alert("관리자에게 대여하세요!!");
-			document.write(returnValue);		
-		);
+	<script>
+		function rentAlert() {
+			alert("관리자에게 대여하세요!!");
+		}
 	</script>
+
+
 
 
 

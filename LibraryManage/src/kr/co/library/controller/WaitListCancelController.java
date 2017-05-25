@@ -13,16 +13,17 @@ import kr.co.library.service.impl.RentalServiceImpl;
 
 public class WaitListCancelController extends HttpServlet {
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		HttpSession session = req.getSession();
-		
+
 		session.setAttribute("userId", req.getParameter("userId"));
 		session.setAttribute("bookId", req.getParameter("bookId"));
-		
+
 		RentalService service = RentalServiceImpl.getInstance();
-		service.cancelWaitBook((String)(session.getAttribute("userId")), (String)(session.getAttribute("bookId")));
-		
-		resp.sendRedirect("/LibraryManage/rental/test.jsp");
+		service.cancelWaitBook((String) (session.getAttribute("userId")), (String) (session.getAttribute("bookId")));
+
+		resp.sendRedirect("/LibraryManage/WaitList?userId=userId");
 	}
+
 }

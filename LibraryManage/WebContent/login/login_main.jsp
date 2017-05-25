@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,6 +8,10 @@
 </head>
 <body>
 <h1>로그인</h1>
+<c:if test="${sessionScope.loginFailMessage != null}">
+	<script>alert('${sessionScope.loginFailMessage}')</script>
+	<c:remove scope="session" var="loginFailMessage"/>
+</c:if>
 <%if(request.getAttribute("errorMessage")!=null){%>
 <span style ="color:red;"><%=request.getAttribute("errorMessage") %></span>
 <%}%>
