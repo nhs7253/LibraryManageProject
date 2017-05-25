@@ -31,7 +31,7 @@
                <td>${wait.rank}</td>
                <td>
                	  <form action="waitListCancel" method="post" style="float: none;">
-                     <input type="hidden" name="userId" value="${sessionScope.userId }">
+                     <input type="hidden" name="userId" value="${sessionScope.loginInfo.userId }">
                      <input type="hidden" name="bookId" value="${wait.bookId }">
                      <input type="submit" value="대기취소">
                   </form>
@@ -58,7 +58,7 @@
          <c:when test="${requestScope.pageBean.previousPageGroup}">
             <!-- 이전페이지 그룹이 있다면 : isPreviousPageGroup() -->
             <a
-               href="${initParam.rootPath }/WaitList?page=${requestScope.pageBean.beginPage-1}&userId=${requestScope.userId}">◀</a>
+               href="${initParam.rootPath }/WaitList?page=${requestScope.pageBean.beginPage-1}&userId=${sessionScope.loginInfo.userId}">◀</a>
          </c:when>
          <c:otherwise>
          ◀
@@ -81,7 +81,7 @@
             <c:when test="${page != requestScope.pageBean.page}">
                <!-- 현재페이지가 아니라면 -->
                <a
-                  href="${initParam.rootPath }/WaitList?page=${page}&userId=${requestScope.userId}">${page }&nbsp;&nbsp;</a>
+                  href="${initParam.rootPath }/WaitList?page=${page}&userId=${sessionScope.loginInfo.userId}">${page }&nbsp;&nbsp;</a>
             </c:when>
             <c:otherwise>
             [${page}]&nbsp;&nbsp;
@@ -99,7 +99,7 @@
       <c:choose>
          <c:when test="${requestScope.pageBean.nextPageGroup}">
             <a
-               href="${initParam.rootPath }/WaitList?page=${requestScope.pageBean.endPage+1}&userId=${requestScope.userId}">▶</a>
+               href="${initParam.rootPath }/WaitList?page=${requestScope.pageBean.endPage+1}&userId=${sessionScope.loginInfo.userId}">▶</a>
          </c:when>
          <c:otherwise>
          ▶
@@ -111,7 +111,7 @@
 
       <!-- 마지막 페이지로 이동 -->
       <a
-         href="${initParam.rootPath }/WaitList?page=${requestScope.pageBean.totalPage}&userId=${requestScope.userId}">마지막
+         href="${initParam.rootPath }/WaitList?page=${requestScope.pageBean.totalPage}&userId=${sessionScope.loginInfo.userId}">마지막
          페이지</a>
 
 
