@@ -28,14 +28,10 @@ public class BookSearchByKeywordController extends HttpServlet {
 		String select = "";
 		String keyword = "";
 		
-		HttpSession session = request.getSession();
-		System.out.println(session.getAttribute("returnURL"));
-		
 		
 		select = request.getParameter("select");
 		keyword = request.getParameter("keyword");
-//		System.out.println("select = " + select);
-//		System.out.println("keyword = " + keyword);
+
 		try{
 			page = Integer.parseInt(request.getParameter("page")); //보려는 페이지번호 조회.
 		}catch (Exception e) {}
@@ -50,10 +46,7 @@ public class BookSearchByKeywordController extends HttpServlet {
 		request.setAttribute("select", select);
 		request.setAttribute("keyword", keyword);
 		
-
 		
-		
-		session.removeAttribute("retrunURL");
 		request.getRequestDispatcher("/forUser/book_list.jsp").forward(request, response);
 		
 		} catch(Exception e){

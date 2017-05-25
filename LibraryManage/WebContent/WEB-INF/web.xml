@@ -85,7 +85,7 @@
 	<!--손용훈 로그인 -->
 	<servlet>
 		<servlet-name>Login</servlet-name>
-		<servlet-class>kr.co.library.controller.LoginUserController</servlet-class>
+		<servlet-class>kr.co.library.controller.LoginController</servlet-class>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>Login</servlet-name>
