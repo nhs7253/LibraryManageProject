@@ -31,7 +31,7 @@ public class LoginController extends HttpServlet {
 //		System.out.println(session.getAttribute("returnURL"));
 		
 		String returnURL = (String) session.getAttribute("returnURL");
-		if(returnURL.startsWith("null")){
+		if(returnURL==null || returnURL.startsWith("null")){
 			returnURL = "/forUser/main.jsp";
 		}
 
@@ -52,7 +52,11 @@ public class LoginController extends HttpServlet {
 																					// 집어넣음
 				session.setAttribute("loginInfo", userInfo);// 회원정보를 담음
 				
-				session.removeAttribute("retrunURL");
+				System.out.println("retrunURL = "+ returnURL);
+				
+				
+				session.removeAttribute("returnURL");
+	
 				req.getRequestDispatcher(returnURL.replace(getServletContext().getInitParameter("rootPath"),"")).forward(req, resp);
 			} catch (LoginFailException e)// 에러메세지 전송
 			{
@@ -69,12 +73,15 @@ public class LoginController extends HttpServlet {
 
 				Administrator adminInfo = adminService.adminLoging(mainId, mainPassword);
 				session.setAttribute("adminInfo", adminInfo);// admin
+				
+				session.removeAttribute("returnURL");
+				
 				req.getRequestDispatcher("/forUser/admin.jsp").forward(req, resp);// 전달
 			} catch (AdminNotFoundException e)// 에러메시지 전송
 			{
 				req.setAttribute("errorMessage", e.getMessage());// 응답하면 관리할
 																	// 필요없는 속성값
-				session.removeAttribute("retrunURL");
+				
 				req.getRequestDispatcher("/forUser/login.jsp").forward(req, resp);// 전달
 			}
 		}
