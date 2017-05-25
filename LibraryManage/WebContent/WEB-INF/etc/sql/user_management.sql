@@ -16,3 +16,11 @@ DROP TABLE user_management;
 
 select * from USER_MANAGEMENT;
 
+		select user_id,password,user_name,phone_num,email,penalty_state
+		from(
+			select rownum rnum,user_id,password,user_name,phone_num,email,penalty_state
+			from(
+				select 	user_id,password,user_name,phone_num,email,penalty_state
+				from user_management) 
+			where rownum  <= 3)
+		where rnum >= 1;

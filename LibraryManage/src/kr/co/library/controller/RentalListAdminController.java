@@ -31,7 +31,6 @@ public class RentalListAdminController extends HttpServlet {
 		}catch (Exception e) {}
 		
 		
-		
 		//2. 비지니스 로직 - Model 호출
 		RentalService service = RentalServiceImpl.getInstance();
 		Map<String, Object> map = service.PrintCurrentRentalList(page, userId);

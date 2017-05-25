@@ -53,7 +53,7 @@ public class WaitListDaoImpl implements WaitListDao
 		// TODO Auto-generated method stub
 		return session.selectList(namespace+"selectWaitListByBookId",bookId);
 	}
-
+	
 	@Override
 	public List<WaitList> selectWaitListByWaitUser(SqlSession session, String waitUser) {
 		// TODO Auto-generated method stub
@@ -97,7 +97,7 @@ public class WaitListDaoImpl implements WaitListDao
 		// TODO Auto-generated method stub
 		return session.selectList(namespace+"selectWaitListJoinBookJoinUserByBookId", bookId);
 	}
-
+	
 	@Override
 	public List<WaitList> selectWaitListJoinBookJoinUserByUserId(SqlSession session, String userId) {
 		// TODO Auto-generated method stub

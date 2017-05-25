@@ -193,6 +193,16 @@
 		<url-pattern>/returnBook</url-pattern>
 	</servlet-mapping>
 	
+	<!--박연수 전체회원조회  -->
+	<servlet>
+		<servlet-name>alluser</servlet-name>
+		<servlet-class>kr.co.library.controller.AllUserListController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>alluser</servlet-name>
+		<url-pattern>/allUser</url-pattern>
+	</servlet-mapping>
+		
 	
   <!-- 왕준 : UserInfoReferServlet 등록 -->
   <servlet>
