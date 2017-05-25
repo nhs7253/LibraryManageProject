@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.core.ApplicationContext;
+
 import kr.co.library.exception.AdminNotFoundException;
 import kr.co.library.exception.LoginFailException;
 import kr.co.library.service.AdministratorService;
@@ -17,17 +19,21 @@ import kr.co.library.service.impl.UserInfoServiceImpl;
 import kr.co.library.vo.Administrator;
 import kr.co.library.vo.UserManagement;
 
-public class LoginUserController extends HttpServlet {
+public class LoginController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		// id/password 조회
 		String mainId = req.getParameter("id");
 		String mainPassword = req.getParameter("password");
+		HttpSession session = req.getSession();// session 생성
 		
-		System.out.println("mainId = " + mainId);
+//		System.out.println(session.getAttribute("returnURL"));
 		
-		System.out.println("mainPassword = " + mainPassword);
+		String returnURL = (String) session.getAttribute("returnURL");
+		if(returnURL.startsWith("null")){
+			returnURL = "/forUser/main.jsp";
+		}
 
 		UserInfoService service = UserInfoServiceImpl.getInstance();// 유저 인스턴스
 		AdministratorService adminService = AdministratorServiceImpl.getInstance();// 어드민
@@ -40,16 +46,19 @@ public class LoginUserController extends HttpServlet {
 		if (user != null)// user
 		{
 			try {
-				HttpSession session = req.getSession();// session 생성
+				
 				UserManagement userInfo = service.longinUser(mainId, mainPassword); // user에
 																					// 데이터를
 																					// 집어넣음
 				session.setAttribute("loginInfo", userInfo);// 회원정보를 담음
-				req.getRequestDispatcher("/userInfo.jsp").forward(req, resp);
+				
+				session.removeAttribute("retrunURL");
+				req.getRequestDispatcher(returnURL.replace(getServletContext().getInitParameter("rootPath"),"")).forward(req, resp);
 			} catch (LoginFailException e)// 에러메세지 전송
 			{
 				req.setAttribute("errorMessage", e.getMessage());// 응답하면 관리할
 																	// 필요없는 속성값
+				
 				req.getRequestDispatcher("/forUser/login.jsp").forward(req, resp);// 전달
 			}
 		}  
@@ -57,7 +66,7 @@ public class LoginUserController extends HttpServlet {
 		{
 			try {
 				// 로그인성공 session 생성 ->
-				HttpSession session = req.getSession();// session 생성
+
 				Administrator adminInfo = adminService.adminLoging(mainId, mainPassword);
 				session.setAttribute("adminInfo", adminInfo);// admin
 				req.getRequestDispatcher("/forUser/admin.jsp").forward(req, resp);// 전달
@@ -65,6 +74,7 @@ public class LoginUserController extends HttpServlet {
 			{
 				req.setAttribute("errorMessage", e.getMessage());// 응답하면 관리할
 																	// 필요없는 속성값
+				session.removeAttribute("retrunURL");
 				req.getRequestDispatcher("/forUser/login.jsp").forward(req, resp);// 전달
 			}
 		}
@@ -72,6 +82,7 @@ public class LoginUserController extends HttpServlet {
 			req.setAttribute("errorMessage", "아이디나 비밀번호를 다시 확인해주세요");// 응답하면 관리할
 			req.getRequestDispatcher("/forUser/login.jsp").forward(req, resp);// 전달
 		}
+		
 		
 	}
 }
