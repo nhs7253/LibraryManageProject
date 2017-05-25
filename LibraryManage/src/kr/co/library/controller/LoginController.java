@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.core.ApplicationContext;
-
 import kr.co.library.exception.AdminNotFoundException;
 import kr.co.library.exception.LoginFailException;
 import kr.co.library.service.AdministratorService;
@@ -20,6 +18,8 @@ import kr.co.library.vo.Administrator;
 import kr.co.library.vo.UserManagement;
 
 public class LoginController extends HttpServlet {
+
+
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
@@ -89,3 +89,4 @@ public class LoginController extends HttpServlet {
 		
 	}
 }
+

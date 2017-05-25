@@ -31,7 +31,10 @@
                <td>${wait.title}</td>
                <td>${wait.rank}</td>
                <td>
+               	  <form action="waitListCancel">
+
                	  <form action="waitListCancel" method="post" style="float: none;">
+
                      <input type="hidden" name="userId" value="${sessionScope.loginInfo.userId }">
                      <input type="hidden" name="bookId" value="${wait.bookId }">
                      <input type="submit" value="대기취소">
@@ -81,11 +84,15 @@
          <c:choose>
             <c:when test="${page != requestScope.pageBean.page}">
                <!-- 현재페이지가 아니라면 -->
+<<<<<<< HEAD
+               <a href="${initParam.rootPath }/WaitList?page=${page}&userId=${requestScope.userId}">${page }&nbsp;&nbsp;</a>
+=======
                <a
                   href="${initParam.rootPath }/WaitList?page=${page}&userId=${sessionScope.loginInfo.userId}">${page }&nbsp;&nbsp;</a>
+>>>>>>> branch 'master' of https://github.com/nhs7253/LibraryManageProject.git
             </c:when>
             <c:otherwise>
-            [${page}]&nbsp;&nbsp;
+            ${page}]&nbsp;&nbsp;
          </c:otherwise>
          </c:choose>
 
