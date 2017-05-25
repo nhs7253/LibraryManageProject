@@ -17,6 +17,10 @@ import kr.co.library.vo.UserManagement;
 public class DeleteUserController extends HttpServlet 
 {
 	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		doPost(req, resp);
+	}
+	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		
 		//session에서 데이터를 가져옴
@@ -33,6 +37,6 @@ public class DeleteUserController extends HttpServlet
 			e.printStackTrace();
 		}
 		
-		resp.sendRedirect("/LibraryManage/forUser/MyPage.jsp");
+		resp.sendRedirect("/LibraryManage/forUser/main.jsp");
 	}
 }

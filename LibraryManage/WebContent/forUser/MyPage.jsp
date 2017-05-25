@@ -16,7 +16,7 @@
 
 <h2>마이페이지</h2>
 
-<table>
+<table border='1' width="500px" >
 	<thead>
 		<tr>
 			<td>회원ID</td>
@@ -25,8 +25,7 @@
 			<td>전화번호</td>
 			<td>이메일</td>
 			<td>연체상태</td>
-			<td></td>
-			<td></td>
+		
 		</tr>
 	</thead>
 	<tbody>
@@ -42,12 +41,21 @@
 				<td><%=((UserManagement)session.getAttribute("loginInfo")).getPhoneNum() %></td>
 				<td><%=((UserManagement)session.getAttribute("loginInfo")).getEmail() %></td>
 				<td><%=((UserManagement)session.getAttribute("loginInfo")).getPenaltyState() %></td>
-				<td><a href = "${initParam.rootPath }/UserUpDate"/>수정</td>
-				<td><a href = "${initParam.rootPath }/DeleteUser"/>탈퇴</td>
 			</tr>
 	</tbody>
 </table>
-<a href = "">회원탈퇴</a>
+<a href = "${initParam.rootPath }/UserUpDate">수정</a>
+
+<!-- 회원 탈퇴 버튼 -> Y/N 확인 알람 -->
+<script type="text/javascript">
+function button_event(){
+	if(confirm("회원을 탈퇴하시 겠습니까?")){//확인
+		location.href="/LibraryManage/DeleteUser";
+	}
+}
+</script>
+<input type="button" value="삭제하기" onclick="button_event();">
+
 <a href = "${initParam.rootPath }/RentalList">나의 대출목록</a>
 <a href ="${initParam.rootPath }/WaitList">나의 대기목록</a>
 

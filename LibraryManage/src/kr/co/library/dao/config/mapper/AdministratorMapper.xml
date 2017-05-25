@@ -32,7 +32,7 @@ DELETE FROM administrator
 WHERE administrator_id = #{administratorId}
 </delete>
 
-<select id = "selectAdminstratorById" parameterType= "string" resultMap="admin-resultmap">
+<select id = "selectAdministratorById" parameterType= "string" resultMap="admin-resultmap">
 SELECT <include refid="all-column"/>
 FROM administrator
 WHERE administrator_id = #{administratorId}
