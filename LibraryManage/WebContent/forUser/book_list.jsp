@@ -66,9 +66,13 @@
 
 								<form action="/LibraryManage/waitListInsert" method="post"
 									style="float: none;">
-									<input type="hidden" name="userId" value="${sessionScope.loginInfo.userId }"> <input
+									<input type="hidden" name="userId"
+										value="${sessionScope.loginInfo.userId }"> <input
 										type="hidden" name="bookId" value="${book.bookId}"> <input
-										type="submit" value="대기신청">
+										type="hidden" name="title" value="${book.title }"> <input
+										type="hidden" name="author" value="${book.author }"> <input
+										type="hidden" name="publisher" value="${book.publisher }">
+									<input type="submit" value="대기신청">
 								</form>
 
 							</td>

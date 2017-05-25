@@ -39,7 +39,7 @@ public class WaitListInsertController extends HttpServlet {
 			}
 
 			session.setAttribute("waitMessage", message);
-			resp.sendRedirect("/LibraryManage/index.jsp");
+			resp.sendRedirect("/LibraryManage/forUser/main.jsp");
 
 		}
 	}
