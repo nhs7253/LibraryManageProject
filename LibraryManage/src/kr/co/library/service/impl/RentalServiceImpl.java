@@ -273,23 +273,6 @@ public class RentalServiceImpl implements RentalService {
 		return map;
 	}
 
-	// 대기1순위 뽑아내는 메소드.
-	private WaitList MinWaitRanking(SqlSession session, List<WaitList> waitLists) {
-
-		ArrayList<Integer> rankList = new ArrayList<>();
-
-		// 대기목록에서 랭킹리스트를 뽑음.
-		for (int i = 0; i < waitLists.size(); i++) {
-			int rank = waitLists.get(i).getWaitRanking();
-			rankList.add(rank);
-		}
-
-		// 랭킹레스트에서 최소값뽑음.
-		int minRanking = Collections.min(rankList);
-
-		return waitDao.selectWaitListByWaitRanking(session, minRanking);
-	}
-
 	@Override
 	public Map<String, Object> PrintCurrentRentalList(int page, String userId) {
 		HashMap<String, Object> map = new HashMap<>();

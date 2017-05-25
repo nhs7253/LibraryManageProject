@@ -1,6 +1,9 @@
 package kr.co.library.service.impl;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -11,6 +14,7 @@ import kr.co.library.exception.LoginFailException;
 import kr.co.library.exception.UserIDOverlapException;
 import kr.co.library.exception.UserNotFoundException;
 import kr.co.library.service.UserInfoService;
+import kr.co.library.util.PagingBean;
 import kr.co.library.util.SqlSessionFactoryManager;
 import kr.co.library.vo.UserManagement;
 
@@ -119,12 +123,34 @@ public class UserInfoServiceImpl implements UserInfoService{
 				throw new LoginFailException("패스워드 오류");
 			}
 		}
+
 		session.commit();
 		}finally{
 		session.close();
 		}
 		throw new LoginFailException("아이디가 없습니다.");
 	}
+
+		
+		@Override
+		public Map<String, Object> allUserList(int page) {
+			HashMap<String,Object> map = new HashMap<>();
+			SqlSession session = factory.openSession();
+			try{
+				
+				int totalCount = userDao.selectUserManagementCount(session);
+				PagingBean pageBean = new PagingBean(totalCount,page);
+				List<Object> list = userDao.selectUserManagementPagingList(session,pageBean.getBeginItemInPage(),pageBean.getEndPage());
+				map.put("pageBean", pageBean);
+				map.put("list", list);
+			}finally{
+				session.close();
+			}
+			return map;
+		}
+		
+		
+
 	
 }
 	

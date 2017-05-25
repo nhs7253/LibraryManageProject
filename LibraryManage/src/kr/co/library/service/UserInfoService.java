@@ -2,6 +2,8 @@ package kr.co.library.service;
 
 import java.io.IOException;
 
+import java.util.Map;
+
 import kr.co.library.exception.LoginFailException;
 import kr.co.library.exception.UserIDOverlapException;
 import kr.co.library.exception.UserNotFoundException;
@@ -54,5 +56,13 @@ public interface UserInfoService {
 	 */
 	public UserManagement longinUser(String id, String password)throws LoginFailException;
 	
+	
+	/**
+	 * 전체회원목록보여주기
+	 * 등록된 모든 회원의 정보를 보여주는 메소드(관리자)
+	 * @param page
+	 * @return
+	 */
+	Map<String,Object> allUserList(int page);
 	
 }

@@ -53,7 +53,7 @@
 														페이징 처리
 			###################################################### --%>
 	<!-- 첫페이지로 이동 -->
-	<a href="${initParam.rootPath }/RentalList?page=1&userId=${requestScope.userId}">첫페이지</a>
+	<a href="${initParam.rootPath }/RentalList?page=1&userId=${sessionScope.loginInfo.userId}">첫페이지</a>
 	
 
 	<!--
@@ -63,7 +63,7 @@
 	<c:choose>
 		<c:when test="${requestScope.pageBean.previousPageGroup}">
 			<!-- 이전페이지 그룹이 있다면 : isPreviousPageGroup() -->
-			<a href="${initParam.rootPath }/RentalList?page=${requestScope.pageBean.beginPage-1}&userId=${requestScope.userId}">◀</a>
+			<a href="${initParam.rootPath }/RentalList?page=${requestScope.pageBean.beginPage-1}&userId=${sessionScope.loginInfo.userId}">◀</a>
 		</c:when>
 		<c:otherwise>
 			◀
@@ -84,7 +84,7 @@
 		<c:choose>
 			<c:when test="${page != requestScope.pageBean.page}">
 				<!-- 현재페이지가 아니라면 -->
-				<a href="${initParam.rootPath }/RentalList?page=${page}&userId=${requestScope.userId}">${page }&nbsp;&nbsp;</a>
+				<a href="${initParam.rootPath }/RentalList?page=${page}&userId=${sessionScope.loginInfo.userId}">${page }&nbsp;&nbsp;</a>
 			</c:when>
 			<c:otherwise>
 				[${page}]&nbsp;&nbsp;
@@ -101,7 +101,7 @@
 	 -->
 	<c:choose>
 		<c:when test="${requestScope.pageBean.nextPageGroup}">
-			<a href="${initParam.rootPath }/RentalList?page=${requestScope.pageBean.endPage+1}&userId=${requestScope.userId}">▶</a>
+			<a href="${initParam.rootPath }/RentalList?page=${requestScope.pageBean.endPage+1}&userId=${sessionScope.loginInfo.userId}">▶</a>
 		</c:when>
 		<c:otherwise>
 			▶
@@ -112,7 +112,7 @@
 	
 	
 	<!-- 마지막 페이지로 이동 -->
-	<a href="${initParam.rootPath }/RentalList?page=${requestScope.pageBean.totalPage}&userId=${requestScope.userId}">마지막 페이지</a>
+	<a href="${initParam.rootPath }/RentalList?page=${requestScope.pageBean.totalPage}&userId=${sessionScope.loginInfo.userId}">마지막 페이지</a>
 	
 
 </p>
