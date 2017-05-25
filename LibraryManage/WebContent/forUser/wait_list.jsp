@@ -11,6 +11,7 @@
 <body>
    <h2>대기 목록</h2>
 
+
    <table>
       <thead>
          <tr>
