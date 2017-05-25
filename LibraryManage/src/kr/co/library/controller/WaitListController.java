@@ -26,11 +26,11 @@ public class WaitListController extends HttpServlet {
 		int page = 1; //기본페이지가 1
 		String userId = "";
 		
-		System.out.println(request.getSession().getAttribute("loginInfo"));
+//		System.out.println(request.getSession().getAttribute("loginInfo"));
 		
 		userId = ((UserManagement)request.getSession().getAttribute("loginInfo")).getUserId();
 		
-		System.out.println(userId);
+//		System.out.println(userId);
 		
 		
 //		userId = request.getParameter("userId");
@@ -47,7 +47,6 @@ public class WaitListController extends HttpServlet {
 		request.setAttribute("pageBean", map.get("pageBean"));
 		request.setAttribute("userId", userId);
 		
-
 		
 
 		request.getRequestDispatcher("/forUser/wait_list.jsp").forward(request, response);
