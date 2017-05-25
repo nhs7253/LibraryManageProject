@@ -8,7 +8,7 @@
 </head>
 <%@include file = "/forUser/user_menu.jsp" %>
 <body>
-
+${sessionScope.userInfo }
 <h2>마이페이지</h2>
 <table>
 	<thead>

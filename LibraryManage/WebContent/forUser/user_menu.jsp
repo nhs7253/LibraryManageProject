@@ -40,6 +40,8 @@ a:active{
 			<a href = "/LibraryManage/logout">로그아웃</a>
 			<a href = "/LibraryManage/forUser/MyPage.jsp">마이페이지</a>
 			<a href = "/LibraryManage/forUser/rental_list.jsp">대출목록</a>
+			<a href = "/LibraryManage/forUser/main.jsp">도서검색</a>
+			
 		</c:otherwise>
 	</c:choose>
 </div>
