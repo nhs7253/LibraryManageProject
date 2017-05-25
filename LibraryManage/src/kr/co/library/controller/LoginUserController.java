@@ -45,7 +45,7 @@ public class LoginUserController extends HttpServlet {
 																					// 데이터를
 																					// 집어넣음
 				session.setAttribute("loginInfo", userInfo);// 회원정보를 담음
-				req.getRequestDispatcher("/userInfo.jsp").forward(req, resp);
+				req.getRequestDispatcher("/forUser/main.jsp").forward(req, resp);
 			} catch (LoginFailException e)// 에러메세지 전송
 			{
 				req.setAttribute("errorMessage", e.getMessage());// 응답하면 관리할

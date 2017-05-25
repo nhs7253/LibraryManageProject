@@ -49,8 +49,8 @@ public class UserCreateController extends HttpServlet{
 		request.setAttribute("result", message);
 	
 		//리다이렉트
-		response.sendRedirect("/LibraryManage/forUser/login.jsp");
 
-	
+		response.sendRedirect("/LibraryManage/forUser/main.jsp");
+
 	}
 }
