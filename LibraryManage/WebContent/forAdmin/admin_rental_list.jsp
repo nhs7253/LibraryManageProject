@@ -7,13 +7,14 @@
 <title>Insert title here</title>
 <link rel="stylesheet" type="text/css" href ="./css/view_table.css">
 </head>
+<%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
-<h2>현재 대여 목록 (관리자)</h2>
+<h2>현재 대여 목록</h2>
 
 <form action="${initParam.rootPath }/RentalListAdmin" method="post">
 	회원id <input type="text" name="userId"/>
 	<input type="submit" value="검색"/>
-</form> <br />
+</form> <br>
 
 <table>
 	<thead>

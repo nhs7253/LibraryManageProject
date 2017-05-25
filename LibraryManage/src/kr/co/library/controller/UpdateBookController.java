@@ -35,6 +35,6 @@ public class UpdateBookController extends HttpServlet{
 		
 		//session.setAttribute("", "");
 		
-		resp.sendRedirect("/LibraryManage/testBook.jsp");
+		resp.sendRedirect("/LibraryManage/forAdmin/book_manage.jsp");
 	}
 }

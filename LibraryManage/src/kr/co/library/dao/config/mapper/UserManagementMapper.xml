@@ -40,9 +40,17 @@
 		where user_id = #{userId}
 	</delete>
 
-	<select id="selectUserManagementList" resultMap="user-resultmap">
-		select <include refid = "all-column"/>
-		from user_management
+	<select id="selectUserManagementList" parameterType = "map" resultMap="user-resultmap">
+		select user_id,password,user_name,phone_num,email,penalty_state
+		from(
+			select rownum rnum,user_id,password,user_name,phone_num,email,penalty_state
+			from(
+				select 	user_id,password,user_name,phone_num,email,penalty_state
+				from user_management) 
+			where rownum  &lt;= #{endIndex})
+		where rnum >= #{startIndex}
+		
+	
 	</select>
 
 	<select id = "selectUserManagementListById" resultMap = "user-resultmap" parameterType = "string">

@@ -10,7 +10,7 @@ a:visited{
 }
 a:hover{
 	/*마우스 포인터가 올라간 시점의 설정.*/
-	text-decoration: underline;
+	text-decoration: none;
 	color:red;
 }
 a:active{

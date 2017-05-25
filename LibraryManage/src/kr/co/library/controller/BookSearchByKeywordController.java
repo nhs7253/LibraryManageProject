@@ -1,12 +1,14 @@
 package kr.co.library.controller;
 
 import java.io.IOException;
+import java.util.Enumeration;
 import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import kr.co.library.service.BookService;
 import kr.co.library.service.impl.BookServiceImpl;
@@ -25,6 +27,9 @@ public class BookSearchByKeywordController extends HttpServlet {
 		int page = 1; //기본페이지가 1
 		String select = "";
 		String keyword = "";
+		
+		HttpSession session = request.getSession();
+		
 		
 		select = request.getParameter("select");
 		keyword = request.getParameter("keyword");
@@ -46,11 +51,16 @@ public class BookSearchByKeywordController extends HttpServlet {
 		
 
 		
+		
+		session.removeAttribute("retrunURL");
 		request.getRequestDispatcher("/forUser/book_list.jsp").forward(request, response);
+		
 		} catch(Exception e){
 			//에러페이지로 이동
 			e.printStackTrace();
 		}
+		
+		
 	}
 }
 

@@ -1,6 +1,8 @@
 package kr.co.library.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -34,8 +36,13 @@ public class UserManagementDaoImpl implements UserManagementDao{
 	}
 
 	@Override
-	public List<UserManagement> selectUserManagementList(SqlSession session) {
-		return session.selectList(namespace+"selectUserManagementList");
+	public List<Object> selectUserManagementPagingList(SqlSession session,int startIndex, int endIndex) {
+		
+		Map<String, String> input = new HashMap<String, String>();
+		input.put("startIndex",String.valueOf(startIndex));
+		input.put("endIndex",String.valueOf(endIndex));
+	
+		return session.selectList(namespace+"selectUserManagementList",input);
 	}
 
 	@Override

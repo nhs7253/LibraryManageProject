@@ -15,6 +15,12 @@ import kr.co.library.vo.UserManagement;
 public class UserCreateController extends HttpServlet{
 	
 	@Override
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
+		doPost(request, response);
+	}
+	
+
+	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		//요청파라미터 조회
@@ -43,7 +49,7 @@ public class UserCreateController extends HttpServlet{
 		request.setAttribute("result", message);
 	
 		//리다이렉트
-		response.sendRedirect("/userCreate.jsp");
+		response.sendRedirect("/LibraryManage/login/login_main");
 
 	
 	}

@@ -33,10 +33,11 @@ public interface UserManagementDao {
 	
 	/**
 	 * 모든 회원의 정보를 반환(title - ASC)
+	 * 페이징
 	 * @param session
 	 * @return
 	 */
-	List<UserManagement> selectUserManagementList(SqlSession session);
+	List<Object> selectUserManagementPagingList(SqlSession session, int startIndex, int endIndex);
 	
 	/**
 	 * 매개변수로 받은 userId와 일치하는 회원정보반환

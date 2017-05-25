@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,12 +10,14 @@
 <link rel="stylesheet" type="text/css" href="./css/view_table.css">
 
 
-
 </head>
 <body>
+	<%@include file="/forUser/user_menu.jsp"%>
 
 
 	<h2>도서 목록</h2>
+
+
 
 
 
@@ -43,7 +47,6 @@
 			<%-- ######################################################
 															조회된 item 출력 
 				###################################################### --%>
-
 			<c:forEach items="${requestScope.list }" var="book">
 
 				<tr>
@@ -59,15 +62,16 @@
 							</td>
 						</c:when>
 						<c:otherwise>
-						<td>
+							<td>
 
-							<form action="/LibraryManage/waitListInsert" method="post" style="float: none;">
-							<input type="hidden" name="userId">
-							<input type="hidden" name="bookId" value="bookId">
-							<input type="submit" value="대기신청">
-							</form>
-	
-						</td>
+								<form action="/LibraryManage/waitListInsert" method="post"
+									style="float: none;">
+									<input type="hidden" name="userId"> <input
+										type="hidden" name="bookId" value="bookId"> <input
+										type="submit" value="대기신청">
+								</form>
+
+							</td>
 						</c:otherwise>
 					</c:choose>
 				</tr>

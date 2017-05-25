@@ -128,7 +128,7 @@
 		AND w.wait_user = #{value}
 	</select>
 	
-	<select id="selectWaitListPagingJoinBookJoinUserByUserId" parameterType="string" resultMap="waitRank-resultmap">	
+	<select id="selectWaitListPagingJoinBookJoinUserByUserId" parameterType="map" resultMap="waitRank-resultmap">	
 			SELECT title, rank, bookId
 			FROM(
 				SELECT b_title title, w_rk rank, rownum rnum, w_book_id bookId
@@ -146,7 +146,7 @@
 			WHERE rnum >= #{startIndex}
 	</select>
 	
-	<select id="selectWaitListPagingJoinBookJoinUser" parameterType="string" resultMap="admin-waitRank-resultmap">	
+	<select id="selectWaitListPagingJoinBookJoinUser" parameterType="map" resultMap="admin-waitRank-resultmap">	
 			SELECT userId, name, bookId, title, rank
 			FROM(
 				SELECT b_book_id bookId, b_title title, w_rk rank, w_wait_user userId, rownum rnum, u_user_name name
