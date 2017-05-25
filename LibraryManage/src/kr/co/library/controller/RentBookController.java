@@ -33,8 +33,18 @@ public class RentBookController extends HttpServlet {
 			message = e.getMessage();
 		}
 		session.setAttribute("message", message);
+		
+		int page = 1; //기본페이지가 1
+		
+		String select = req.getParameter("select");
+		String keyword = req.getParameter("keyword");
 
-		resp.sendRedirect("/LibraryManage/rental/test.jsp");
+		try{
+			page = Integer.parseInt(req.getParameter("page")); //보려는 페이지번호 조회.
+		}catch (Exception e) {}
+		
+		session.setAttribute("check", "check");
+		resp.sendRedirect(String.format("/LibraryManage/BookSearchByKeyword?select=%s&keyword=%s&page=%d", select, keyword, page));
 		
 	}
 }

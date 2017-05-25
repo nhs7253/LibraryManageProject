@@ -31,7 +31,6 @@
                <td>${wait.title}</td>
                <td>${wait.rank}</td>
                <td>
-               	  <form action="waitListCancel">
 
                	  <form action="waitListCancel" method="post" style="float: none;">
 
