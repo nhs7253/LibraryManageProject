@@ -18,8 +18,8 @@
  <p>
  <button type="submit">로그인</button>
 <!--Exception 발생  -->
-<%--  <form action = "${initParam.rootPath }/userCreate" method = "post">
-	<input type="submit" value = "회원가입" /></form> --%>
+  <form action = "${initParam.rootPath }/userCreate" method = "post">
+	<input type="submit" value = "회원가입" /></form> 
 </form>
 </body>
 </html>
