@@ -31,7 +31,7 @@
                <td>${wait.rank}</td>
                <td>
                	  <form action="waitListCancel">
-                     <input type="hidden" name="userId" value="${requestScope.userId }">
+                     <input type="hidden" name="userId" value="${sessionScope.loginInfo.userId }">
                      <input type="hidden" name="bookId" value="${wait.bookId }">
                      <input type="submit" value="대기취소">
                   </form>
@@ -80,11 +80,10 @@
          <c:choose>
             <c:when test="${page != requestScope.pageBean.page}">
                <!-- 현재페이지가 아니라면 -->
-               <a
-                  href="${initParam.rootPath }/WaitList?page=${page}&userId=${requestScope.userId}">${page }&nbsp;&nbsp;</a>
+               <a href="${initParam.rootPath }/WaitList?page=${page}&userId=${requestScope.userId}">${page }&nbsp;&nbsp;</a>
             </c:when>
             <c:otherwise>
-            [${page}]&nbsp;&nbsp;
+            ${page}]&nbsp;&nbsp;
          </c:otherwise>
          </c:choose>
 
