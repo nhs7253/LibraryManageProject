@@ -34,6 +34,8 @@ public class UserCreateController extends HttpServlet{
 		//이메일
 		String email = request.getParameter("email");
 		//연체상태는 입력받으면 안되지.
+		
+	
 		String message = "회원가입이 완료되었습니다.";
 		//비지니스 로직
 		UserInfoService service = UserInfoServiceImpl.getInstance();
@@ -50,7 +52,14 @@ public class UserCreateController extends HttpServlet{
 	
 		//리다이렉트
 
+
+
+//		response.sendRedirect("/LibraryManage/login/login_main");
+
+//		response.sendRedirect("/LibraryManage/login/login_main.jsp");
+
 		response.sendRedirect("/LibraryManage/forUser/main.jsp");
+
 
 	}
 }

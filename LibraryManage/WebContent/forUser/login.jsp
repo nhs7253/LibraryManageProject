@@ -17,12 +17,14 @@
  PW : <input type="password" name="password"><br>
  <p>
  <button type="submit">로그인</button>
-</form>
+
+ </form>
 
 <!--Exception 발생  -->
   <form action = "${initParam.rootPath }/forUser/userCreate.jsp" method = "post">
 	<input type="submit" value = "회원가입" />
 </form> 
+
 
 
 </body>
