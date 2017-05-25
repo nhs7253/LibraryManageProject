@@ -101,7 +101,7 @@ public class RentalServiceImpl implements RentalService {
 				}
 			}
 
-			throw new FailRentException("대여실패(BookId, UserId 확인)", userId, bookId);
+			throw new FailRentException("대여실패(UserId 확인)", userId, bookId);
 		} finally {
 			session.close();
 		}
