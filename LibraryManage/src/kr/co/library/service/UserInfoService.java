@@ -2,8 +2,6 @@ package kr.co.library.service;
 
 import java.io.IOException;
 
-import org.apache.ibatis.session.SqlSession;
-
 import kr.co.library.exception.LoginFailException;
 import kr.co.library.exception.UserIDOverlapException;
 import kr.co.library.exception.UserNotFoundException;
@@ -52,12 +50,9 @@ public interface UserInfoService {
 	public void clearPenalty(String userId);
 	
 	/**
-	 * 아이디 인증 메소드
-	 * @param userId
-	 * @param password
-	 * @return
-	 * @throws LoginFailException
+	 * 로그인 인증
 	 */
-	public UserManagement authenticate(String userId, String password);
+	public UserManagement longinUser(String id, String password)throws LoginFailException;
+	
 	
 }
