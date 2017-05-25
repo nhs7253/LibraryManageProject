@@ -10,6 +10,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 
 import kr.co.library.dao.UserManagementDao;
 import kr.co.library.dao.impl.UserManagementDaoImpl;
+import kr.co.library.exception.LoginFailException;
 import kr.co.library.exception.UserIDOverlapException;
 import kr.co.library.exception.UserNotFoundException;
 import kr.co.library.service.UserInfoService;
@@ -106,22 +107,30 @@ public class UserInfoServiceImpl implements UserInfoService{
 			session.close();
 		}
 	}
-		/**
-		 * 인증 메세지
-		 */
-		@Override
-		public UserManagement authenticate(String userId, String password){
+	@Override
+	public UserManagement longinUser(String id, String password)throws LoginFailException {
 		SqlSession session = factory.openSession();
-			UserManagement user = UserManagementDaoImpl.getInstance().selectUserManagementListById(session, userId);
-			
-			if (user != null)
+		try{
+		UserManagement user = userDao.selectUserManagementListById(session, id);
+		if(id.equals(user.getUserId()))
+		{
+			if(password.equals(user.getPassword()))
 			{
-				if (password.equals(user.getPassword())) {// 비밀번호 조회
-					return user;
-				}
+				return user;//비밀번호 아이디 일치 user 리턴
 			}
-			return null;
+			else
+			{
+				throw new LoginFailException("패스워드 오류");
+			}
 		}
+
+		session.commit();
+		}finally{
+		session.close();
+		}
+		throw new LoginFailException("아이디가 없습니다.");
+	}
+
 		
 		@Override
 		public Map<String, Object> allUserList(int page) {
@@ -141,6 +150,9 @@ public class UserInfoServiceImpl implements UserInfoService{
 		}
 		
 		
+
 	
 }
+	
+
 		

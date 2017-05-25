@@ -19,45 +19,59 @@ import kr.co.library.vo.UserManagement;
 
 public class LoginUserController extends HttpServlet {
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException 
-	{
-		
-		
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
 		// id/password 조회
-		String id = req.getParameter("id");
-		String password = req.getParameter("password");
+		String mainId = req.getParameter("id");
+		String mainPassword = req.getParameter("password");
 		
-		UserInfoService service = UserInfoServiceImpl.getInstance();
-		AdministratorService adminService = AdministratorServiceImpl.getInstance();
+		System.out.println("mainId = " + mainId);
+		
+		System.out.println("mainPassword = " + mainPassword);
 
-	
-		
-	
-			//id,password조회
-			
-			UserManagement user = service.authenticate(id, password);
-			Administrator admin = adminService.selectAdministratorById(id);
-			
-				if(admin==null)//admin 조회
-				{
-					// 로그인성공 session 생성 ->
-				HttpSession session = req.getSession();
-				session.setAttribute("loginInfo", user);// 회원정보 관리
-				req.getRequestDispatcher("/forUser/main.jsp").forward(req, resp);
-				//req.setAttribute("errorMessage", e.getMessage());// Exception오류 메세지
-				req.getRequestDispatcher("/forUser/login.jsp").forward(req, resp);// 전달 경로
-				
-				}
-				else//user
-				{	
-					// 로그인성공 session 생성 ->
-					HttpSession session = req.getSession();
-					session.setAttribute("loginInfo", admin);//admin
-					req.getRequestDispatcher("/forAdmin/admin_index.jsp").forward(req, resp);
-					//req.setAttribute("errorMessage", e.getMessage());// Exception오류 메세지
-					req.getRequestDispatcher("/forUser/login.jsp").forward(req, resp);
-				}
+		UserInfoService service = UserInfoServiceImpl.getInstance();// 유저 인스턴스
+		AdministratorService adminService = AdministratorServiceImpl.getInstance();// 어드민
+																					// 인스턴스
+
+		UserManagement user = service.searchUser(mainId);
+		Administrator admin = adminService.selectAdministratorById(mainId);
+
+		// 유저,어드민 구별
+		if (user != null)// user
+		{
+			try {
+				HttpSession session = req.getSession();// session 생성
+				UserManagement userInfo = service.longinUser(mainId, mainPassword); // user에
+																					// 데이터를
+																					// 집어넣음
+				session.setAttribute("loginInfo", userInfo);// 회원정보를 담음
+				req.getRequestDispatcher("/userInfo.jsp").forward(req, resp);
+			} catch (LoginFailException e)// 에러메세지 전송
+			{
+				req.setAttribute("errorMessage", e.getMessage());// 응답하면 관리할
+																	// 필요없는 속성값
+				req.getRequestDispatcher("/forUser/login.jsp").forward(req, resp);// 전달
 			}
-			
+		}  
+		if (admin != null)// admin 조회
+		{
+			try {
+				// 로그인성공 session 생성 ->
+				HttpSession session = req.getSession();// session 생성
+				Administrator adminInfo = adminService.adminLoging(mainId, mainPassword);
+				session.setAttribute("adminInfo", adminInfo);// admin
+				req.getRequestDispatcher("/forUser/admin.jsp").forward(req, resp);// 전달
+			} catch (AdminNotFoundException e)// 에러메시지 전송
+			{
+				req.setAttribute("errorMessage", e.getMessage());// 응답하면 관리할
+																	// 필요없는 속성값
+				req.getRequestDispatcher("/forUser/login.jsp").forward(req, resp);// 전달
+			}
 		}
-
+		if(user==null && admin == null){
+			req.setAttribute("errorMessage", "아이디나 비밀번호를 다시 확인해주세요");// 응답하면 관리할
+			req.getRequestDispatcher("/forUser/login.jsp").forward(req, resp);// 전달
+		}
+		
+	}
+}
