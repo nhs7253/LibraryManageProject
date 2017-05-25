@@ -19,8 +19,7 @@
 			<td>전화번호</td>
 			<td>이메일</td>
 			<td>연체상태</td>
-		<!--<td>대출여부</td>
-			<td>대기여부</td> -->
+	
 		</tr>
 	</thead>
 	<tbody>
@@ -36,13 +35,7 @@
 				<td>${user.phoneNum}</td>
 				<td>${user.email}</td>
 				<td>${user.penaltyState}</td>
-				<td>
-					<%
-						
-					%>
-				</td>
-				<td></td>
-			</tr>
+			
 		</c:forEach>
 
 	</tbody>

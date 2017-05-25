@@ -20,7 +20,7 @@
 </form>
 
 <!--Exception 발생  -->
-  <form action = "${initParam.rootPath }/forUser/userCreate" method = "post">
+  <form action = "${initParam.rootPath }/forUser/userCreate.jsp" method = "post">
 	<input type="submit" value = "회원가입" />
 </form> 
 
