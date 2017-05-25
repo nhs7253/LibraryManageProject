@@ -24,7 +24,6 @@ public class WaitListAdminController extends HttpServlet {
 		//1. 요청파라미터 조회 + 검증
 		int page = 1; //기본페이지가 1
 		
-		System.out.println("aaaaaaaaaaaaa");
 
 		try{
 			page = Integer.parseInt(request.getParameter("page")); //보려는 페이지번호 조회.
