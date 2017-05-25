@@ -29,6 +29,7 @@ public class BookSearchByKeywordController extends HttpServlet {
 		String keyword = "";
 		
 		HttpSession session = request.getSession();
+		System.out.println(session.getAttribute("returnURL"));
 		
 		
 		select = request.getParameter("select");
