@@ -12,8 +12,12 @@
 </head>
 <%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
+	<c:if test="${sessionScope.rentMessage != null}">
+	<script>alert('${sessionScope.rentMessage}')</script>
+	<c:remove scope="session" var="rentMessage"/>
+	</c:if>
 	<h2>도서 목록</h2>
-	<form action="${initParam.rootPath }/BookSearchByKeywordForAdmin" method="post">
+	<form action="${initParam.rootPath }/BookSearchByKeyword" method="post">
 	<select name="select">
 	    <option value="title">제목</option>
 	    <option value="author">저자</option>
@@ -58,7 +62,7 @@
 							 <input	type="hidden" name="keyword" value="${param.keyword }">
 							 <input type="hidden" name="select" value="${param.select }">
 							 <input type="hidden" name="page" value="${param.page }">
-							<input type="submit" value ="대출" onclick="alert('대출완료');" /></form>
+							<input type="submit" value ="대출"/></form>
 						</c:when>
 						<c:otherwise>
 							

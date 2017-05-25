@@ -32,7 +32,7 @@ public class RentBookController extends HttpServlet {
 		} catch (FailWaitException e) {
 			message = e.getMessage();
 		}
-		session.setAttribute("message", message);
+		session.setAttribute("rentMessage", message);
 		
 		int page = 1; //기본페이지가 1
 		
