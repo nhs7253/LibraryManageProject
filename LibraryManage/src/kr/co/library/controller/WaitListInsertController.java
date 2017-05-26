@@ -29,7 +29,7 @@ public class WaitListInsertController extends HttpServlet {
 			} catch (LoginFailException lfe) {
 				message =lfe.getMessage();
 				session.setAttribute("loginFailMessage", message);
-				resp.sendRedirect("/LibraryManage/login/login_main.jsp");
+				resp.sendRedirect("/LibraryManage/forUser/login.jsp");
 			}
 		} else {
 			try {
