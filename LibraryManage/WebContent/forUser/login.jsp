@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -6,6 +7,7 @@
 <title>로그인</title>
 </head>
 <body>
+
 <style>
 .center{text-align : center;}
 #c{text-align : center;}
@@ -15,6 +17,15 @@
 <!-- C스타일 적용 (가운데로) -->
 <h1 class="center">로그인</h1>
 <p id="c"><%if(request.getAttribute("errorMessage")!=null){%>
+=======
+
+	<c:if test="${sessionScope.loginFailMessage != null}">
+	<script>alert('${sessionScope.loginFailMessage}')</script>
+	<c:remove scope="session" var="loginFaileMessage"/>
+	</c:if>
+	
+<h1>로그인</h1>
+<%if(request.getAttribute("errorMessage")!=null){%>
 <span style ="color:red;"><%=request.getAttribute("errorMessage") %></span>
 <%}%>
 </p>
