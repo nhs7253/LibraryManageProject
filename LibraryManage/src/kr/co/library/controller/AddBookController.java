@@ -37,6 +37,7 @@ public class AddBookController extends HttpServlet{
 			} catch (WrongBookException e) {
 				message = e.getMessage();
 			}
+			System.out.println(message);
 			session.setAttribute("addBookMessage", message);
 			resp.sendRedirect("/LibraryManage/forAdmin/book_manage.jsp");		
 		}else{

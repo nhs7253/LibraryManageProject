@@ -39,6 +39,7 @@ a:active {
 	<a href = "/LibraryManage/RentalListAdmin" >도서반납</a>
 	<a href = "/LibraryManage/allUser" >전체회원목록</a>
 	<a href = "/LibraryManage/WaitListAdmin" >도서예약현황</a>
+	<a href = "/LibraryManage/logout" >로그아웃</a>
 </div>
 <br />
 
