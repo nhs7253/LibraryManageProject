@@ -129,11 +129,17 @@ public class RentalServiceImpl implements RentalService {
 				bookDao.updateBook(session, new Book(book.getBookId(), book.getTitle(), book.getAuthor(),
 						book.getPublisher(), book.getPublishDate(), 'Y'));
 
+				
+				System.out.println("service - userId : " + userId);
+				
 				// 반납시간-대출시간이 2주일보다 길면 연체상태를 Y로 수정.1209600000밀리초
 				Date startTime = updateRental.getRentalStart();
 				Date EndTime = updateRental.getRentalEnd();
 				if (EndTime.getTime() - startTime.getTime() > 1209600000) {
 					UserManagement user = userDao.selectUserManagementListById(session, userId);
+					
+					System.out.println("service - returnBook : " + user);
+					
 					userDao.updateUserManagement(session, new UserManagement(user.getUserId(), user.getPassword(),
 							user.getUserName(), user.getPhoneNum(), user.getEmail(), 'Y'));
 					return userId + "님 연체";
