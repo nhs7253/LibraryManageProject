@@ -6,8 +6,59 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="./css/view_table.css">
+<!-- <link rel="stylesheet" type="text/css" href="./css/view_table.css"> -->
 
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<style type="text/css">
+table {
+    width: 100%;
+    border-collapse: collapse;
+	text-align: center;
+	border: 1px solid gray;
+	
+	table-layout:fixed
+}
+ th {
+    border-top: 3px solid #000000;
+    border-bottom: 3px solid #000000;
+	padding: 5px 10px;
+}
+
+td {
+    border-bottom: 1px solid #c8c8c8;
+	padding: 5px 10px;
+	
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+}
+
+form {
+	padding: 10px 5px;
+	float: right;
+}
+
+p, h2{
+	text-align:center;
+	vertical-align:middle;
+	.align-center { text-align: center; }
+}
+
+tr:hover{background-color:#f5f5f5}
+
+
+
+
+thead:hover{
+	/*마우스 포인터가 올라간 시점의 설정.*/
+	background-color:green;
+}
+
+
+
+}
+</style>
 
 </head>
 <body>
@@ -33,13 +84,12 @@
 	<table>
 		<thead>
 			<tr>
-				<td>책ID</td>
-				<td>제목</td>
-				<td>저자</td>
-				<td>출판사</td>
-				<td>발간일</td>
-				<td>대여가능여부</td>
-				<td>대여신청</td>
+				<td width = "36%"> 제목</td>
+				<td width = "27%">저자</td>
+				<td width = "14%">출판사</td>
+				<td width = "5%">발간일</td>
+				<td width = "10%">대여가능여부</td>
+				<td width = "8%">대여신청</td>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,9 +100,8 @@
 			<c:forEach items="${requestScope.list }" var="book">
 
 				<tr>
-					<td>${book.bookId}</td>
-					<td>${book.title}</td>
-					<td>${book.author}</td>
+					<td title='${book.title}'>${book.title}</td>
+					<td title='${book.author}'>${book.author}</td>
 					<td>${book.publisher}</td>
 					<td>${book.publishDate}</td>
 					<td>${book.rentalState}</td>
@@ -89,7 +138,6 @@
 			alert("관리자에게 대여하세요!!");
 		}
 	</script>
-
 
 
 
@@ -134,7 +182,7 @@
 				<c:when test="${page != requestScope.pageBean.page}">
 					<!-- 현재페이지가 아니라면 -->
 					<a
-						href="${initParam.rootPath }/BookSearchByKeyword?page=${page}&select=${requestScope.select}&keyword=${requestScope.keyword}">${page }&nbsp;&nbsp;</a>
+						href="${initParam.rootPath }/BookSearchByKeyword?page=${page}&select=${requestScope.select}&keyword=${requestScope.keyword}" class="w3-button w3-hover-green">${page }&nbsp;&nbsp;</a>
 				</c:when>
 				<c:otherwise>
 				[${page}]&nbsp;&nbsp;
