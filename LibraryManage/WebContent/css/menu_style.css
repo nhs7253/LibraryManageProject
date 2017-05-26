@@ -26,6 +26,6 @@ a:active {
 	color: blue;
 }
 
-p.userwelcome{
+span.userWelcome{
 	text-align: left;
-	}
+}

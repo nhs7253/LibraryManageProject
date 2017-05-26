@@ -46,7 +46,7 @@ form {
 			<input type="submit" value="검색"/>
 		</form> 
 
-		<br />
+		<br>
 		</div>
 	</body>
 </html>
