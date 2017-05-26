@@ -4,8 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="/LibraryManage/css/testStyle.css">
-
+<link rel="stylesheet" type="text/css" href="/LibraryManage/css/bookmanage_style.css">
 </head>
 <%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
@@ -18,10 +17,13 @@
     <li><a href="update_book.jsp">도서수정</a></li>
     <li><a href="delete_book.jsp">도서삭제</a></li>
   </ul>
-</nav>
-
+</nav> 
 <article>
-	<h2>도서관리페이지 입니다.</h2>
+	<h1>책삭제</h1>
+	<form action="/LibraryManage/deleteBook" method = "post">
+	책ID: <input type = "text" name = "bookId"><br>
+	<input type="submit" value="삭제" onclick="alert('${sessionScope.deleteBookMessage}');">
+	</form>
 </article>
 
 <footer>Copyright &copy LibraryManage.co.kr</footer>
