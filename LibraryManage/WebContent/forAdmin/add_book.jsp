@@ -12,13 +12,13 @@
 <header>
 	<h1>도서정보관리</h1>
 </header>
-<nav>
+<aside>
 	<ul>
-    <li><a href="add_book.jsp">도서등록</a></li>
-    <li><a href="update_book.jsp">도서수정</a></li>
-    <li><a href="delete_book.jsp">도서삭제</a></li>
+    <li><a class="bookmenu" href="add_book.jsp">도서등록</a></li>
+    <li><a class="bookmenu" href="update_book.jsp">도서수정</a></li>
+    <li><a class="bookmenu" href="delete_book.jsp">도서삭제</a></li>
   </ul>
-</nav>
+</aside>
 <article>
 	<form action="/LibraryManage/addBook" method = "post">
       <br>

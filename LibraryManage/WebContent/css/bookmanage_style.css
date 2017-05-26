@@ -20,21 +20,19 @@ footer {
     text-align: center;
 }
 
-nav {
+aside {
     float: left;
     max-width: 160px;
     margin: 0;
     padding: 1em;
 }
 
-nav ul {
+aside ul li.bookmenu {
     list-style-type: none;
     padding: 0;
-}
-   
-nav ul a {
     text-decoration: none;
 }
+   
 
 article {
     margin-left: 170px;
