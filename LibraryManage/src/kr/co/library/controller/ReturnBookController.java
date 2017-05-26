@@ -39,7 +39,7 @@ public class ReturnBookController extends HttpServlet{
 			message = e.getMessage();
 		}
 
-		session.setAttribute("returnMessage", message);
+		session.setAttribute("returnBookMessage", message);
 		
 		resp.sendRedirect("/LibraryManage/RentalListAdmin");
 

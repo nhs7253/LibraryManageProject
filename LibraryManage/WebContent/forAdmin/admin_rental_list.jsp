@@ -48,7 +48,8 @@
 				<td>${requestScope.name[Status.index]}</td>
 				<td>${rent.rentalStart}</td>
 				<td>${requestScope.overdue[Status.index]}</td>
-				<td><form action = "${initParam.rootPath }/returnBook?rentalNo=${rent.rentalNo}" method = "post">
+				<td>
+				<form action = "${initParam.rootPath }/returnBook?rentalNo=${rent.rentalNo}" method = "post">
 				<input type="submit" value = "반납" onclick="alert('${sessionScope.returnBookMessage}');" /></form></td>
 			</tr>
 		</c:forEach>
