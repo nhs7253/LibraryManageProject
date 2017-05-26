@@ -1,37 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@taglib prefix = "c" uri = "http://java.sun.com/jsp/jstl/core" %> 
-<<<<<<< HEAD
-<link rel="stylesheet" type="text/css" href="/LibraryManage/css/menu_style.css">
-=======
 
-<style type="text/css">
- 
- div{
- 	float: right;
- }
- 
-a:link{
-	/*방문하지 않은 링크 설정.*/
-	text-decoration:none; /*밑줄 안나오도록 처리.*/
-	color:blue;
-}
-a:visited{
-	/*방문한 링크 설정*/
-	text-decoration: none;
-	color:blue;
-}
-a:hover{
-	/*마우스 포인터가 올라간 시점의 설정.*/
-	text-decoration: none;
-	color:red;
-}
-a:active{
-	/*마우스를 링크에 클릭하는 시점*/       
-	color:green;
-}
- 
-</style>
->>>>>>> branch 'master' of https://github.com/nhs7253/LibraryManageProject.git
+<link rel="stylesheet" type="text/css" href="/LibraryManage/css/menu_style.css">
+
 
 <c:if test="${empty sessionScope.loginInfo}">
 	<c:set scope="session" var="returnURL" value='<%=  request.getAttribute( "javax.servlet.forward.request_uri" )+"?page="+request.getParameter("page")+"&select="+request.getAttribute("select")+"&keyword="+request.getAttribute("keyword")%>'/>
