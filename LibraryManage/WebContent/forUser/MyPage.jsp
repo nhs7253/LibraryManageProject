@@ -44,7 +44,7 @@
 			</tr>
 	</tbody>
 </table>
-<a href = "${initParam.rootPath }/UserUpDate">수정</a>
+<a href = /LibraryManage/forUser/userUpdate.jsp>수정</a>
 
 <!-- 회원 탈퇴 버튼 -> Y/N 확인 알람 -->
 <script type="text/javascript">
