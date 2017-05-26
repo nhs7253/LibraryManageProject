@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -13,11 +12,12 @@
 </head>
 <body>
 	<%@include file="/forUser/user_menu.jsp"%>
-
+	<c:if test="${sessionScope.waitMessage != null}">
+	<script>alert('${sessionScope.waitMessage}')</script>
+	<c:remove scope="session" var="waitMessage"/>
+	</c:if>
 
 	<h2>도서 목록</h2>
-
-
 
 
 
@@ -66,8 +66,12 @@
 
 								<form action="/LibraryManage/waitListInsert" method="post"
 									style="float: none;">
-									<input type="hidden" name="userId" value="${sessionScope.loginInfo.userId }"> <input
-										type="hidden" name="bookId" value="${book.bookId}"> <input
+									<input type="hidden" name="userId"
+										value="${sessionScope.loginInfo.userId }">
+										<input type="hidden" name="bookId" value="${book.bookId }"> <input
+										type="hidden" name="keyword" value="${param.keyword }"><input
+										type="hidden" name="select" value="${param.select }"><input
+										type="hidden" name="page" value="${param.page }"> <input
 										type="submit" value="대기신청">
 								</form>
 

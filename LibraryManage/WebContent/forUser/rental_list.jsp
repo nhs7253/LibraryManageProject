@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,8 +38,8 @@
 				<td>${rent.book.author}</td>
 				<td>${rent.book.publisher}</td>
 				<td>${rent.book.publishDate}</td>
-				<td>${rent.rentalStart}</td>
-				<td>${rent.rentalEnd}</td>
+				<td><fmt:formatDate value="${rent.rentalStart}" pattern="yyyy-MM-dd"/></td>
+				<td><fmt:formatDate value="${rent.rentalEnd}" pattern="yyyy-MM-dd"/></td>
 				<td>${requestScope.overdue[Status.index]}</td>
 			</tr>
 		</c:forEach>

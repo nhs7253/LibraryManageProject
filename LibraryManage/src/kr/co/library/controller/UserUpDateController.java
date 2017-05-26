@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import kr.co.library.exception.UserNotFoundException;
 import kr.co.library.service.impl.UserInfoServiceImpl;
 import kr.co.library.vo.UserManagement;
@@ -28,7 +29,7 @@ public class UserUpDateController extends HttpServlet
 		String phoneNum =req.getParameter("phoneNum");
 		String email =req.getParameter("email");
 		
-		System.out.println("phoneNum = "  + phoneNum);
+		
 		
 		UserManagement user = new UserManagement(
 					((UserManagement)session.getAttribute("loginInfo")).getUserId(),
@@ -38,7 +39,7 @@ public class UserUpDateController extends HttpServlet
 					email,
 					((UserManagement)session.getAttribute("loginInfo")).getPenaltyState()
 				);
-		System.out.println("user"  + user);
+		
 		
 		try
 		{

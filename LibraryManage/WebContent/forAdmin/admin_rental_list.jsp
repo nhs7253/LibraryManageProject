@@ -49,7 +49,7 @@
 				<td>${rent.rentalStart}</td>
 				<td>${requestScope.overdue[Status.index]}</td>
 				<td><form action = "${initParam.rootPath }/returnBook?rentalNo=${rent.rentalNo}" method = "post">
-				<input type="submit" value = "반납" onclick="alert('반납완료');" /></form></td>
+				<input type="submit" value = "반납" onclick="alert('${sessionScope.returnBookMessage}');" /></form></td>
 			</tr>
 		</c:forEach>
 		
@@ -79,9 +79,6 @@
 			◀
 		</c:otherwise>
 	</c:choose>
-	
-	
-	
 	
 	
 	<!-- 

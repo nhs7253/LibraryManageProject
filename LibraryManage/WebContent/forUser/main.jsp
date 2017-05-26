@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
@@ -22,8 +23,14 @@ form {
 </head>
 <%@include file = "/forUser/user_menu.jsp" %>
 	<body>
+ 		<c:if test="${sessionScope.successMessage != null}">
+   <script>alert('${sessionScope.successMessage}')</script>
+   <c:remove scope="session" var="successMessage"/>
+   </c:if>
 		<h2>도서검색</h2>
-		
+
+		<h2>메인sdsd ${sessionScope.successMessage }dddd</h2>
+
 		<form action="${initParam.rootPath }/BookSearchByKeyword" method="post">
 		<select name="select">
 			<option value="title">제목</option>

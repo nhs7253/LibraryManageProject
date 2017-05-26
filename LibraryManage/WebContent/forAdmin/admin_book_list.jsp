@@ -12,6 +12,10 @@
 </head>
 <%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
+	<c:if test="${sessionScope.rentMessage != null}">
+	<script>alert('${sessionScope.rentMessage}')</script>
+	<c:remove scope="session" var="rentMessage"/>
+	</c:if>
 	<h2>도서 목록</h2>
 	<form action="${initParam.rootPath }/BookSearchByKeyword" method="post">
 	<select name="select">
@@ -31,7 +35,7 @@
 				<td>저자</td>
 				<td>출판사</td>
 				<td>발간일</td>
-				<td>대여여부</td>
+				<td>대출여부</td>
 				<td>버튼</td>
 			</tr>
 		</thead>
@@ -52,12 +56,18 @@
 					<td>
 					<c:choose>
 						<c:when test = "${book.rentalState eq 'Y'.charAt(0)}">
-							<form action ="${initParam.rootPath}/rentbook"  method = "post">
-							<input type="submit" value = "대출" onclick="alert('대출완료');" /></form>
+							<form action ="rentBook"  method = "post" style="float: none;">
+							<input type="text" name="userId" placeholder="ID을 입력하세요.">
+							<input type="hidden" name="bookId" value="${book.bookId }">
+							 <input	type="hidden" name="keyword" value="${param.keyword }">
+							 <input type="hidden" name="select" value="${param.select }">
+							 <input type="hidden" name="page" value="${param.page }">
+							<input type="submit" value ="대출"/></form>
 						</c:when>
 						<c:otherwise>
-							<form action ="${initParam.rootPath}/waitListInsert"  method = "post">
-							<input type="submit" value = "예약" onclick="alert('예약완료');" /></form>
+							
+							<input type="submit" value = "대출중" onclick="alert('대출불가능');" style="float: none;"/>
+							
 						</c:otherwise>
 					</c:choose>
 					</td>

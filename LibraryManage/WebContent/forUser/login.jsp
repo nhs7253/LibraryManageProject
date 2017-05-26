@@ -4,6 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <title>로그인</title>
+<link rel="stylesheet" type="text/css" href="./css/view_table.css">
 </head>
 <body>
 
@@ -17,13 +18,14 @@
  PW : <input type="password" name="password"><br>
 <br>
  <button type="submit">로그인</button>
-
  </form>
 
 <!--Exception 발생  -->
   <form action = "${initParam.rootPath }/forUser/userCreate.jsp" method = "post">
-	<input type="submit" value = "회원가입"/>
+
+<input type="submit" value = "회원가입"/>
   </form> 
+
 
 
 

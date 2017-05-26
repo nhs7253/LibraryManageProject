@@ -4,11 +4,9 @@ import java.util.Map;
 
 import org.apache.ibatis.session.SqlSession;
 
-import org.apache.ibatis.session.SqlSession;
-
 import kr.co.library.exception.FailRentException;
+import kr.co.library.exception.FailReturnException;
 import kr.co.library.exception.FailWaitException;
-import kr.co.library.exception.NoWaitException;
 
 public interface RentalService {
 
@@ -43,7 +41,7 @@ public interface RentalService {
 	 * @param userId
 	 * @param rentalNo
 	 */
-	public void returnBook(String userId,int rentalNo) throws FailRentException, FailWaitException;
+	public String returnBook(String userId,int rentalNo) throws FailReturnException;
 	
 	/**
 	 * 대기처리

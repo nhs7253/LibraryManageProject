@@ -8,8 +8,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.catalina.core.ApplicationContext;
-
 import kr.co.library.exception.AdminNotFoundException;
 import kr.co.library.exception.LoginFailException;
 import kr.co.library.service.AdministratorService;
@@ -53,7 +51,6 @@ public class LoginController extends HttpServlet {
 																					// 집어넣음
 				session.setAttribute("loginInfo", userInfo);// 회원정보를 담음
 				
-
 				session.removeAttribute("returnURL");
 	
 				req.getRequestDispatcher(returnURL.replace(getServletContext().getInitParameter("rootPath"),"")).forward(req, resp);
@@ -75,7 +72,7 @@ public class LoginController extends HttpServlet {
 				
 				session.removeAttribute("returnURL");
 				
-				req.getRequestDispatcher("/forUser/admin.jsp").forward(req, resp);// 전달
+				req.getRequestDispatcher("/forAdmin/admin_index.jsp").forward(req, resp);// 전달
 			} catch (AdminNotFoundException e)// 에러메시지 전송
 			{
 				req.setAttribute("errorMessage", e.getMessage());// 응답하면 관리할
