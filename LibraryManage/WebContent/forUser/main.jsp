@@ -15,10 +15,17 @@ h2{
 form {
 	margin: auto;
 	vertical-align: middle; 
+	
 }
- 
-</style>
+.center {
+    margin: auto;
+    width: 60%;
+    top:400px;
+    position:absoulte;
 
+}
+  
+</style>
 </head>
 <%@include file = "/forUser/user_menu.jsp" %>
 	<body>
@@ -26,8 +33,9 @@ form {
 	<script>alert('${sessionScope.waitMessage}')</script>
 	<c:remove scope="session" var="waitMessage"/>
 </c:if>
-		<h2>메인</h2>
-
+	
+	<div class="center" style="position: relative; top: 50px;">
+	<img src="/LibraryManage/img/main.jpg" width="290px" height="100px">
 		<form action="${initParam.rootPath }/BookSearchByKeyword" method="post">
 		<select name="select">
 			<option value="title">제목</option>
@@ -39,5 +47,6 @@ form {
 		</form> 
 
 		<br />
+		</div>
 	</body>
 </html>
