@@ -6,7 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href="./css/view_table.css">
+
+<link rel="stylesheet" type="text/css" href="/LibraryManage/css/view_table.css">
+<!-- 
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+ -->
+
 
 
 </head>
@@ -30,16 +35,15 @@
 	</form>
 	<br>
 
-	<table>
+	<table class="w3-table-all">
 		<thead>
-			<tr>
-				<td>책ID</td>
-				<td>제목</td>
-				<td>저자</td>
-				<td>출판사</td>
-				<td>발간일</td>
-				<td>대여가능여부</td>
-				<td>대여신청</td>
+			<tr class="w3-blue">
+				<th width = "36%"> 제목</th>
+				<th width = "27%">저자</th>
+				<th width = "14%">출판사</th>
+				<th width = "5%">발간일</th>
+				<th width = "10%">대여가능여부</th>
+				<th width = "8%">대여신청</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -50,9 +54,8 @@
 			<c:forEach items="${requestScope.list }" var="book">
 
 				<tr>
-					<td>${book.bookId}</td>
-					<td>${book.title}</td>
-					<td>${book.author}</td>
+					<td title='${book.title}'>${book.title}</td>
+					<td title='${book.author}'>${book.author}</td>
 					<td>${book.publisher}</td>
 					<td>${book.publishDate}</td>
 					<td>${book.rentalState}</td>
@@ -89,7 +92,6 @@
 			alert("관리자에게 대여하세요!!");
 		}
 	</script>
-
 
 
 

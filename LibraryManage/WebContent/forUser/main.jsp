@@ -29,7 +29,7 @@ form {
    </c:if>
 		<h2>도서검색</h2>
 
-		<h2>메인sdsd ${sessionScope.successMessage }dddd</h2>
+		<h2>메인 </h2>
 
 		<form action="${initParam.rootPath }/BookSearchByKeyword" method="post">
 		<select name="select">

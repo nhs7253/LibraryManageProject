@@ -21,7 +21,7 @@ public class BookSearchByKeywordController extends HttpServlet {
 	}
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
-		
+		request.setCharacterEncoding("UTF-8");
 		try{
 		//1. 요청파라미터 조회 + 검증
 		int page = 1; //기본페이지가 1

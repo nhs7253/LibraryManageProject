@@ -17,17 +17,16 @@
 
 <h2>마이페이지</h2>
 
-<table>
+<table border='1' width="500px" >
 	<thead>
 		<tr>
-			<td>회원ID : <%=((UserManagement)session.getAttribute("loginInfo")).getUserId() %></td>
-			<td>비밀번호 : <%=((UserManagement)session.getAttribute("loginInfo")).getPassword() %></td>
-			<td>이름 : <%=((UserManagement)session.getAttribute("loginInfo")).getUserName() %></td>
-			<td>전화번호 : <%=((UserManagement)session.getAttribute("loginInfo")).getPhoneNum() %></td>
-			<td>이메일 : <%=((UserManagement)session.getAttribute("loginInfo")).getEmail() %></td>
-			<td>연체상태 : <%=((UserManagement)session.getAttribute("loginInfo")).getPenaltyState() %></td>
-			<td></td>
-			<td></td>
+			<td>회원ID</td>
+			<td>비밀번호</td>
+			<td>이름</td>
+			<td>전화번호</td>
+			<td>이메일</td>  
+			<td>연체상태</td>
+		
 		</tr>
 	</thead>
 	<tbody>
@@ -36,21 +35,28 @@
 														조회된 item 출력 
 			###################################################### --%>
 		
-		<c:forEach items="${sessionScope.userInfo }" var="user" varStatus="Status">
 			<tr>
-				<td>${user.userId}</td>
-				<td>${user.password}</td>
-				<td>${user.userName}</td>
-				<td>${user.phoneNum}</td>
-				<td>${user.email}</td>
-				<td>${user.penaltyState}</td>
-				<td><a href = "${initParam.rootPath }/UserUpDate"/>수정</td>
-				<td><a href = "${initParam.rootPath }/DeleteUser"/>탈퇴</td>
+				<td><%=((UserManagement)session.getAttribute("loginInfo")).getUserId() %></td>
+				<td><%=((UserManagement)session.getAttribute("loginInfo")).getPassword() %></td>
+				<td><%=((UserManagement)session.getAttribute("loginInfo")).getUserName() %></td>
+				<td><%=((UserManagement)session.getAttribute("loginInfo")).getPhoneNum() %></td>
+				<td><%=((UserManagement)session.getAttribute("loginInfo")).getEmail() %></td>
+				<td><%=((UserManagement)session.getAttribute("loginInfo")).getPenaltyState() %></td>
 			</tr>
-		</c:forEach>
 	</tbody>
 </table>
-<a href = "">회원탈퇴</a>
+<a href = /LibraryManage/forUser/userUpdate.jsp>수정</a>
+
+<!-- 회원 탈퇴 버튼 -> Y/N 확인 알람 -->
+<script type="text/javascript">
+function button_event(){
+	if(confirm("회원을 탈퇴하시 겠습니까?")){//확인
+		location.href="/LibraryManage/DeleteUser";
+	}
+}
+</script>
+<input type="button" value="삭제하기" onclick="button_event();">
+
 <a href = "${initParam.rootPath }/RentalList">나의 대출목록</a>
 <a href ="${initParam.rootPath }/WaitList">나의 대기목록</a>
 
