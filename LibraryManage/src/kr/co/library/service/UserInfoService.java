@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Map;
 
 import kr.co.library.exception.LoginFailException;
-import kr.co.library.exception.UserIDOverlapException;
+import kr.co.library.exception.FailMemberRegistException;
 import kr.co.library.exception.UserNotFoundException;
 import kr.co.library.vo.UserManagement;
 
@@ -15,10 +15,10 @@ public interface UserInfoService {
 	 * User객체를 받아서 새 회원을 가입처리
 	 * @param user
 	 * @return
-	 * @throws UserIDOverlapException
+	 * @throws FailMemberRegistException
 	 * @throws IOException
 	 */
-	public void createUser(UserManagement user) throws UserIDOverlapException, IOException;
+	public void createUser(UserManagement user) throws FailMemberRegistException, IOException;
 	
 	/**
 	 * 수정된 User객체를 받아서 회원정보를 수정. 

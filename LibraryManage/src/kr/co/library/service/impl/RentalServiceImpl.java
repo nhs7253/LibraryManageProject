@@ -145,8 +145,8 @@ public class RentalServiceImpl implements RentalService {
 							user.getUserName(), user.getPhoneNum(), user.getEmail(), 'Y'));
 					return userId + "님 연체";
 				}
-				session.commit();
 
+				session.commit();
 				MailSender.getInstance().sendMail(waitDao.selectWaitListJoinBookJoinUserByBookId(session, bookId).get(0).getUserManagement().getEmail(), book.getTitle());
 				return "반납완료";
 			} else {
