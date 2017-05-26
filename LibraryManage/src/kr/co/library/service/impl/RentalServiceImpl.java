@@ -23,6 +23,7 @@ import kr.co.library.exception.FailRentException;
 import kr.co.library.exception.FailReturnException;
 import kr.co.library.exception.FailWaitException;
 import kr.co.library.service.RentalService;
+import kr.co.library.util.MailSender;
 import kr.co.library.util.PagingBean;
 import kr.co.library.util.SqlSessionFactoryManager;
 import kr.co.library.vo.Book;
@@ -144,7 +145,9 @@ public class RentalServiceImpl implements RentalService {
 							user.getUserName(), user.getPhoneNum(), user.getEmail(), 'Y'));
 					return userId + "님 연체";
 				}
+
 				session.commit();
+				MailSender.getInstance().sendMail(waitDao.selectWaitListJoinBookJoinUserByBookId(session, bookId).get(0).getUserManagement().getEmail(), book.getTitle());
 				return "반납완료";
 			} else {
 				// 이미 반납된것.
