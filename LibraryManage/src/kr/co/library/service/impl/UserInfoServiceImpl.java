@@ -140,7 +140,9 @@ public class UserInfoServiceImpl implements UserInfoService{
 				
 				int totalCount = userDao.selectUserManagementCount(session);
 				PagingBean pageBean = new PagingBean(totalCount,page);
-				List<Object> list = userDao.selectUserManagementPagingList(session,pageBean.getBeginItemInPage(),pageBean.getEndPage());
+				
+				List<Object> list = userDao.selectUserManagementPagingList(session,pageBean.getBeginItemInPage(),pageBean.getEndItemInPage());
+				
 				map.put("pageBean", pageBean);
 				map.put("list", list);
 			}finally{

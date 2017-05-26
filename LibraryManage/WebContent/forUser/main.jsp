@@ -26,7 +26,7 @@ form {
 	<script>alert('${sessionScope.waitMessage}')</script>
 	<c:remove scope="session" var="waitMessage"/>
 </c:if>
-		<h2>도서검색</h2>
+		<h2>메인</h2>
 
 		<form action="${initParam.rootPath }/BookSearchByKeyword" method="post">
 		<select name="select">

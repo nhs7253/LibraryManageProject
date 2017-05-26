@@ -2,15 +2,15 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link rel="stylesheet" type="text/css" href="./css/view_table.css">
 </head>
 <%@include file = "/forUser/user_menu.jsp" %>
-<hr>
+
 <body>
 <h2>회원정보수정 page</h2>
 <hr>

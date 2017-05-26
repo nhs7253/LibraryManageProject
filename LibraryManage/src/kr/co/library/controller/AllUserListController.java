@@ -33,6 +33,8 @@ public class AllUserListController extends HttpServlet{
 		UserInfoService service = UserInfoServiceImpl.getInstance();
 		Map<String, Object> map = service.allUserList(page);
 		
+		System.out.println("test : "+ map.get("list"));
+		
 		//3. 결과 응답 - View 호출
 		req.setAttribute("list", map.get("list"));
 		req.setAttribute("pageBean", map.get("pageBean"));

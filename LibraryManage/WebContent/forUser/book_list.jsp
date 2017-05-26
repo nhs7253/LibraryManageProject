@@ -21,8 +21,6 @@
 
 
 
-
-
 	<form action="${initParam.rootPath }/BookSearchByKeyword" method="post">
 		<select name="select">
 			<option value="title">제목</option>
