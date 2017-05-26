@@ -30,9 +30,11 @@ public class LoginController extends HttpServlet {
 		
 		
 		String returnURL = (String) session.getAttribute("returnURL");
-		if(returnURL==null || returnURL.startsWith("null")){
+		if(returnURL==null || returnURL.startsWith("null") || returnURL.contains("logout")){
 			returnURL = "/forUser/main.jsp";
 		}
+		
+		System.out.println("LoginController - " + returnURL);
 
 		UserInfoService service = UserInfoServiceImpl.getInstance();// 유저 인스턴스
 		AdministratorService adminService = AdministratorServiceImpl.getInstance();// 어드민
@@ -72,7 +74,7 @@ public class LoginController extends HttpServlet {
 				
 				session.removeAttribute("returnURL");
 				
-				req.getRequestDispatcher("/forAdmin/admin_index.jsp").forward(req, resp);// 전달
+				req.getRequestDispatcher("/forAdmin/admin_main_menu.jsp").forward(req, resp);// 전달
 			} catch (AdminNotFoundException e)// 에러메시지 전송
 			{
 				req.setAttribute("errorMessage", e.getMessage());// 응답하면 관리할
