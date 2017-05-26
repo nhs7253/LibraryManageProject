@@ -145,7 +145,7 @@ public class RentalServiceImpl implements RentalService {
 					return userId + "님 연체";
 				}
 				session.commit();
-				return userId + "님 반납완료";
+				return "반납완료";
 			} else {
 				// 이미 반납된것.
 				throw new FailReturnException("이미 반납된 책입니다", userId);
