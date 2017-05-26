@@ -6,23 +6,30 @@
 <title>로그인</title>
 </head>
 <body>
-
-<h1>로그인</h1>
-<%if(request.getAttribute("errorMessage")!=null){%>
+<style>
+.center{text-align : center;}
+#c{text-align : center;}
+#b{ margin-left: 40px;}
+</style>
+<p>
+<!-- C스타일 적용 (가운데로) -->
+<h1 class="center">로그인</h1>
+<p id="c"><%if(request.getAttribute("errorMessage")!=null){%>
 <span style ="color:red;"><%=request.getAttribute("errorMessage") %></span>
 <%}%>
-<form action="/LibraryManage/login" method="post">
+</p>
 
+<form action="/LibraryManage/login" method="post">
+<p id="c">
  ID : <input type="text" name="id"><br>
  PW : <input type="password" name="password"><br>
- <p>
- <button type="submit">로그인</button>
-
+ </p>
+ <p id="b"><button type="submit">로그인</button></p>
  </form>
-<p>
+
 <!--Exception 발생  -->
   <form action = "${initParam.rootPath }/forUser/userCreate.jsp" method = "post">
-	<input type="submit" value = "회원가입" />
+  <button type="submit">회원가입</button>
 </form> 
 
 
