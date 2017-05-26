@@ -5,59 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<!--  <link rel="stylesheet" type="text/css" href ="./css/view_table.css"> -->
+
+
+<link rel="stylesheet" type="text/css" href="/LibraryManage/css/view_table.css">
+<!-- 
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
-
-<style type="text/css">
-table {
-    width: 100%;
-    border-collapse: collapse;
-	text-align: center;
-	border: 1px solid gray;
-	
-	table-layout:fixed
-}
- th {
-    border-top: 3px solid #000000;
-    border-bottom: 3px solid #000000;
-	padding: 5px 10px;
-}
-
-td {
-    border-bottom: 1px solid #c8c8c8;
-	padding: 5px 10px;
-	
-	overflow:hidden;
-	white-space:nowrap;
-	text-overflow:ellipsis;
-}
-
-form {
-	padding: 10px 5px;
-	float: right;
-}
-
-p, h2{
-	text-align:center;
-	vertical-align:middle;
-	.align-center { text-align: center; }
-}
-
-tr:hover{background-color:#f5f5f5}
-
-
-
-
-thead:hover{
-	/*마우스 포인터가 올라간 시점의 설정.*/
-	background-color:green;
-}
-
-
-
-}
-</style>
-
+ -->
+ 
 </head>
 <%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
@@ -76,16 +30,16 @@ thead:hover{
 		<input type="submit" value="검색"/>
 	</form> <br>
 	
-	<table>
+	<table class="w3-table-all">
 		<thead>
-			<tr>
-				<td width = "10%">책ID</td>
-				<td width = "30%">제목</td>
-				<td width = "20%">저자</td>
-				<td width = "10%">출판사</td>
-				<td width = "5%">발간일</td>
-				<td width = "5%">대출여부</td>
-				<td width = "20%">버튼</td>
+			<tr class="w3-blue">
+				<th width = "9%">책ID</th>
+				<th width = "30%">제목</th>
+				<th width = "20%">저자</th>
+				<th width = "10%">출판사</th>
+				<th width = "5%">발간일</th>
+				<th width = "7%">대출여부</th>
+				<th width = "23%">버튼</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -161,7 +115,7 @@ thead:hover{
 		<c:choose>
 			<c:when test="${page != requestScope.pageBean.page}">
 				<!-- 현재페이지가 아니라면 -->
-				<a href="${initParam.rootPath }/BookSearchByKeyword?page=${page}&select=${requestScope.select}&keyword=${requestScope.keyword}" class="w3-button w3-hover-green">${page }&nbsp;&nbsp;</a>
+				<a href="${initParam.rootPath }/BookSearchByKeyword?page=${page}&select=${requestScope.select}&keyword=${requestScope.keyword}" >${page }&nbsp;&nbsp;</a>
 			</c:when>
 			<c:otherwise>
 				[${page}]&nbsp;&nbsp;

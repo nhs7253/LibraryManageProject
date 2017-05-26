@@ -5,20 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href ="./css/view_table.css">
+<link rel="stylesheet" type="text/css" href ="/LibraryManage/css/view_table.css">
 </head>
 <%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
 <h2>전체 회원 목록</h2>
 
-<table>
+<table class="w3-table-all">
 	<thead>
-		<tr>
-			<td>회원ID</td>
-			<td>이름</td>
-			<td>전화번호</td>
-			<td>이메일</td>
-			<td>연체상태</td>
+		<tr class="w3-blue">
+			<th>회원ID</th>
+			<th>이름</th>
+			<th>전화번호</th>
+			<th>이메일</th>
+			<th>연체상태</th>
 	
 		</tr>
 	</thead>

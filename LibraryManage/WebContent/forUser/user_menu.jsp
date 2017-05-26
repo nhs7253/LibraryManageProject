@@ -7,15 +7,15 @@
  	float: right;
  }
  
- a:link{
+a:link{
 	/*방문하지 않은 링크 설정.*/
 	text-decoration:none; /*밑줄 안나오도록 처리.*/
-	color:green;
+	color:blue;
 }
 a:visited{
 	/*방문한 링크 설정*/
 	text-decoration: none;
-	color:green;
+	color:blue;
 }
 a:hover{
 	/*마우스 포인터가 올라간 시점의 설정.*/
@@ -24,7 +24,7 @@ a:hover{
 }
 a:active{
 	/*마우스를 링크에 클릭하는 시점*/       
-	color:blue;
+	color:green;
 }
  
 </style>
