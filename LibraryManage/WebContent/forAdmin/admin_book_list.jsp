@@ -5,6 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<<<<<<< HEAD
+<link rel="stylesheet" type="text/css" href ="/LibraryManage/css/view_table.css">
+=======
 
 
 <link rel="stylesheet" type="text/css" href="/LibraryManage/css/view_table.css">
@@ -12,6 +15,7 @@
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
  -->
  
+>>>>>>> branch 'master' of https://github.com/nhs7253/LibraryManageProject.git
 </head>
 <%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>

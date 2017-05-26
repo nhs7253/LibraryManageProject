@@ -1,0 +1,41 @@
+	p.adminWelcome{
+	text-align: center;
+	}
+	
+   nav {
+       height: 30px;
+       width: 1000px;
+       margin: 0 auto;
+   }
+   
+   nav ul li {
+      list-style: none;
+      color: white;
+      background-color: #464646;
+      line-height: 30px;
+      float: left;
+      vertical-align: middle;
+      text-align: center;
+   }
+   
+   nav .menuLink {
+      text-decoration:none;
+      color: white;
+      display: block;
+      width: 150px;
+      font-size: 12px;
+      font-weight: bold;
+      font-family: "Trebuchet MS", Dotum, Arial;
+   }
+   
+   nav .menuLink:hover {
+      color : red;
+      background-color: #4d4d4d;
+   }
+   img{
+   	display: block;
+   	margin-left: auto;
+   	margin-right: auto;
+   	position:relative;
+   	top: 100px;
+   }
