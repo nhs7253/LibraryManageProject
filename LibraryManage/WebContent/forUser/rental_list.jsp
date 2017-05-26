@@ -12,17 +12,17 @@
 <body>
 <h2>대여 목록</h2>
 
-<table>
+<table class="w3-table-all">
 	<thead>
-		<tr>
-			<td>책ID</td>
-			<td>제목</td>
-			<td>저자</td>
-			<td>출판사</td>
-			<td>발간일</td>
-			<td>빌린날짜</td>
-			<td>반납날짜</td>
-			<td>연체여부</td>
+		<tr class="w3-blue">
+			<th>책ID</th>
+			<th>제목</th>
+			<th>저자</th>
+			<th>출판사</th>
+			<th>발간일</th>
+			<th>빌린날짜</th>
+			<th>반납날짜</th>
+			<th>연체여부</th>
 		</tr>
 	</thead>
 	<tbody>

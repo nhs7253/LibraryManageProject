@@ -16,19 +16,19 @@
 	<input type="submit" value="검색"/>
 </form> <br>
 
-<table>
+<table class="w3-table-all">
 	<thead>
-		<tr>
-			<td>책ID</td> 
-			<td>제목</td>
-			<td>저자</td>
-			<td>출판사</td>
-			<td>발간일</td>
-			<td>대여자ID</td>
-			<td>대여자</td>
-			<td>빌린날짜</td>
-			<td>연체여부</td>
-			<td></td>
+		<tr class="w3-blue">
+			<th>책ID</th> 
+			<th>제목</th>
+			<th>저자</th>
+			<th>출판사</th>
+			<th>발간일</th>
+			<th>대여자ID</th>
+			<th>대여자</th>
+			<th>빌린날짜</th>
+			<th>연체여부</th>
+			<th></th>
 		</tr>
 	</thead>
 	<tbody>

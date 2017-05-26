@@ -5,20 +5,20 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link rel="stylesheet" type="text/css" href ="./css/view_table.css">
+<link rel="stylesheet" type="text/css" href ="/LibraryManage/css/view_table.css">
 </head>
 <%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
 <h2>도서 대출 예약 목록(관리자)</h2>
 
-<table>
+<table class="w3-table-all">
 	<thead>
-		<tr>
-			<td>예약자ID</td>
-			<td>이름</td>
-			<td>예약도서ID</td>
-			<td>도서제목</td>
-			<td>대기순위</td>
+		<tr class="w3-blue">
+			<th>예약자ID</th>
+			<th>이름</th>
+			<th>예약도서ID</th>
+			<th>도서제목</th>
+			<th>대기순위</th>
 		</tr>
 	</thead>
 	<tbody>
