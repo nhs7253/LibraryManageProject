@@ -31,7 +31,7 @@ public class MailSender {
 	}
 	
     public void sendMail(String recipientEmail, String content) {
-                  
+                  System.out.println("MailSender" + "!!!!!!!!!!!!!!!");
         try{
             //편지보낸시간
             msg.setSentDate(new Date());

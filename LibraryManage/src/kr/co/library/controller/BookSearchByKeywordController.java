@@ -12,12 +12,15 @@ import javax.servlet.http.HttpSession;
 
 import kr.co.library.service.BookService;
 import kr.co.library.service.impl.BookServiceImpl;
+import kr.co.library.util.MailSender;
 
 public class BookSearchByKeywordController extends HttpServlet {
 
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		doPost(request, response);
+//		System.out.println("MailSender");
+//		MailSender.getInstance().sendMail("nhs7253@naver.com", "메일보냄");
 	}
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
