@@ -37,7 +37,7 @@ table, th, td {
 		<br>
 		<h3 class="center">회원기본정보</h3>
 		<div align="center">
-			<table>
+			<table >
 				<tr>
 					<td>ID</td>
 					<td>

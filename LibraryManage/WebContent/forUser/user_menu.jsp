@@ -4,6 +4,7 @@
 <link rel="stylesheet" type="text/css" href="/LibraryManage/css/menu_style.css">
 
 
+
 <c:if test="${empty sessionScope.loginInfo}">
 	<c:set scope="session" var="returnURL" value='<%=  request.getAttribute( "javax.servlet.forward.request_uri" )+"?page="+request.getParameter("page")+"&select="+request.getAttribute("select")+"&keyword="+request.getAttribute("keyword")%>'/>
 </c:if>
@@ -17,14 +18,13 @@
 			</div>
 		</c:when>
 		<c:otherwise>
-			${sessionScope.loginInfo.userId }님 환영합니다.
+			<span class="userWelcome">${sessionScope.loginInfo.userId }님 환영합니다.</span>
 			<div>
 			<a href = "/LibraryManage/logout">로그아웃</a>
 			<a href = "/LibraryManage/forUser/MyPage.jsp">마이페이지</a>
 			<a href = "/LibraryManage/RentalList">대출목록</a>
 			<a href = "/LibraryManage/BookSearchByKeyword?select=title">도서검색</a>
 			</div>		
-		
 		</c:otherwise>
 	</c:choose>
 

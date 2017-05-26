@@ -20,13 +20,23 @@ table, th, td {
 }
 </style>
 <meta charset="UTF-8">
-<title>회원가입</title>
+
+
+<title>회원 가입</title>
+<style>
+h1 {text-align: center;} 
+#c{text-align: center;}
+<!-- c가운데로 정렬 -->
+</style>
 
 <link rel="stylesheet" type="text/css" href="./css/view_table.css">
 </head>
+
 <body>
+
 	<c:if test="${sessionScope.failMessage != null}">
 		<script>
+		
 			alert('${sessionScope.failMessage}')
 		</script>
 		<c:remove scope="session" var="failMessage" />
@@ -70,5 +80,6 @@ table, th, td {
 		<input type="button" value="가입" onclick="alert('회원가입정보를 입력해주세요.')">
 	<%} %>
 	</form> --%>
+
 </body>
 </html>
