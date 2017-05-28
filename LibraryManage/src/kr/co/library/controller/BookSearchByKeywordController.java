@@ -19,8 +19,6 @@ public class BookSearchByKeywordController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
 		doPost(request, response);
-//		System.out.println("MailSender");
-//		MailSender.getInstance().sendMail("nhs7253@naver.com", "메일보냄");
 	}
 	@Override
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)throws ServletException, IOException {
@@ -29,7 +27,6 @@ public class BookSearchByKeywordController extends HttpServlet {
 		//1. 요청파라미터 조회 + 검증
 		int page = 1; //기본페이지가 1
 		
-		System.out.println(request.getSession().getAttribute("returnURL"));
 		
 		String select = request.getParameter("select");
 		String keyword = request.getParameter("keyword");

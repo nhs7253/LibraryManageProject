@@ -101,4 +101,13 @@ public interface RentalListDao {
 	 * @return
 	 */
 	int selectRentalListByEndIsNullCount(SqlSession session);
+	
+	
+	/**
+	 * userId를 받아 최종 반환일이 큰 순으로 정렬
+	 * @param session
+	 * @param userId
+	 * @return
+	 */
+	List<RentalList> selectRentalListByUserIdMaxEnd(SqlSession session, String userId);
 }

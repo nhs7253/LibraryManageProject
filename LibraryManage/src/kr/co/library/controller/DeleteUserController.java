@@ -25,7 +25,6 @@ public class DeleteUserController extends HttpServlet
 		
 		//session에서 데이터를 가져옴
 		HttpSession session = req.getSession(); 
-		System.out.println(((UserManagement)session.getAttribute("loginInfo")).getUserId());
 		try
 		{
 			UserInfoServiceImpl.getInstance().dropUser(((UserManagement)session.getAttribute("loginInfo")).getUserId());

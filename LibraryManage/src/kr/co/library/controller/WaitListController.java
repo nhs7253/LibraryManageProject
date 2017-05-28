@@ -26,14 +26,8 @@ public class WaitListController extends HttpServlet {
 		int page = 1; //기본페이지가 1
 		String userId = "";
 		
-//		System.out.println(request.getSession().getAttribute("loginInfo"));
-		
 		userId = ((UserManagement)request.getSession().getAttribute("loginInfo")).getUserId();
 		
-//		System.out.println(userId);
-		
-		
-//		userId = request.getParameter("userId");
 		try{
 			page = Integer.parseInt(request.getParameter("page")); //보려는 페이지번호 조회.
 		}catch (Exception e) {}

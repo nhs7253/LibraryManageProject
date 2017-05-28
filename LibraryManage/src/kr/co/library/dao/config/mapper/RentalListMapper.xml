@@ -183,5 +183,12 @@
 		FROM rental_list
 		WHERE rental_end IS NULL
 	</select>
+	
+	<select id="selectRentalListByUserIdMaxEnd" resultType="string" resultMap="rentalList-resultmap">
+		SELECT <include refid="all-column" />
+		FROM rental_list
+		WHERE user_id = #{value}
+		ORDER BY rental_end DESC
+	</select>
 
 </mapper>
