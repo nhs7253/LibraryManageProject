@@ -111,7 +111,7 @@ public interface RentalService {
 	 * @param userId
 	 * @return
 	 */
-	public List<RentalList> CountCurrentRentalList(String userId);
+	public int CountCurrentRentalList(String userId);
 
 	
 	/**

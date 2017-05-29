@@ -312,8 +312,9 @@ public class RentalServiceImpl implements RentalService {
 	}
 
 	@Override
-	public List<RentalList> CountCurrentRentalList(String userId) {
+	public int CountCurrentRentalList(String userId) {
 		SqlSession session = factory.openSession();
+		
 		return rentalDao.selectRentalListByEndIsNullCountByUserId(session, userId);
 	}
 

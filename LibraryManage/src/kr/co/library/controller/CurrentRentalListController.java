@@ -22,7 +22,7 @@ public class CurrentRentalListController extends HttpServlet{
 		String userId = req.getParameter("userId");
 		
 		RentalService service = RentalServiceImpl.getInstance();
-		List<RentalList> list = service.CountCurrentRentalList(userId);
+		int list = service.CountCurrentRentalList(userId);
 		
 		req.setAttribute("currentList", list);
 	

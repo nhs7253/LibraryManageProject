@@ -214,6 +214,8 @@
 		<url-pattern>/currentRentalListById</url-pattern>
 	</servlet-mapping>
 	
+	
+	
   <!-- 왕준 : UserInfoReferServlet 등록 -->
   <servlet>
   	<servlet-name>userInfoRefer</servlet-name>

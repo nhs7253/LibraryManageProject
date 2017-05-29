@@ -108,7 +108,7 @@ public interface RentalListDao {
 	 * @param session
 	 * @return
 	 */
-	List<RentalList> selectRentalListByEndIsNullCountByUserId(SqlSession session, String userId);
+	int selectRentalListByEndIsNullCountByUserId(SqlSession session, String userId);
 
 	
 	/**

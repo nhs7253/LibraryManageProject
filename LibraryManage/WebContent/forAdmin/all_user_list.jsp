@@ -1,3 +1,6 @@
+<%@page import="kr.co.library.vo.RentalList"%>
+<%@page import="java.util.List"%>
+<%@page import="kr.co.library.vo.UserManagement"%>
 <%@page import="kr.co.library.service.impl.RentalServiceImpl"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -12,15 +15,13 @@
 form{
 float: middle;
 }
+input{
+float:middle;}
 </style>
 </head>
 <%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
 
-<c:if test="${sessionScope.addBookMessage != null}">
-	<script>alert('${sessionScope.addBookMessage}')</script>
-	<c:remove scope="session" var="addBookMessage"/>
-</c:if>
 <header>
 		<h2>전체 회원 목록</h2>
 </header>
@@ -34,6 +35,7 @@ float: middle;
 			<th>이메일</th>
 			<th>연체상태</th>
 			<th>연체해제</th>
+			<th>현재 대출중</th>
 			<th></th>
 
 		</tr>
@@ -67,6 +69,13 @@ float: middle;
 								</form>
 						</c:otherwise>
 					</c:choose>
+				</td>
+				<td>
+				<% 
+					UserManagement user = (UserManagement) pageContext.getAttribute("user");
+					int count = RentalServiceImpl.getInstance().CountCurrentRentalList(user.getUserId());
+				%>
+				<%=count%>권	
 				</td>
 				<td><form action = "${initParam.rootPath }/DeleteUser?userId=${user.userId}" method = "post">
 				<input type="submit" value = "탈퇴" onclick="alert('${user.userId}님이 탈퇴되었습니다.');" /></form></td>

@@ -22,7 +22,9 @@ drop sequence rental_no_seq;
 
 select * from rental_list where book_id = 'P003W0005002';
 
-
+select count(*)
+		from rental_list
+		where rental_end is null and user_id ='1111'
 		
 		
 INSERT INTO rental_list VALUES(rental_no_seq.nextVal, '사용자1', '897', SYSDATE, null);
