@@ -9,10 +9,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import kr.co.library.exception.UserNotFoundException;
+import kr.co.library.service.UserInfoService;
 import kr.co.library.service.impl.UserInfoServiceImpl;
 import kr.co.library.vo.UserManagement;
-
-
 
 public class DeleteUserController extends HttpServlet 
 {
@@ -25,17 +24,31 @@ public class DeleteUserController extends HttpServlet
 		
 		//session에서 데이터를 가져옴
 		HttpSession session = req.getSession(); 
-		try
-		{
-			UserInfoServiceImpl.getInstance().dropUser(((UserManagement)session.getAttribute("loginInfo")).getUserId());
-			//session 제거
-			session.invalidate();
-		}
-		catch(UserNotFoundException e)
-		{
-			e.printStackTrace();
-		}
+		UserInfoService service = UserInfoServiceImpl.getInstance();
+
 		
-		resp.sendRedirect("/LibraryManage/forUser/main.jsp");
+		if(session.getAttribute("adminInfo")!=null){
+			
+			String userId= req.getParameter("userId");
+			try {
+				service.dropUser(userId);
+			} catch (UserNotFoundException e) {
+				e.printStackTrace();
+			}			
+			resp.sendRedirect("/LibraryManage/forAdmin/all_user_list.jsp");
+
+		}else if(session.getAttribute("adminInfo")==null){
+			
+			try {
+				service.dropUser(((UserManagement)session.getAttribute("loginInfo")).getUserId());
+				session.invalidate();
+			} catch (UserNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			resp.sendRedirect("/LibraryManage/forUser/main.jsp");
+		}
+
+		}
 	}
-}

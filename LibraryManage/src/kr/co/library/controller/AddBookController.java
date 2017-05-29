@@ -37,13 +37,13 @@ public class AddBookController extends HttpServlet{
 			} catch (WrongBookException e) {
 				message = e.getMessage();
 			}
-	
+
 			session.setAttribute("addBookMessage", message);
-			resp.sendRedirect("/LibraryManage/forAdmin/book_manage.jsp");		
+			resp.sendRedirect("/LibraryManage/forAdmin/add_book.jsp");		
 		}else{
 			//관리자 아이디로 로그인되지 않았을때 
 			session.setAttribute("NoAdminMessage", "관리자가 아닙니다.");
-			resp.sendRedirect("/LibraryManage/forAdmin/book_manage.jsp");
+			resp.sendRedirect("/LibraryManage/forAdmin/add_book.jsp");
 		}
 	
 	}

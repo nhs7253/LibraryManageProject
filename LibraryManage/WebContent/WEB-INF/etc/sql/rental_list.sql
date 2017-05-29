@@ -20,7 +20,11 @@ drop sequence rental_no_seq;
 		FROM RENTAL_LIST
 		WHERE rental_no = 3;
 
+select * from rental_list where book_id = 'P003W0005002';
 
+
+		
+		
 INSERT INTO rental_list VALUES(rental_no_seq.nextVal, '사용자1', '897', SYSDATE, null);
 INSERT INTO rental_list VALUES(rental_no_seq.nextVal, 'ㅂㅂㅂ', '새새책', SYSDATE, null);
 DELETE FROM rental_list WHERE user_id='user01'

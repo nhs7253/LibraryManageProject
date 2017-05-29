@@ -24,15 +24,18 @@ aside {
     float: left;
     max-width: 160px;
     margin: 0;
-    padding: 1em;
+    padding: 1em; 
 }
 
-aside ul li.bookmenu {
-    list-style-type: none;
+aside ul li{
+	list-style-type: none;
     padding: 0;
-    text-decoration: none;
-}
    
+}
+ 
+ aside ul a{
+ text-decoration: none;
+ }
 
 article {
     margin-left: 170px;

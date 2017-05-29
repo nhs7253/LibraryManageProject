@@ -191,4 +191,10 @@
 		ORDER BY rental_end DESC
 	</select>
 
+	<select id="selectRentalListByEndIsNullCountByUserId" parameterType="string" resultMap="rentalList-resultmap">
+		select 
+		<include refid="all-column" />
+		from rental_list
+		where rental_end is null and user_id = #{value}
+	</select>
 </mapper>

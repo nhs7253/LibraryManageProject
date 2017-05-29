@@ -84,12 +84,10 @@ public class RentalListDaoImpl implements RentalListDao {
 	}
 
 	@Override
-	public List<Object> selectRentalListPagingByEndIsNull(SqlSession session, String userId , int startIndex, int endIndex) {
+	public List<Object> selectRentalListPagingByEndIsNull(SqlSession session, int startIndex, int endIndex) {
 		// TODO Auto-generated method stub
 		Map<String, String> input = new HashMap<String, String>();
-//		if(userId.isEmpty())
-//			userId = null;
-		input.put("userId",userId);
+		
 		input.put("startIndex",String.valueOf(startIndex));
 		input.put("endIndex",String.valueOf(endIndex));
 		return session.selectList(namespace + "selectRentalListPagingByEndIsNull", input);
@@ -102,9 +100,15 @@ public class RentalListDaoImpl implements RentalListDao {
 	}
 
 	@Override
+
+	public List<RentalList> selectRentalListByEndIsNullCountByUserId(SqlSession session, String userId) {
+		return session.selectOne(namespace+"selectRentalListByEndIsNullCountByUserId");
+	}
+
 	public List<RentalList> selectRentalListByUserIdMaxEnd(SqlSession session, String userId) {
 		// TODO Auto-generated method stub
 		return session.selectList(namespace + "selectRentalListByUserIdMaxEnd", userId);
+
 	}
 
 }

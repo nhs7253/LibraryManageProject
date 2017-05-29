@@ -27,7 +27,6 @@ public class BookSearchByKeywordController extends HttpServlet {
 		//1. 요청파라미터 조회 + 검증
 		int page = 1; //기본페이지가 1
 		
-		
 		String select = request.getParameter("select");
 		String keyword = request.getParameter("keyword");
 		HttpSession session = request.getSession();

@@ -204,6 +204,15 @@
 		<url-pattern>/allUser</url-pattern>
 	</servlet-mapping>
 		
+	<!--박연수 회원별 현재대출목록조회  -->
+	<servlet>
+		<servlet-name>currentrentallistById</servlet-name>
+		<servlet-class>kr.co.library.controller.CurrentRentalListController</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>currentrentallistById</servlet-name>
+		<url-pattern>/currentRentalListById</url-pattern>
+	</servlet-mapping>
 	
   <!-- 왕준 : UserInfoReferServlet 등록 -->
   <servlet>

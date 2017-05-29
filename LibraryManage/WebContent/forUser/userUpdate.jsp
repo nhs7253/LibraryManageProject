@@ -22,9 +22,17 @@ table, th, td {
 	text-align: center;
 	padding: 10px;
 }
+
+footer {
+    padding: 1em;
+    color: black;
+    background-color: white;
+    clear: left;
+    text-align: center;
+}
 </style>
 <meta charset="UTF-8">
-<title>수정</title>
+<title>회원정보수정</title>
 <link rel="stylesheet" type="text/css" href="./css/view_table.css">
 </head>
 
@@ -59,9 +67,12 @@ table, th, td {
 					<td>Email</td>
 					<td><input type="text" name="email" value="${sessionScope.loginInfo.email}"></td>
 				</tr>
-			</table>
+			</table><br><br>
 			<input type="submit" value="수정완료" onclick="alert(수정이 완료되었습니다.);">
 		</div>
-	</form>
+	</form><br><br><br><br>
+	
+	<footer>Copyright &copy LibraryManage.co.kr </footer>
+	
 </body>
 </html>

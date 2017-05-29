@@ -19,7 +19,7 @@ public class UpdateBookController extends HttpServlet{
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
 		HttpSession session = req.getSession();
-		String message="";
+		String message="?";
 
 		// 관리자일때
 		if (session.getAttribute("adminInfo") != null) {
@@ -29,9 +29,10 @@ public class UpdateBookController extends HttpServlet{
 			String author = req.getParameter("author");
 			String publisher = req.getParameter("publisher");
 			String publishDate = req.getParameter("publishDate");
-			char rentalState = req.getParameter("rentalState").charAt(0);
+			//String rentalState = req.getParameter("rentalState");
 
-			Book book = new Book(bookId, title, author, publisher, publishDate,rentalState);
+			Book book = new Book(bookId, title, author, publisher, publishDate,'Y');
+					//rentalState.charAt(0));
 			try {
 				message = BookServiceImpl.getInstance().updateBook(book);
 			} catch (BookNotFoundException e) {
@@ -41,11 +42,11 @@ public class UpdateBookController extends HttpServlet{
 			}
 			
 			session.setAttribute("updateBookMessage", message);
-			resp.sendRedirect("/LibraryManage/forAdmin/book_manage.jsp");
+			resp.sendRedirect("/LibraryManage/forAdmin/update_book.jsp");
 		} else {
 			// 관리자 아닐때
 			session.setAttribute("NoAdminMessage", "관리자가 아닙니다.");
-			resp.sendRedirect("/LibraryManage/forAdmin/book_manage.jsp");
+			resp.sendRedirect("/LibraryManage/forAdmin/update_book.jsp");
 		}
 
 	}

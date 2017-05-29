@@ -36,8 +36,6 @@ public class RentalListController extends HttpServlet {
 		//2. 비지니스 로직 - Model 호출
 		RentalService service = RentalServiceImpl.getInstance();
 		Map<String, Object> map = service.PrintRentalList(page, userId);
-		
-
 			
 		//3. 결과 응답 - View 호출
 		request.setAttribute("list", map.get("list"));

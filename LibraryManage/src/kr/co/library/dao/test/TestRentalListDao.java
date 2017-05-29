@@ -79,8 +79,10 @@ public class TestRentalListDao {
 //			
 //			System.out.println(dao.selectRentalListByEndIsNullCount(session));
 			
-			printBookList(dao.selectRentalListByUserIdMaxEnd(session, "3"),"selectRentalListByUserIdMaxEnd");
 			
+			printBookList(dao.selectRentalListPagingByUserIdToBook(session, "", 1, 10),"selectRentalListPagingByUserIdToBook");
+			
+
 			session.commit();
 		} finally {
 			session.close();

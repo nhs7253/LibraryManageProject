@@ -5,13 +5,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>나의 대여목록</title>
 <link rel="stylesheet" type="text/css" href ="./css/view_table.css">
 </head>
 <%@include file = "/forUser/user_menu.jsp" %>
 <body>
-<h2>대여 목록</h2>
-
+<h2>나의 도서 대여 목록</h2>
+<br><br>
 <table class="w3-table-all">
 	<thead>
 		<tr class="w3-blue">

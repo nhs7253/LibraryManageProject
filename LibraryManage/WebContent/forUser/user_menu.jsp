@@ -8,22 +8,23 @@
 </c:if>
 
 
-   <c:choose>
-      <c:when test = "${empty sessionScope.loginInfo}">
-         <div>
-         <a href = "/LibraryManage/forUser/login.jsp">로그인</a>
-         <a href = "/LibraryManage/forUser/userCreate.jsp">회원가입</a>
-         </div>
-      </c:when>
-      <c:otherwise>
-         <span class="userWelcome">${sessionScope.loginInfo.userId }님 환영합니다.</span>
-         <div>
-         <a href = "/LibraryManage/logout">로그아웃</a>
-         <a href = "/LibraryManage/forUser/MyPage.jsp">마이페이지</a>
-         <a href = "/LibraryManage/RentalList">대출목록</a>
-         <a href = "/LibraryManage/BookSearchByKeyword?select=title">도서검색</a>
-         </div>      
-      </c:otherwise>
-   </c:choose>
+	<c:choose>
+		<c:when test = "${empty sessionScope.loginInfo}">
+			<div>
+			<a href = "/LibraryManage/forUser/login.jsp">로그인</a>
+			<a href = "/LibraryManage/forUser/userCreate.jsp">회원가입</a>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<span class="userWelcome">${sessionScope.loginInfo.userId }님 환영합니다.</span>
+			<div>
+			<a href = "/LibraryManage/logout">로그아웃</a>
+			<a href = "/LibraryManage/forUser/MyPage.jsp">마이페이지</a>
+			<a href = "/LibraryManage/RentalList">대출목록</a>
+			<a href = "/LibraryManage/WaitList">대기목록</a>
+			<a href = "/LibraryManage/BookSearchByKeyword?select=title">도서검색</a>
+			</div>		
+		</c:otherwise>
+	</c:choose>
 
  <br> <hr>

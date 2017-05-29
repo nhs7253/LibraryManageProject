@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>도서 대여 페이지</title>
 
 
 <link rel="stylesheet" type="text/css" href="/LibraryManage/css/view_table.css">
@@ -20,7 +20,11 @@
 	<script>alert('${sessionScope.rentMessage}')</script>
 	<c:remove scope="session" var="rentMessage"/>
 	</c:if>
-	<h2>도서 목록</h2>
+	
+	<header>
+		<h2>도서 목록</h2>
+	</header>
+	
 	<form action="${initParam.rootPath }/BookSearchByKeyword" method="post">
 	<select name="select">
 	    <option value="title">제목</option>

@@ -1,19 +1,29 @@
+<%@page import="kr.co.library.service.impl.RentalServiceImpl"%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>전체 회원 목록</title>
 <link rel="stylesheet" type="text/css" href ="/LibraryManage/css/view_table.css">
+<style>
+form{
+float: middle;
+}
+</style>
 </head>
 <%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
-	<c:if test="${sessionScope.message != null}">
-		<script>alert('${sessionScope.message}')</script>
-		<c:remove scope="session" var="message"/>
-	</c:if>
-<h2>전체 회원 목록</h2>
+
+<c:if test="${sessionScope.addBookMessage != null}">
+	<script>alert('${sessionScope.addBookMessage}')</script>
+	<c:remove scope="session" var="addBookMessage"/>
+</c:if>
+<header>
+		<h2>전체 회원 목록</h2>
+</header>
 
 <table class="w3-table-all">
 	<thead>
@@ -24,6 +34,8 @@
 			<th>이메일</th>
 			<th>연체상태</th>
 			<th>연체해제</th>
+			<th></th>
+
 		</tr>
 	</thead>
 	<tbody>
@@ -39,8 +51,7 @@
 				<td>${user.phoneNum}</td>
 				<td>${user.email}</td>
 				<td>${user.penaltyState}</td>
-				<td>
-					<c:choose>
+				<td><c:choose>
 						<c:when test="${user.penaltyState == 'N'.charAt(0)}">
 								<input type="button" disabled="true" value="연체해제" />
 						</c:when>
@@ -57,6 +68,8 @@
 						</c:otherwise>
 					</c:choose>
 				</td>
+				<td><form action = "${initParam.rootPath }/DeleteUser?userId=${user.userId}" method = "post">
+				<input type="submit" value = "탈퇴" onclick="alert('${user.userId}님이 탈퇴되었습니다.');" /></form></td>
 		</c:forEach>
 
 	</tbody>

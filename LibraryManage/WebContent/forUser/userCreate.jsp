@@ -26,7 +26,13 @@ table, th, td {
 <style>
 h1 {text-align: center;} 
 #c{text-align: center;}
-<!-- c가운데로 정렬 -->
+footer {
+    padding: 1em;
+    color: black;
+    background-color: white;
+    clear: left;
+    text-align: center;
+}
 </style>
 
 <link rel="stylesheet" type="text/css" href="./css/view_table.css">
@@ -73,7 +79,9 @@ h1 {text-align: center;}
 
 			<input type="submit" value="가입">
 		</div>
-	</form>
+	</form><br><br><br><br><br><br><br><br>
+
+<footer>Copyright &copy LibraryManage.co.kr</footer>
 
 	<%-- <form action="${initParam.rootPath}/userCreate" method="post">
 	<%if (request.getAttribute("loginInfo") == null || request.getAttribute("loginInfo").equals("")){%>

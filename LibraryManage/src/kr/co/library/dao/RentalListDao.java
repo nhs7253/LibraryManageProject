@@ -92,7 +92,7 @@ public interface RentalListDao {
 	 * @param endIndex
 	 * @return
 	 */
-	List<Object> selectRentalListPagingByEndIsNull(SqlSession session, String userId, int startIndex, int endIndex);
+	List<Object> selectRentalListPagingByEndIsNull(SqlSession session, int startIndex, int endIndex);
 	
 	
 	/**
@@ -102,6 +102,14 @@ public interface RentalListDao {
 	 */
 	int selectRentalListByEndIsNullCount(SqlSession session);
 	
+
+	/**
+	 * userId인 회원의 대출목록중 rental_end가 null인 컬럼의 수를 리턴. 
+	 * @param session
+	 * @return
+	 */
+	List<RentalList> selectRentalListByEndIsNullCountByUserId(SqlSession session, String userId);
+
 	
 	/**
 	 * userId를 받아 최종 반환일이 큰 순으로 정렬
@@ -110,4 +118,5 @@ public interface RentalListDao {
 	 * @return
 	 */
 	List<RentalList> selectRentalListByUserIdMaxEnd(SqlSession session, String userId);
+
 }

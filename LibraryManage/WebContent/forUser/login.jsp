@@ -11,12 +11,13 @@ h1 {
 #c {
 	text-align: center;
 }
-<!--
-c가운데로
- 
-정렬
- 
--->
+footer {
+    padding: 1em;
+    color: black;
+    background-color: white;
+    clear: left;
+    text-align: center;
+}
 </style>
 <meta charset="UTF-8">
 
@@ -29,12 +30,12 @@ c가운데로
 		</script>
 		<c:remove scope="session" var="loginFailMessage" />
 	</c:if>
+		<h1 class="center">LOGIN</h1>
+	<hr>
 	<br>
 	<br>
 	<br>
 	<br>
-	<br>
-	<h1>로그인</h1>
 
 
 	<form id="c" action="/LibraryManage/login" method="post">
@@ -52,7 +53,8 @@ c가운데로
 			<button id="c" type="submit">로그인</button>
 			<input id="c" type="button" value="회원가입"
 				onClick="location.href='/LibraryManage/forUser/userCreate.jsp';">
-	</form>
+	</form>	<br><br><br><br><br><br><br><br>
 
+<footer>Copyright &copy LibraryManage.co.kr</footer>
 </body>
 </html>
