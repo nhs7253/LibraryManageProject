@@ -239,3 +239,11 @@ FROM rental_list;
 				WHERE rownum <= '10'
 			)
 			WHERE rnum >= '1'
+			
+			
+			
+			
+SELECT *
+FROM rental_list
+WHERE user_id = '3'
+ORDER BY rental_end DESC

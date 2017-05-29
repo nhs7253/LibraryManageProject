@@ -234,6 +234,18 @@
   	<servlet-name>userCreate</servlet-name>
   	<url-pattern>/userCreate</url-pattern>
   </servlet-mapping>
+  
+  
+  
+  <!-- 현식 : 연체 패널티 해제 -->
+    <servlet>
+  	<servlet-name>RentalPenaltyRevocation</servlet-name>
+  	<servlet-class>kr.co.library.controller.RentalPenaltyRevocationController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>RentalPenaltyRevocation</servlet-name>
+  	<url-pattern>/RentalPenaltyRevocation</url-pattern>
+  </servlet-mapping>
 
 
 </web-app>

@@ -1,6 +1,7 @@
 package kr.co.library.service.impl;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -22,6 +23,8 @@ import kr.co.library.dao.impl.WaitListDaoImpl;
 import kr.co.library.exception.FailRentException;
 import kr.co.library.exception.FailReturnException;
 import kr.co.library.exception.FailWaitException;
+import kr.co.library.exception.PenaltyNotException;
+import kr.co.library.exception.PenaltyUnendedException;
 import kr.co.library.service.RentalService;
 import kr.co.library.util.MailSender;
 import kr.co.library.util.PagingBean;
@@ -129,26 +132,26 @@ public class RentalServiceImpl implements RentalService {
 				Book book = bookDao.selectBookListById(session, bookId);
 				bookDao.updateBook(session, new Book(book.getBookId(), book.getTitle(), book.getAuthor(),
 						book.getPublisher(), book.getPublishDate(), 'Y'));
-				
+						
 				// 반납시간-대출시간이 2주일보다 길면 연체상태를 Y로 수정.1209600000밀리초
 				Date startTime = updateRental.getRentalStart();
 				Date EndTime = updateRental.getRentalEnd();
 				if (EndTime.getTime() - startTime.getTime() > 1209600000) {
 					UserManagement user = userDao.selectUserManagementListById(session, userId);
-					
+
 					userDao.updateUserManagement(session, new UserManagement(user.getUserId(), user.getPassword(),
 							user.getUserName(), user.getPhoneNum(), user.getEmail(), 'Y'));
 					session.commit();
 					return userId + "님 연체";
 					
 				}
-
 				session.commit();
 				
 				//반납 후 대기1순위자에게 이메일보내기.
 				if(!waitDao.selectWaitListJoinBookJoinUserByBookId(session, bookId).isEmpty()){
 					MailSender.getInstance().sendMail(waitDao.selectWaitListJoinBookJoinUserByBookId(session, bookId).get(0).getUserManagement().getEmail(), book.getTitle());
 				}
+
 				return "반납완료";
 			} else {
 				// 이미 반납된것.
@@ -312,7 +315,37 @@ public class RentalServiceImpl implements RentalService {
 	public List<RentalList> CountCurrentRentalList(String userId) {
 		SqlSession session = factory.openSession();
 		return rentalDao.selectRentalListByEndIsNullCountByUserId(session, userId);
+	}
+
+	public String RentalPenaltyRevocation(UserManagement user) throws PenaltyUnendedException, PenaltyNotException {
+		SqlSession session = factory.openSession();
 		
+		try {
+			if(user.getPenaltyState()=='Y'){
+				Calendar penaltyDay = Calendar.getInstance(); //패널티 계산을 위해 Calendar를 생성
+				penaltyDay.setTime(rentalDao.selectRentalListByUserIdMaxEnd(session, user.getUserId()).get(0).getRentalEnd()); //마지막 반납 시간
+				penaltyDay.add(Calendar.DATE, 7); //패널티 일수 만큼 더함
+				Date currentDate = new Date(); //현재 시간 
+				SimpleDateFormat format = new SimpleDateFormat("dd일 hh시 mm분 ss초"); //남은 시간 확인시 포멧 설정
+				if(currentDate.getTime() > penaltyDay.getTimeInMillis()){ //현재 시간이 패널티 종료 시간을 지났을 경우 (패널티 종료)
+					userDao.updateUserManagement(session, new UserManagement( 
+															  user.getUserId(), 
+															  user.getPassword(), 
+															  user.getUserName(), 
+															  user.getPhoneNum(), 
+															  user.getEmail(), 
+															  'N'));
+					session.commit();
+					return "패널티를 해제 합니다."; 
+				}else{
+					throw new PenaltyUnendedException("패널티가 " + format.format(new Date(penaltyDay.getTimeInMillis() - currentDate.getTime())) + " 남았습니다.");
+				}
+			}
+			throw new PenaltyNotException("연체되지 않은 회원입니다.");
+
+		} finally {
+			session.close();
+		}
 	}
 
 }

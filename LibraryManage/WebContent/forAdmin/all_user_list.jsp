@@ -16,13 +16,14 @@ float: middle;
 </head>
 <%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
+
 <c:if test="${sessionScope.addBookMessage != null}">
 	<script>alert('${sessionScope.addBookMessage}')</script>
 	<c:remove scope="session" var="addBookMessage"/>
 </c:if>
 <header>
 		<h2>전체 회원 목록</h2>
-	</header>
+</header>
 
 <table class="w3-table-all">
 	<thead>
@@ -32,9 +33,9 @@ float: middle;
 			<th>전화번호</th>
 			<th>이메일</th>
 			<th>연체상태</th>
-			<th>현재 대출중</th>
+			<th>연체해제</th>
 			<th></th>
-	
+
 		</tr>
 	</thead>
 	<tbody>
@@ -50,19 +51,25 @@ float: middle;
 				<td>${user.phoneNum}</td>
 				<td>${user.email}</td>
 				<td>${user.penaltyState}</td>
-				<td>
-				<form action ="${initParam.rootPath }/currentRentalListById?userId=${user.userId}" method = "post">
-					<input type = "submit" value = "조회" />
-					${fn:length(requestScope.currentList)}권
-				</form>
-					<%-- {fn:length(requestScope.currentList)} --%>				
-				
-				<%-- <c:set scope="request" var = "currentList" 
-				value ='<%RentalServiceImpl.getInstance().CountCurrentRentalList(%>{user.userId}<%);%>'/> --%>
+				<td><c:choose>
+						<c:when test="${user.penaltyState == 'N'.charAt(0)}">
+								<input type="button" disabled="true" value="연체해제" />
+						</c:when>
+						<c:otherwise>
+								<form action="/LibraryManage/RentalPenaltyRevocation" method="post" style="float: none;">
+									<input type="hidden" name="userId" value="${user.userId }">
+									<input type="hidden" name="password" value="${user.password }">
+									<input type="hidden" name="userName" value="${user.userName }"> 
+									<input type="hidden" name="phoneNum" value="${user.phoneNum }">
+									<input type="hidden" name="email" value="${user.email }">
+									<input type="hidden" name="penaltyState" value="${user.penaltyState }"> 
+									<input type="submit" value="연체해제">
+								</form>
+						</c:otherwise>
+					</c:choose>
 				</td>
 				<td><form action = "${initParam.rootPath }/DeleteUser?userId=${user.userId}" method = "post">
 				<input type="submit" value = "탈퇴" onclick="alert('${user.userId}님이 탈퇴되었습니다.');" /></form></td>
-			
 		</c:forEach>
 
 	</tbody>

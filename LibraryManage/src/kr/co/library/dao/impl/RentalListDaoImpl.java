@@ -100,8 +100,15 @@ public class RentalListDaoImpl implements RentalListDao {
 	}
 
 	@Override
+
 	public List<RentalList> selectRentalListByEndIsNullCountByUserId(SqlSession session, String userId) {
 		return session.selectOne(namespace+"selectRentalListByEndIsNullCountByUserId");
+	}
+
+	public List<RentalList> selectRentalListByUserIdMaxEnd(SqlSession session, String userId) {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + "selectRentalListByUserIdMaxEnd", userId);
+
 	}
 
 }

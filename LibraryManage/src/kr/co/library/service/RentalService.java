@@ -9,6 +9,10 @@ import kr.co.library.exception.FailRentException;
 import kr.co.library.exception.FailReturnException;
 import kr.co.library.exception.FailWaitException;
 import kr.co.library.vo.RentalList;
+import kr.co.library.exception.PenaltyNotException;
+import kr.co.library.exception.PenaltyUnendedException;
+import kr.co.library.vo.UserManagement;
+
 
 public interface RentalService {
 
@@ -101,11 +105,22 @@ public interface RentalService {
 	
 	//public String rentWaitFirst(SqlSession session, String userId, String bookId) throws FailRentException, FailWaitException;
 	
+
 	/**
 	 * 해당회원의 현재대출중인 도서의 권수를 계산
 	 * @param userId
 	 * @return
 	 */
 	public List<RentalList> CountCurrentRentalList(String userId);
+
+	
+	/**
+	 * 유저를 객체를 받아 대여 패널티가 종료 됬을 시에 종료를 행한다.
+	 * @param user
+	 * @return
+	 * @throws PenaltyNotException 
+	 * @throws PenaltyUnendedException 
+	 */
+	String RentalPenaltyRevocation(UserManagement user) throws PenaltyUnendedException, PenaltyNotException;
 	
 }

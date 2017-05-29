@@ -31,13 +31,12 @@ public class MailSender {
 	}
 	
     public void sendMail(String recipientEmail, String content) {
-                  
         try{
             //편지보낸시간
             msg.setSentDate(new Date());
              
             InternetAddress from = new InternetAddress() ;
-            from = new InternetAddress("ste38274<ste38274@gmail.com>");
+            from = new InternetAddress("LibraryManage<ste38274@gmail.com>");
             // 이메일 발신자
             msg.setFrom(from);
             // 이메일 수신자
