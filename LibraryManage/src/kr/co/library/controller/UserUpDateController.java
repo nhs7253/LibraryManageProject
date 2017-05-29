@@ -25,7 +25,7 @@ public class UserUpDateController extends HttpServlet
 		
 		//jsp에서 수정한 데이터를 받음.
 		String password =req.getParameter("password");
-		String name =req.getParameter("name");
+		String name =req.getParameter("userName");
 		String phoneNum =req.getParameter("phoneNum");
 		String email =req.getParameter("email");
 		
