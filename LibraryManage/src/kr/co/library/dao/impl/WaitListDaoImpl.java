@@ -51,7 +51,7 @@ public class WaitListDaoImpl implements WaitListDao
 	@Override
 	public List<WaitList> selectWaitListByBookId(SqlSession session, String bookId) {
 		// TODO Auto-generated method stub
-		return session.selectOne(namespace+"selectWaitListByBookId",bookId);
+		return session.selectList(namespace+"selectWaitListByBookId",bookId);
 	}
 	
 	@Override
