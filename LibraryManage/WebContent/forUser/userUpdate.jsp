@@ -45,30 +45,39 @@ footer {
 		<br>
 		<h3 class="center">회원기본정보</h3>
 		<div align="center">
-			<table >
+			<table>
 				<tr>
 					<td>ID</td>
-					<td>
-					<input type="text" name="userId" value="${sessionScope.loginInfo.userId}" readOnly></td>
+					<td><input type="text" name="userId"
+						value="${sessionScope.loginInfo.userId}" readOnly></td>
 				</tr>
 				<tr>
 					<td>PW</td>
-					<td><input type="password" name="password" value="${sessionScope.loginInfo.password}"></td>
+					<td><input type="password" name="password"
+						value="${sessionScope.loginInfo.password}"></td>
 				</tr>
 				<tr>
 					<td>Name</td>
-					<td><input type="text" name="name" value="${sessionScope.loginInfo.userName}"></td>
+					<td><input type="text" name="userName"
+						value="${sessionScope.loginInfo.userName}"></td>
 				</tr>
 				<tr>
 					<td>PhoneNum</td>
-					<td><input type="text" name="phoneNum" value="${sessionScope.loginInfo.phoneNum}"></td>
+					<td><input type="text" name="phoneNum"
+						value="${sessionScope.loginInfo.phoneNum}"></td>
 				</tr>
 				<tr>
 					<td>Email</td>
-					<td><input type="text" name="email" value="${sessionScope.loginInfo.email}"></td>
+					<td><input type="text" name="email"
+						value="${sessionScope.loginInfo.email}"></td>
 				</tr>
-			</table><br><br>
-			<input type="submit" value="수정완료" onclick="alert(수정이 완료되었습니다.);">
+			</table>
+			<br> <br>
+			<%
+				if (request.getAttribute("errorMessage") != null) {
+			%>
+			<span style="color: red;"><%=request.getAttribute("errorMessage")%></span>
+			<%}%><br> <input type="submit" value="수정완료" onclick="alert(수정이 완료되었습니다.);">
 		</div>
 	</form><br><br><br><br>
 	

@@ -12,34 +12,26 @@ import kr.co.library.exception.UserNotFoundException;
 import kr.co.library.service.impl.UserInfoServiceImpl;
 import kr.co.library.vo.UserManagement;
 
-
-public class UserUpDateController extends HttpServlet
-{
+public class UserUpDateController extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		
-		
-		HttpSession session = req.getSession(); 
-		
-		
+			
+		HttpSession session = req.getSession(); 		
 		
 		//jsp에서 수정한 데이터를 받음.
 		String password =req.getParameter("password");
-		String name =req.getParameter("userName");
+		String userName =req.getParameter("userName");
 		String phoneNum =req.getParameter("phoneNum");
 		String email =req.getParameter("email");
 		
-		
-		
-		UserManagement user = new UserManagement(
-					((UserManagement)session.getAttribute("loginInfo")).getUserId(),
-					password,
-					name,
-					phoneNum,
-					email,
-					((UserManagement)session.getAttribute("loginInfo")).getPenaltyState()
-				);
-		
+	     if (password.equals("") || userName.equals("") ||email.equals("")) {
+	          req.setAttribute("errorMessage", "이름,패스워드,이메일 중 빈칸이 빈곳이 있으면 안됩니다.");// 빈칸확인
+	          req.getRequestDispatcher("/forUser/userUpdate.jsp").forward(req, resp);// 전달
+	       } 
+	      else{
+	          UserManagement user = new UserManagement(((UserManagement) session.getAttribute("loginInfo")).getUserId(),
+	                password, userName, phoneNum, email,
+	                ((UserManagement) session.getAttribute("loginInfo")).getPenaltyState());
 		
 		try
 		{
@@ -53,5 +45,5 @@ public class UserUpDateController extends HttpServlet
 		resp.sendRedirect("/LibraryManage/forUser/MyPage.jsp");
 	}
 	
-
+	}
 }
