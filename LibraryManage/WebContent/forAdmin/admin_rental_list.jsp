@@ -1,15 +1,24 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>도서 반납 페이지</title>
 <link rel="stylesheet" type="text/css" href ="/LibraryManage/css/view_table.css">
 </head>
 <%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
-<h2>현재 대여 목록</h2>
+	<c:if test="${sessionScope.returnBookMessage != null}">
+	<script>alert('${sessionScope.returnBookMessage}')</script>
+	<c:remove scope="session" var="returnBookMessage"/>
+	</c:if>
+	
+<header>
+		<h2>모든 회원 현재 대여 목록</h2>
+</header>
+
 
 <form action="${initParam.rootPath }/RentalListAdmin" method="post">
 	회원id <input type="text" name="userId"/>
@@ -46,11 +55,11 @@
 				<td>${rent.book.publishDate}</td>
 				<td>${rent.userId}</td>
 				<td>${requestScope.name[Status.index]}</td>
-				<td>${rent.rentalStart}</td>
+				<td><fmt:formatDate value="${rent.rentalStart}" pattern="yyyy-MM-dd"/></td>
 				<td>${requestScope.overdue[Status.index]}</td>
 				<td>
-				<form action = "${initParam.rootPath }/returnBook?rentalNo=${rent.rentalNo}" method = "post">
-				<input type="submit" value = "반납" onclick="alert('${sessionScope.returnBookMessage}');" /></form></td>
+				<form action = "${initParam.rootPath }/returnBook?rentalNo=${rent.rentalNo}&userId=${rent.userId}" method = "post">
+				<input type="submit" value = "반납" /></form></td>
 			</tr>
 		</c:forEach>
 		

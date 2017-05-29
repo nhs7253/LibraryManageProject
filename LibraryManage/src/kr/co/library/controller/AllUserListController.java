@@ -8,7 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import kr.co.library.service.RentalService;
 import kr.co.library.service.UserInfoService;
+import kr.co.library.service.impl.RentalServiceImpl;
 import kr.co.library.service.impl.UserInfoServiceImpl;
 
 public class AllUserListController extends HttpServlet{
@@ -31,9 +33,9 @@ public class AllUserListController extends HttpServlet{
 		
 		//2. 비지니스 로직 - Model 호출
 		UserInfoService service = UserInfoServiceImpl.getInstance();
+
 		Map<String, Object> map = service.allUserList(page);
 		
-		System.out.println("test : "+ map.get("list"));
 		
 		//3. 결과 응답 - View 호출
 		req.setAttribute("list", map.get("list"));

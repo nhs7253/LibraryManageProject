@@ -33,8 +33,6 @@ public class LoginController extends HttpServlet {
 		if(returnURL==null || returnURL.startsWith("null") || returnURL.contains("logout")){
 			returnURL = "/forUser/main.jsp";
 		}
-		
-		System.out.println("LoginController - " + returnURL);
 
 		UserInfoService service = UserInfoServiceImpl.getInstance();// 유저 인스턴스
 		AdministratorService adminService = AdministratorServiceImpl.getInstance();// 어드민

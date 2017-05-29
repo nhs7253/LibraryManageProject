@@ -4,12 +4,15 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>전체 대기자 페이지</title>
 <link rel="stylesheet" type="text/css" href ="/LibraryManage/css/view_table.css">
 </head>
 <%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
-<h2>도서 대출 예약 목록(관리자)</h2>
+	<header>
+		<h2>모든회원 도서 대기 목록</h2>
+	</header>
+
 
 <table class="w3-table-all">
 	<thead>

@@ -4,13 +4,13 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>나의 대기목록</title>
 <link rel="stylesheet" type="text/css" href="./css/view_table.css">
 </head>
 <%@include file = "/forUser/user_menu.jsp" %>
 <body>
-   <h2>대기 목록</h2>
-
+   <h2>나의 도서 대기목록</h2>
+<br><br>
 
    <table>
       <thead>

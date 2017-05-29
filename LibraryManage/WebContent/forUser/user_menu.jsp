@@ -3,6 +3,8 @@
 
 <link rel="stylesheet" type="text/css" href="/LibraryManage/css/menu_style.css">
 
+
+
 <c:if test="${empty sessionScope.loginInfo}">
 	<c:set scope="session" var="returnURL" value='<%=  request.getAttribute( "javax.servlet.forward.request_uri" )+"?page="+request.getParameter("page")+"&select="+request.getAttribute("select")+"&keyword="+request.getAttribute("keyword")%>'/>
 </c:if>
@@ -21,6 +23,7 @@
 			<a href = "/LibraryManage/logout">로그아웃</a>
 			<a href = "/LibraryManage/forUser/MyPage.jsp">마이페이지</a>
 			<a href = "/LibraryManage/RentalList">대출목록</a>
+			<a href = "/LibraryManage/WaitList">대기목록</a>
 			<a href = "/LibraryManage/BookSearchByKeyword?select=title">도서검색</a>
 			</div>		
 		</c:otherwise>

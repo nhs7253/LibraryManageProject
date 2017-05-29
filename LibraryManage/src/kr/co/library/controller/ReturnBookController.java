@@ -28,9 +28,10 @@ public class ReturnBookController extends HttpServlet{
 		HttpSession session = req.getSession();
 		String message;
 
+	
 		String userId = (String) req.getParameter("userId");
 		int rentalNo = Integer.parseInt((String) req.getParameter("rentalNo"));
-
+		
 		RentalService service = RentalServiceImpl.getInstance();
 
 		try {

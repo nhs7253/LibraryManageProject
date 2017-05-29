@@ -7,50 +7,71 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>마이페이지</title>
 <style>
-h2 {text-align: center;} 
-#c{text-align: center;}
 
-<!-- c가운데로 정렬 -->
+#c{text-align: center;}
+.center {
+	text-align: center;
+}
+
+table {
+	border-collapse: collapse;
+	margin-left: auto;
+	margin-right: auto;
+
+}
+
+table, th, td {
+	border: 0.5px ridge;
+	text-align: center;
+	padding: 10px;
+}
+footer {
+    padding: 1em;
+    color: black;
+    background-color: white;
+    clear: left;
+    text-align: center;
+}
 </style>
+
 <link rel="stylesheet" type="text/css" href="./css/view_table.css">
 </head>
 <%@include file = "/forUser/user_menu.jsp" %>
 
-<body >
+<body>
+<h1 class="center">회원정보</h1><hr><br><br><br><br>
 
-
-<h2>회원 정보</h2>
 
 <table id="c" border='1' width="500px" align="center" >
    <thead>
       <tr>
          <td>회원ID</td>
+         <td><%=((UserManagement)session.getAttribute("loginInfo")).getUserId() %></td>
+      </tr>
+      <tr>
          <td>비밀번호</td>
+         <td><%=((UserManagement)session.getAttribute("loginInfo")).getPassword() %></td>
+      </tr>
+      <tr>
          <td>이름</td>
+         <td><%=((UserManagement)session.getAttribute("loginInfo")).getUserName() %></td>
+      </tr>
+      <tr>
          <td>전화번호</td>
+         <td><%=((UserManagement)session.getAttribute("loginInfo")).getPhoneNum() %></td>
+      </tr>
+      <tr>
          <td>이메일</td>  
+         <td><%=((UserManagement)session.getAttribute("loginInfo")).getEmail() %></td>
+      </tr>
+      <tr>
          <td>연체상태</td>
-      
+     	 <td><%=((UserManagement)session.getAttribute("loginInfo")).getPenaltyState() %></td>
       </tr>
    </thead>
-   <tbody id="c">
-      
-      <%-- ######################################################
-                                          조회된 item 출력 
-         ###################################################### --%>
-      
-         <tr>
-            <td><%=((UserManagement)session.getAttribute("loginInfo")).getUserId() %></td>
-            <td><%=((UserManagement)session.getAttribute("loginInfo")).getPassword() %></td>
-            <td><%=((UserManagement)session.getAttribute("loginInfo")).getUserName() %></td>
-            <td><%=((UserManagement)session.getAttribute("loginInfo")).getPhoneNum() %></td>
-            <td><%=((UserManagement)session.getAttribute("loginInfo")).getEmail() %></td>
-            <td><%=((UserManagement)session.getAttribute("loginInfo")).getPenaltyState() %></td>
-         </tr>
-   </tbody>
-</table>
+</table><br>
 
 <p id="c">
 <input id="c" type="button" value="수정" onClick="location.href='/LibraryManage/forUser/userUpdate.jsp';">
@@ -64,7 +85,8 @@ function button_event(){
 }
 </script>
 <input id="c" type="button" value="회원탈퇴" onclick="button_event();">
+</p><br><br><br>
 
-
+<footer>Copyright &copy LibraryManage.co.kr</footer>
 </body>
 </html>

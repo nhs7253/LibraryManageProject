@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>도서목록</title>
 
 <link rel="stylesheet" type="text/css" href="/LibraryManage/css/view_table.css">
 <!-- 

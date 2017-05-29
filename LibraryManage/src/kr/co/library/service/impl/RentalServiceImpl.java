@@ -23,6 +23,7 @@ import kr.co.library.exception.FailRentException;
 import kr.co.library.exception.FailReturnException;
 import kr.co.library.exception.FailWaitException;
 import kr.co.library.service.RentalService;
+import kr.co.library.util.MailSender;
 import kr.co.library.util.PagingBean;
 import kr.co.library.util.SqlSessionFactoryManager;
 import kr.co.library.vo.Book;
@@ -128,9 +129,6 @@ public class RentalServiceImpl implements RentalService {
 				Book book = bookDao.selectBookListById(session, bookId);
 				bookDao.updateBook(session, new Book(book.getBookId(), book.getTitle(), book.getAuthor(),
 						book.getPublisher(), book.getPublishDate(), 'Y'));
-
-				
-				System.out.println("service - userId : " + userId);
 				
 				// 반납시간-대출시간이 2주일보다 길면 연체상태를 Y로 수정.1209600000밀리초
 				Date startTime = updateRental.getRentalStart();
@@ -138,13 +136,19 @@ public class RentalServiceImpl implements RentalService {
 				if (EndTime.getTime() - startTime.getTime() > 1209600000) {
 					UserManagement user = userDao.selectUserManagementListById(session, userId);
 					
-					System.out.println("service - returnBook : " + user);
-					
 					userDao.updateUserManagement(session, new UserManagement(user.getUserId(), user.getPassword(),
 							user.getUserName(), user.getPhoneNum(), user.getEmail(), 'Y'));
+					session.commit();
 					return userId + "님 연체";
+					
 				}
+
 				session.commit();
+				
+				//반납 후 대기1순위자에게 이메일보내기.
+				if(!waitDao.selectWaitListJoinBookJoinUserByBookId(session, bookId).isEmpty()){
+					MailSender.getInstance().sendMail(waitDao.selectWaitListJoinBookJoinUserByBookId(session, bookId).get(0).getUserManagement().getEmail(), book.getTitle());
+				}
 				return "반납완료";
 			} else {
 				// 이미 반납된것.
@@ -228,16 +232,18 @@ public class RentalServiceImpl implements RentalService {
 	}
 
 	@Override
-	public Map<String, Object> PrintCurrentRentalList(int page, String userId) {
+	public Map<String, Object> PrintCurrentRentalList(int page) {
 		HashMap<String, Object> map = new HashMap<>();
 		List<String> name = new ArrayList<>();
 		List<String> overdue = null;
 
 		SqlSession session = factory.openSession();
 		try {
-			int tatalCount = rentalDao.selectRentalListByEndIsNullCount(session);
-			PagingBean pageBean = new PagingBean(tatalCount, page);
-			List<Object> list = rentalDao.selectRentalListPagingByEndIsNull(session, userId,
+			//페이징위한 총 리스트(반납시간이 기록되지 않은것 )수 카운트 
+			int totalCount = rentalDao.selectRentalListByEndIsNullCount(session);
+			PagingBean pageBean = new PagingBean(totalCount, page);
+			
+			List<Object> list = rentalDao.selectRentalListPagingByEndIsNull(session,
 					pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
 			List<RentalList> temp = new ArrayList<>();
 
@@ -300,6 +306,13 @@ public class RentalServiceImpl implements RentalService {
 		}
 
 		return map;
+	}
+
+	@Override
+	public List<RentalList> CountCurrentRentalList(String userId) {
+		SqlSession session = factory.openSession();
+		return rentalDao.selectRentalListByEndIsNullCountByUserId(session, userId);
+		
 	}
 
 }
