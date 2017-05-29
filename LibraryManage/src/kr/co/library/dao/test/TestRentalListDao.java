@@ -79,19 +79,10 @@ public class TestRentalListDao {
 //			
 //			System.out.println(dao.selectRentalListByEndIsNullCount(session));
 			
-<<<<<<< HEAD
 			
 			printBookList(dao.selectRentalListPagingByUserIdToBook(session, "", 1, 10),"selectRentalListPagingByUserIdToBook");
 			
-			System.out.println(dao.selectRentalListPagingByEndIsNull(session, 1, 10));
-			
-			System.out.println(dao.selectRentalListPagingByEndIsNull(session, 1, 10));
-			
-			System.out.println(dao.selectRentalListByEndIsNullCount(session));
-=======
-			printBookList(dao.selectRentalListByUserIdMaxEnd(session, "3"),"selectRentalListByUserIdMaxEnd");
->>>>>>> branch 'master' of https://github.com/nhs7253/LibraryManageProject.git
-			
+
 			session.commit();
 		} finally {
 			session.close();
