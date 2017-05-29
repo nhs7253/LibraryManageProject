@@ -235,31 +235,24 @@ public class RentalServiceImpl implements RentalService {
 	}
 
 	@Override
-	public Map<String, Object> PrintCurrentRentalList(int page) {
+	public Map<String, Object> PrintCurrentRentalList(int page, String userId) {
 		HashMap<String, Object> map = new HashMap<>();
-		List<String> name = new ArrayList<>();
 		List<String> overdue = null;
 
 		SqlSession session = factory.openSession();
 		try {
-			//페이징위한 총 리스트(반납시간이 기록되지 않은것 )수 카운트 
-			int totalCount = rentalDao.selectRentalListByEndIsNullCount(session);
-			PagingBean pageBean = new PagingBean(totalCount, page);
+
+			int tatalCount = rentalDao.selectRentalListByEndIsNullCount(session);
+			PagingBean pageBean = new PagingBean(tatalCount, page);
+			List<RentalList> list = rentalDao.selectRentalListPagingByEndIsNull(session, userId,
+									pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
 			
-			List<Object> list = rentalDao.selectRentalListPagingByEndIsNull(session,
-					pageBean.getBeginItemInPage(), pageBean.getEndItemInPage());
-			List<RentalList> temp = new ArrayList<>();
-
-			for (int i = 0; i < list.size(); i++) {
-				temp.add((RentalList) ((Map<String, Object>) list.get(i)).get("list"));
-				name.add((String) ((Map<String, Object>) list.get(i)).get("user_name"));
-			}
-
-			overdue = getOverdueInfo(temp);
+			System.out.println("PrintCurrentRentalList - list = " + list);
+	
+			overdue = getOverdueInfo(list);
 
 			map.put("pageBean", pageBean);
-			map.put("list", temp);
-			map.put("name", name);
+			map.put("list", list);
 			map.put("overdue", overdue);
 		} finally {
 			session.close();
@@ -320,15 +313,16 @@ public class RentalServiceImpl implements RentalService {
 
 	public String RentalPenaltyRevocation(UserManagement user) throws PenaltyUnendedException, PenaltyNotException {
 		SqlSession session = factory.openSession();
-		
 		try {
 			if(user.getPenaltyState()=='Y'){
+		
 				Calendar penaltyDay = Calendar.getInstance(); //패널티 계산을 위해 Calendar를 생성
 				penaltyDay.setTime(rentalDao.selectRentalListByUserIdMaxEnd(session, user.getUserId()).get(0).getRentalEnd()); //마지막 반납 시간
 				penaltyDay.add(Calendar.DATE, 7); //패널티 일수 만큼 더함
 				Date currentDate = new Date(); //현재 시간 
 				SimpleDateFormat format = new SimpleDateFormat("dd일 hh시 mm분 ss초"); //남은 시간 확인시 포멧 설정
 				if(currentDate.getTime() > penaltyDay.getTimeInMillis()){ //현재 시간이 패널티 종료 시간을 지났을 경우 (패널티 종료)
+					
 					userDao.updateUserManagement(session, new UserManagement( 
 															  user.getUserId(), 
 															  user.getPassword(), 

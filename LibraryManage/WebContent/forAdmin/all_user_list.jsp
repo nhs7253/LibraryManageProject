@@ -21,7 +21,10 @@ float:middle;}
 </head>
 <%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
-
+	<c:if test="${sessionScope.message != null}">
+	<script>alert('${sessionScope.message}')</script>
+	<c:remove scope="session" var="message"/>
+	</c:if>
 <header>
 		<h2>전체 회원 목록</h2>
 </header>

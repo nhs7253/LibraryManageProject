@@ -1,6 +1,8 @@
 package kr.co.library.vo;
 
 import java.util.Date;
+import java.util.List;
+
 
 public class RentalList {
 	private int rentalNo;
@@ -10,12 +12,12 @@ public class RentalList {
 	private Date rentalEnd;
 
 	private Book book;
+	
+	private String userName;
 
 	public RentalList() {
 		super();
 	}
-	
-	
 
 	public RentalList(int rentalNo, String userId, String bookId, Date rentalStart, Date rentalEnd) {
 		super();
@@ -26,8 +28,6 @@ public class RentalList {
 		this.rentalEnd = rentalEnd;
 	}
 
-
-
 	public RentalList(int rentalNo, String userId, String bookId, Date rentalStart, Date rentalEnd, Book book) {
 		super();
 		this.rentalNo = rentalNo;
@@ -36,6 +36,18 @@ public class RentalList {
 		this.rentalStart = rentalStart;
 		this.rentalEnd = rentalEnd;
 		this.book = book;
+	}
+
+	public RentalList(int rentalNo, String userId, String bookId, Date rentalStart, Date rentalEnd, Book book,
+			String userName) {
+		super();
+		this.rentalNo = rentalNo;
+		this.userId = userId;
+		this.bookId = bookId;
+		this.rentalStart = rentalStart;
+		this.rentalEnd = rentalEnd;
+		this.book = book;
+		this.userName = userName;
 	}
 
 	public int getRentalNo() {
@@ -86,6 +98,14 @@ public class RentalList {
 		this.book = book;
 	}
 
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -96,6 +116,7 @@ public class RentalList {
 		result = prime * result + rentalNo;
 		result = prime * result + ((rentalStart == null) ? 0 : rentalStart.hashCode());
 		result = prime * result + ((userId == null) ? 0 : userId.hashCode());
+		result = prime * result + ((userName == null) ? 0 : userName.hashCode());
 		return result;
 	}
 
@@ -135,15 +156,19 @@ public class RentalList {
 				return false;
 		} else if (!userId.equals(other.userId))
 			return false;
+		if (userName == null) {
+			if (other.userName != null)
+				return false;
+		} else if (!userName.equals(other.userName))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "RentalList [rentalNo=" + rentalNo + ", userId=" + userId + ", bookId=" + bookId + ", rentalStart="
-				+ rentalStart + ", rentalEnd=" + rentalEnd + ", book=" + book + "]";
+				+ rentalStart + ", rentalEnd=" + rentalEnd + ", book=" + book + ", userName=" + userName + "]";
 	}
 	
 	
-
 }

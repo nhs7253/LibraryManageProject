@@ -51,9 +51,10 @@ footer {
       </select>
          <input type="text" name="keyword"/>
          <input type="submit" value="검색"/>
+         </form>
    </div></article>
    
-   <!-- <footer>Copyright &copy LibraryManage.co.kr</footer> -->
+ <!--  <footer>Copyright &copy LibraryManage.co.kr</footer> -->
    
    </body>
 </html>

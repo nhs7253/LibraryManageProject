@@ -18,6 +18,8 @@ public class RentalPenaltyRevocationController extends HttpServlet {
 
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		
 		UserManagement user = new UserManagement(req.getParameter("userId"), 
 												req.getParameter("password"), 
 												req.getParameter("userName"), 

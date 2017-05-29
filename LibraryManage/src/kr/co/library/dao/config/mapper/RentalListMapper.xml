@@ -18,7 +18,20 @@
 		<result column="rental_end" property="rentalEnd" />
 	</resultMap>
 	
+	<resultMap type="rentalList" id="rentalList-resultmap2">
+		<id column="rental_no" property="rentalNo" />
+		<result column="user_id" property="userId" />
+		<result column="book_id" property="bookId" />
+		<result column="rental_start" property="rentalStart" />
+		<result column="rental_end" property="rentalEnd" />
+		<result column="user_name" property="userName" />
+	</resultMap>
+	
 	<resultMap type="rentalList" id="rentalList-book-resultmap" extends="rentalList-resultmap">
+		<association property="book" resultMap="kr.co.library.dao.config.mapper.bookMapper.book-resultmap"/>
+	</resultMap>
+	
+	<resultMap type="rentalList" id="rentalList-book-user-resultmap" extends="rentalList-resultmap2">
 		<association property="book" resultMap="kr.co.library.dao.config.mapper.bookMapper.book-resultmap"/>
 	</resultMap>
 	
@@ -136,7 +149,7 @@
 	</select>
 	
 	
-	<select id="selectRentalListPagingByEndIsNull" parameterType="map" resultMap="rentalList-book-uesrName-resultmap">
+	<select id="selectRentalListPagingByEndIsNull" parameterType="map" resultMap="rentalList-book-user-resultmap">
 			SELECT rental_no, user_id, book_id, rental_start, rental_end, 
 				   title, author, publisher, publish_date, rental_state,
 				   user_name

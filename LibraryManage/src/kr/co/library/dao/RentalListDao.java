@@ -92,7 +92,7 @@ public interface RentalListDao {
 	 * @param endIndex
 	 * @return
 	 */
-	List<Object> selectRentalListPagingByEndIsNull(SqlSession session, int startIndex, int endIndex);
+	List<RentalList> selectRentalListPagingByEndIsNull(SqlSession session, String userId, int startIndex, int endIndex);
 	
 	
 	/**

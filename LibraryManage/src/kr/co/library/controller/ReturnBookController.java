@@ -27,7 +27,6 @@ public class ReturnBookController extends HttpServlet{
 		
 		HttpSession session = req.getSession();
 		String message;
-
 	
 		String userId = (String) req.getParameter("userId");
 		int rentalNo = Integer.parseInt((String) req.getParameter("rentalNo"));
@@ -43,6 +42,5 @@ public class ReturnBookController extends HttpServlet{
 		session.setAttribute("returnBookMessage", message);
 		
 		resp.sendRedirect("/LibraryManage/RentalListAdmin");
-
 	}
 }

@@ -54,7 +54,7 @@
 				<td>${rent.book.publisher}</td>
 				<td>${rent.book.publishDate}</td>
 				<td>${rent.userId}</td>
-				<td>${requestScope.name[Status.index]}</td>
+				<td>${rent.userName}</td>
 				<td><fmt:formatDate value="${rent.rentalStart}" pattern="yyyy-MM-dd"/></td>
 				<td>${requestScope.overdue[Status.index]}</td>
 				<td>
