@@ -35,7 +35,7 @@ public class DeleteUserController extends HttpServlet
 			} catch (UserNotFoundException e) {
 				e.printStackTrace();
 			}			
-			resp.sendRedirect("/LibraryManage/forAdmin/all_user_list.jsp");
+			resp.sendRedirect("/LibraryManage/allUser");
 
 		}else if(session.getAttribute("adminInfo")==null){
 			
