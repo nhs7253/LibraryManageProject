@@ -101,4 +101,10 @@ public class RentalListDaoImpl implements RentalListDao {
 		return session.selectOne(namespace+"selectRentalListByEndIsNullCount");
 	}
 
+	@Override
+	public List<RentalList> selectRentalListByUserIdMaxEnd(SqlSession session, String userId) {
+		// TODO Auto-generated method stub
+		return session.selectList(namespace + "selectRentalListByUserIdMaxEnd", userId);
+	}
+
 }

@@ -9,6 +9,10 @@
 </head>
 <%@include file = "/forAdmin/admin_menu.jsp" %>
 <body>
+	<c:if test="${sessionScope.message != null}">
+		<script>alert('${sessionScope.message}')</script>
+		<c:remove scope="session" var="message"/>
+	</c:if>
 <h2>전체 회원 목록</h2>
 
 <table class="w3-table-all">
@@ -19,7 +23,7 @@
 			<th>전화번호</th>
 			<th>이메일</th>
 			<th>연체상태</th>
-	
+			<th>연체해제</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -35,7 +39,24 @@
 				<td>${user.phoneNum}</td>
 				<td>${user.email}</td>
 				<td>${user.penaltyState}</td>
-			
+				<td>
+					<c:choose>
+						<c:when test="${user.penaltyState == 'N'.charAt(0)}">
+								<input type="button" disabled="true" value="연체해제" />
+						</c:when>
+						<c:otherwise>
+								<form action="/LibraryManage/RentalPenaltyRevocation" method="post" style="float: none;">
+									<input type="hidden" name="userId" value="${user.userId }">
+									<input type="hidden" name="password" value="${user.password }">
+									<input type="hidden" name="userName" value="${user.userName }"> 
+									<input type="hidden" name="phoneNum" value="${user.phoneNum }">
+									<input type="hidden" name="email" value="${user.email }">
+									<input type="hidden" name="penaltyState" value="${user.penaltyState }"> 
+									<input type="submit" value="연체해제">
+								</form>
+						</c:otherwise>
+					</c:choose>
+				</td>
 		</c:forEach>
 
 	</tbody>

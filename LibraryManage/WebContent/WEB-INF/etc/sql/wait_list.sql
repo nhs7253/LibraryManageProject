@@ -167,3 +167,7 @@ FROM (
 		RANK() OVER (PARTITION BY book_id ORDER BY wait_ranking ) as rk 
 		FROM wait_list) w, book b, user_management u
 WHERE w.book_id = b.book_id(+) AND w.wait_user = u.user_id
+
+
+
+

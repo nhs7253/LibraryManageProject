@@ -27,7 +27,6 @@ public class UserManagementDaoImpl implements UserManagementDao{
 
 	@Override
 	public int updateUserManagement(SqlSession session, UserManagement user) {
-		System.out.println("DAO 실행됨");
 		return session.update(namespace+"updateUserManagement",user);
 	}
 
