@@ -27,7 +27,7 @@ table, th, td {
 <title>수정</title>
 <link rel="stylesheet" type="text/css" href="./css/view_table.css">
 </head>
-<%@include file="/forUser/user_menu.jsp"%>
+
 
 <body>
 

@@ -16,22 +16,22 @@ import kr.co.library.vo.UserManagement;
 public class UserInfoReferController extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		HttpSession session = request.getSession();
-//	TEST : 	session.setAttribute("userId", "kwang0101");
-		String userId = (String) session.getAttribute("userId");
-
+																														throws ServletException, IOException {
 		
+		HttpSession session = request.getSession();
+		//session.userId를 조회
+		String userId = (String) session.getAttribute("userId");
 
 		// 비지니스 로직 - Model 호출
 		UserInfoService service = UserInfoServiceImpl.getInstance();
 
-		UserManagement user;
-		user = service.searchUser(userId);
-
+		UserManagement user = service.searchUser(userId);
+		//user 객체안에 userId 조회를 넣어준다.
+		
 		request.setAttribute("info", user);
-
-		// 결과 응답
+		//request에 info라는 이름으로 user를 넣어준다.
+		
+		
 		//요청디스패치
 		request.getRequestDispatcher("/test.jsp").forward(request, response);
 

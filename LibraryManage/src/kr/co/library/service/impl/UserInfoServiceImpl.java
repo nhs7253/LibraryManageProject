@@ -45,20 +45,30 @@ public class UserInfoServiceImpl implements UserInfoService {
 			// 아이디중복검사 또는 잘못된값 일경우
 			if (userDao.selectUserManagementListById(session, user.getUserId()) != null) {
 				throw new FailMemberRegistException(String.format("ID 중복!!."));
+				
+			//UserId의 값이 없을 경우
 			}else if(user.getUserId().isEmpty()){
 				throw new FailMemberRegistException(String.format("ID 입력하세요."));
 			} 
+			//UserPassword의 값이 없을 경우
 			else if (user.getPassword().isEmpty()) {
 				throw new FailMemberRegistException(String.format("비밀번호 입력하세요"));
-			} else if (user.getUserName().isEmpty()) {
+			} 
+			//UserName의 값이 없을 경우
+			else if (user.getUserName().isEmpty()) {
 				throw new FailMemberRegistException(String.format("이름를 입력하세요"));
-			} else if (user.getPhoneNum().isEmpty()) {
+			} 
+			//PhoneNum의 값이 없을경우
+			else if (user.getPhoneNum().isEmpty()) {
 				throw new FailMemberRegistException(String.format("번호를 입력하세요"));
-			} else if (user.getEmail().isEmpty()) {
+			} 
+			//Email의 값이 없을경우
+			else if (user.getEmail().isEmpty()) {
 				throw new FailMemberRegistException(String.format("이메일 입력하세요"));
 			}
 			
 			userDao.insertUserManagement(session, user);
+			
 			session.commit();
 		} finally {
 			session.close();
@@ -69,7 +79,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	@Override
 	public void updateUser(UserManagement user) throws UserNotFoundException {
 		SqlSession session = factory.openSession();
-		System.out.println("Service 실행됨 1");
+		
 		try {
 			if (userDao.selectUserManagementListById(session, user.getUserId()) == null) {
 				throw new UserNotFoundException(String.format("ID %s 인 회원이 없습니다.", user.getUserId()));
